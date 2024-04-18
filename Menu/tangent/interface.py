@@ -1,33 +1,19 @@
-from Classes.Points import Points
-from Classes.Graphs import Graphs
-from Classes.Table import Table
-from common.commander import Commander
-from menu.handlers.func import pause
+from menu.tangent.interface.plots import TangentInterface
+from menu.tangent.solutions.functions.formula import TangentFormula
+from menu.tangent.solutions.functions import tangent
+from menu.tangent.solutions.research import Research
 
-class TangentInterface:
-    def __init__(self, name: str, size: int):
-        self.name = name
-        self.plot = Graphs(1, 1)
-        self.base = Points((-size, size), task)
-        self.overlay = Points(abe, task)
+def TangentMethod(name: str, abe: tuple):
+    formula = TangentFormula(name)
 
-    def no_roots(a: float, b: float):
-        pause(f"Похоже на интервале {[a, b]} корней для функции B нет")
+    research = Research(formula.task)
+    research.start(abe)
+    view = TangentInterface(name, 100)
+    view.memorize(name, research.message)
 
-    def memorize(message: str):
-        self.message = message
-        print(f"\nЗначение m = {message}")
+    if research.roots is not None:
+        view.DrawTangent(tangent(abe[2], research))
+    else:
+        view.no_roots(abe[0], abe[1])
 
-    def output(row: list):
-        plot.ax.legend()
-        Table(Tangent['Result'], self.message).row(row).show().pause()
-
-    def draw_graph(basis: float, line: float, x: float, y: float, index: int):
-        self.plot.ax.plot(basis, line, label=f'Касательная {index}', linestyle='--')
-        self.plot.ax.scatter(x, y, color='red', label='её точка')
-
-    def show_graph():
-        self.plot.based(self.overlay, f"График {self.name}")
-        self.plot.apply(self.base).apply(self.overlay)
-        if Commander.View('Plot', 'Tangent'):
-            self.plot.show()
+    view.show_graph()

@@ -2,7 +2,7 @@ import menu.runge.interface
 from menu.runge.interface.defaults import defaultsA, defaultsB, are_defaults, inputA, inputB
 from Class.Input import has_form
 
-def RungeKutta(form):
+def RungeKuttaEntry(form):
     if not has_form(1, 2, form):
         return
 

@@ -1,7 +1,10 @@
 from common.input.common import vinput
+from inquirer import Confirm
+
+confirm = (Confirm('confirm', message='Использовать значения по умолчанию?', default=True))
 
 def are_defaults(): # Использовать значения по умолчанию ?
-    return vinput(query.confirm)['confirm']
+    return vinput(confirm)['confirm']
 
 Defaults = { # Значения по умолчанию
     'Division': ( # Метод деления отрезков

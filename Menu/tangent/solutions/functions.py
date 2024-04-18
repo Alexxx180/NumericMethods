@@ -1,3 +1,5 @@
+from common
+
 def update(y: tuple, f: callable, x: float)
     for i in range(len(y)):
         y[i] = derive(f, x, i)

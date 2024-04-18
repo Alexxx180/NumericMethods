@@ -1,5 +1,6 @@
 import common.texts.queries as q
-from common.input.common import vinput
+from common.input.values.single import vinput
+from inquirer import prompt
 
 # Ввод 'e'
 def validate_e():
@@ -8,16 +9,12 @@ def validate_e():
     e = float(vinput(request)[name])
 
     while abs(e) >= 1 or e < 0.000000000000001 or e == 0:
-        message = ('e: требуется e < 1, e > -1, ' +
-            'e ≠ 0. e: не должно быть > 15 ' +
-            'десятичных знаков\nПовторите')
-        print(message)
-        request = inquirer.prompt(request)
+        print('e: требуется -1 < e < 1, e ≠ 0. ' +
+            'e: не должно быть > 15 десятичных знаков\nПовторите')
+        request = prompt(request)
         e = float(query)
 
     return e
-
-
 
 # Проверка наличия формы в программе
 def has_form(start: int, count: int, form: int)

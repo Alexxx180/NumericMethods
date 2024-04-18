@@ -1,9 +1,9 @@
-from common.input import UserSelect
+from common.input.select import user_select
 
-class Commander:
+class Switch:
     @staticmethod
     def View(control: str, method: str):
-        return Enabled[control][method] or UserSelect(Texts[control][method])
+        return Enabled[control][method] or user_select(Texts[control][method])
 
     Enabled = {
         'Tables': {

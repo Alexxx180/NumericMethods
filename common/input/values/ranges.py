@@ -31,13 +31,3 @@ def vrange(request, task, start, end):
         n = float(request())
 
     return n
-
-# Введение списка значений пользователем
-def input_list(query, variables):
-    result = []
-    request = vinput(query)
-    for variable in variables:
-        convert = variable[0]
-        name = variable[1]
-        result.append(convert(request[name]))
-    return result

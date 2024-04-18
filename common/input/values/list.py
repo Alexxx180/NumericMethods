@@ -1,6 +1,5 @@
 from common.input.common import vinput
 
-# Введение списка значений пользователем
 def input_list(query, variables):
     result = []
     request = vinput(query)
