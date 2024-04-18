@@ -1,4 +1,4 @@
-from common
+from common.calculation.trigonometry import derive
 
 def update(y: tuple, f: callable, x: float)
     for i in range(len(y)):

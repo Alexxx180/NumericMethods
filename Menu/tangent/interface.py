@@ -4,10 +4,9 @@ from menu.tangent.solutions.functions import tangent
 from menu.tangent.solutions.research import Research
 
 def TangentMethod(name: str, abe: tuple):
-    formula = TangentFormula(name)
-
-    research = Research(formula.task)
+    research = Research(Formula['Tangent'][name])
     research.start(abe)
+
     view = TangentInterface(name, 100)
     view.memorize(name, research.message)
 

@@ -1,24 +1,32 @@
-import common.texts.queries as q
+from common.texts.queries import *
 from common.input.list import input_list
 
+Requests = {
+    'division': (texts['a'], texts['b'], texts['n'], texts['e']),
+    'tangent': (texts['a'], texts['b'], texts['e']),
+    'runge': {
+        'A': (texts['x'], texts['y'], texts['h'], texts['n']),
+        'B': (texts['yd'], texts['a'], texts['b'])
+    }
+    'simpson': (texts['a'], texts['b'], texts['start'], texts['end'], texts['e'])
+}
+
 Input = {
-    'Division': (lambda: input_list(q.division_request, 
-        (float, 'variable_a'), (float, 'variable_b')
-        (validate_e), (lambda: reques_n(0, 100)))
+    'Division': (lambda: input_list(Requests['division'], 
+        (float, 'a'), (float, 'b'), (validate_e), (lambda: request_n(0, 100)))
+    ),
+    'Tangent': (lambda: input_list(Requests['tangent'],
+        (float, 'a'), (float, 'b'), (validate_e)
     ),
     'Runge': {
-        'A': (lambda: input_list(query.x_y_h_n_request,
-            (float, 'variable_x'), (float, 'variable_y'),
-            (float, 'variable_h'), (int, 'variable_n'))
+        'A': (lambda: input_list(Requests['runge']['A'],
+            (float, 'x'), (float, 'y'), (float, 'h'), (int, 'n'))
         ),
-        'B': (lambda: input_list(query.yp_a_b_request,
-            (float, 'variable_yp'),
-            (float, 'variable_a'),
-            (float, 'variable_b'))
+        'B': (lambda: input_list(Request['runge']['B'],
+            (float, 'yp'), (float, 'a'), (float, 'b'))
         )
     },
-    'Simpson': (lambda variable_b: input_list(
-        q.simpson_request, (float, 'variable_a'), (float, variable_b),
-        (float, 'variable_start'), (float, 'variable_end'), (validate_e)
+    'Simpson': (lambda b: input_list(Requests['Simpson'],
+        (float, 'a'), (float, b), (float, 'start'), (float, 'end'), (validate_e)
     ),
 }

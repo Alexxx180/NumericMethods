@@ -7,7 +7,7 @@ def RungeKuttaEntry(form):
         return
 
     defaults = are_defaults()
-    args1 = defaultsA(form) if defaults else inputA()
+    args1 =  defaultsA(form) if defaults else inputA()
 
     # Применение методов A или B
     if form == 1:
