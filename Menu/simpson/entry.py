@@ -1,38 +1,19 @@
-from Simpson_formula.Functions import s_f, define_n, define_m, func
-from Classes.Graphs import Graphs
-from Classes.Points import PointGraphs
-from hendllers.func import pause
-import common.commander
-from Classes.Input import UserSelect
-from common.calc.TrigonometryFunctions import derive
+from common.commander.formula.text import *
+from common.commander.defaults import *
+from common.commander.input import *
+from menu.simpson.interface import SimpsonMethod
 
-class SimpsonMethod:
-    def __init__(ab: tuple):
-        self.ab = ab
-        self.plot = Graphs(1,2)
-        self.root = (0.0, 0)
-        self.names = ("График f(x)", "График f''''(x)")
+def SimpsonFormulaEntry(form):
+    if has_form(1, 2, form):
+        return
 
-        task = formula(ab).tasks[0 if ab[1] is None else 1]
+    print(Descriptions['Simpson'][form])
 
-        self.derives = (lambda x: derive(task, x, 0),
-            lambda x: derive(task, x, 4))
+    if are_defaults():
+        args = Defaults['Simpson'][form]
+        if form != 1:
+            args[1] = None
+    else:
+        args = Input['Simpson']('b' if form == 1 else '')
 
-    def Calculate(ends: Ends, precision: float):
-        self.root[0]: float = search_max(ends, self.derives[1], plot.ax[1])
-        self.root[1]: int = quadratic(ends.size(), maximum, precision)
-
-        self.xy: tuple = ends.margin(10)
-
-        return perform(ends, root, derives[1], plot.ax[0])
-
-    def Simpson(ends: Ends, precision: float):
-        size = 10
-        offset = ends.margin(0.5)
-        self.points = (offset[0], offset[1], -size, size)
-
-        result = Calculate(ends, precision, task)
-
-        SegmentPrint.integration(ab, ends, precision, self.root, result)
-        if Commander.Plots['Simpson'] or UserSelect(""):
-            self.plot.show()
+    SimpsonMethod(args)
