@@ -1,11 +1,8 @@
-import inquirer
+from inquirer import prompt, Text
 from menu.gauss.solutions.check import is_single_string, is_varying
 
 class InputLoop:
-    Name = 'row'
-
     def __init__(self):
-        self.values = None
         self.matrix = []
 
     def process_input_string(row):
@@ -18,8 +15,8 @@ class InputLoop:
         return self.errors
 
     def loop(description: str):
-        row_input = inquirer.prompt([inquirer.Text(Name, message=description)])
-        row = row_input[Name]
+        name = 'row'
+        row = prompt([Text(name, message=description)])[name]
 
         if not row:
             return False

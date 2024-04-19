@@ -1,5 +1,5 @@
 from platforms.cross import clear
-from menu.handlers.interaction import ask
+from menu.handlers.interaction import ask, select
 import menu.handlers.choices as choice
 
 # TODO: For each formula except Gauss

@@ -11,8 +11,7 @@ def GaussEntry():
 
     if are_defaults():
         GaussMethod(array)
-        return
-
-    validator = InputLoop()
-    if validator.perform():
-        GaussMethod(validator.matrix)
+    else:
+        validator = InputLoop()
+        if validator.perform():
+            GaussMethod(validator.matrix)

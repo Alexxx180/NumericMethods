@@ -1,6 +1,5 @@
-import numpy as np
-
-from Classes.Table import Table
+from numpy import column_stack, zeros, dot
+from common.drawing import Table
 
 class GaussFunctions:
     Float = "{:.3f}"
@@ -10,8 +9,8 @@ class GaussFunctions:
         v = (s.format(a[i][k]), s.format(a[k, k]))
         return "{no[0]} = {no[0]} - {no[1]} * ({v[0]} / {v[1]})"
 
-    # Прямой ход (обнуление элементов ниже главной диагонали)
     def straight_course(n: int, b: list, a, shape):
+        print("\nПрямой ход - обнуление элементов ниже главной диагонали\n")
         table = Table([""], "")
         result = None
         index = 0
@@ -27,17 +26,15 @@ class GaussFunctions:
                 a[i, k:] -= ratio * a[k, k:]
                 b[i] -= ratio * b[k]
                 # Добавление столбца
-                result = np.column_stack((a, b))
+                result = column_stack((a, b))
                 table.matrix(result).show().clear()
 
         return result
 
-    # Обратный ход (подстановка обратно, чтобы найти решения)
     def reverse_course(n: int, b: list, a, shape):
-        x = np.zeros(n)
-        print("\nОбратный ход\n")
+        print("\nОбратный ход - подстановка для нахождения решений\n")
+        x = zeros(n)
         for k in range(shape[0] - 1, -1, -1):
-            # np.dot скалярное произведение
-            scalar = np.dot(a[k, k + 1:], x[k + 1:])
+            scalar = dot(a[k, k + 1:], x[k + 1:])
             x[k] = (b[k] - scalar) / a[k, k]
-            print(f"x{k + 1} = {Float.format(x[k])}")
+            print(f"x{k + 1} = {x[k]:.3f}")

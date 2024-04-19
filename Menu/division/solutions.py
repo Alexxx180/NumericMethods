@@ -1,28 +1,46 @@
-from Classes.Graphs import Graphs
-import menu.division.solutions.division
-import menu.division.interface.segment
-import menu.division.interface.print
+from common.calculation.objects.end import Ends
+from common.drawing.graphs.space import DefaultSpace
+from common.drawing.graphs.milestone import Milestone
+from menu.division.solutions.segment import Segment
+from menu.division.solutions.functions import change_sequence
 
-def DivideSegmentMethod(form: dict, tables: tuple, a: float, b: float, n: tuple):
-    plot = Graphs(1, 1)
+class SegmentDivision:
+    def __init__(self, args: tuple):
+        self.roots = []
+        self.range = Ends(args)
+        self.n = args[2]
+        self.e = args[3]
+        self.formula = Formula['Division']
+        self.stone = Milestone('График А', args)
+        self.space = DefaultSpace(Graphs(1, 1), 'blue')
+        self.segments = (Segment(0, 0), Segment(0, 0))
 
-    graph = DivisionSegmentPlot(a, b, plot)
-    division = SegmentDivision(plot.ax)
+    def show():
+        self.space.show(self.stone)
+        return self
 
-    roots = division.study(a, b, n[0])
-    if len(roots) == 0:
-        graph.show().print(SegmentPrint.NoRoots)
-        return
+    def resign(self, interval: list) -> str:
+        if self.current.differs(self.previous):
+            self.roots.append(interval)
+            return 'blue'
+        return 'red'
 
-    tables[0](roots)
+    def study(self) -> list:
+        self.segments[0].update(a)
+        step: float = self.range.size() / self.n
 
-    rows = []
-    for index, x in enumerate(roots):
-        one = form['one']
-        intervals(one, index + 1, x, n[1])
-        division.breakdown(x, n[1])
-        row = (form['list'].format(x), one.format(middle(x)))
-        rows.append(row)
+        for no in arange(1, self.n + 1, 1):
+            interval: list = [x for x in self.segments]
+            self.segments[1].update(self.range.start + step * no)
+            self.segments[0].set(self.current)
+            self.space.colored(resign(interval), interval, self.formula)
 
-    tables[1](rows)
-    graph.show().pause(SegmentPrint.Root.format(rows[0][1]))
+        return self.roots
+
+    def breakdown(self, x: tuple) -> tuple:
+        while (x[1] - x[0]) > 2 * self.e:
+            sequence(change_sequence, x)
+        sequence(lambda x: x, x)
+
+    def sequence(self, change: callable, x: tuple):
+        self.space.lines(x) ; change(x) ; print(x)

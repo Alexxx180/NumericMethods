@@ -22,16 +22,8 @@ Descriptions = {
             F''(x) = 2·sin(0.5x + 0.1)·cos(0.5x + 0.1)
         '''
     },
-    'Simpson': (
-        (
-            '1) eᵃˣ · sin(bx)',
-            '''
-                       1
-                2) ━━━━━━━━━
-                   √(x² + a)
-            '''
-        ),
-        (
+    'Simpson': {
+        'A': (
             '1) eᵃˣ  ·  sin(bx)',
             '''
                 Производная 4-го порядка:
@@ -39,7 +31,7 @@ Descriptions = {
                 (a⁴·sin(bx) + 4·a³·b·cos(bx) - 6·a²·b³·sin(bx) + b⁴·sin(bx))·eᵃˣ
             '''
         ),
-        (
+        'B': (
             '''
                        1
                 2) ━━━━━━━━━
@@ -57,14 +49,14 @@ Descriptions = {
             '''
         )
     },
-    'Runge': (
-        (
+    'Runge': {
+        'A': (
             "y' = (1 + x²) · (1 + y)",
             '''  x + (x³ / 3)
             y = e            - 1
             '''
         ),
-        (
+        'B': (
             """
                 1) y'' - ay' - by = sin(x)
 
@@ -77,5 +69,5 @@ Descriptions = {
             y'' = u' = au + by + f(x)
             """
         )
-    )
+    }
 }

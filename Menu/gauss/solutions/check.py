@@ -1,7 +1,5 @@
 import numpy as np
 
-from Classes.Table import Table
-
 class GaussChecks:
     Text = {
         'none': "\nДанная система не имеет решения.",
@@ -9,21 +7,26 @@ class GaussChecks:
         'endless': "Система имеет бесконечное множество решений"
     }
 
+    @static_method
+    def __null_string(name: str, row: list):
+        return (True, f"Есть нулевая строка " + str(row) + Text[name])
+
+    @static_method
+    def __all_zeros(array: list):
+        return (all(e == 0 for e in array[:-2]), Text['endless'])
+
     @staticmethod
     def are_undefined(array):
         shape = array.shape
 
         for row in array:
-            errors = (False, f"Есть нулевая строка ")
-            if errors[0] = np.all(row[:-1] == 0) and row[-1] != 0:
-                errors[1] += str(row) + Text['none']
-                return errors
-            if errors[0] = np.all(row == 0):
-                errors[1] += str(row) + Text['many']
-                return errors
-        c = array[shape[0] - 1]
-        # Проверяем, что все элементы, кроме двух последних, равны нулю
-        return (all(element == 0 for element in c[:-2]), Text['endless'])
+            if np.all(row[:-1] == 0) and row[-1] != 0:
+                return __null_string(row, 'none')
+
+            if np.all(row == 0):
+                return __null_string(row, 'many')
+
+        return __all_zeros(array[shape[0] - 1])
 
     @staticmethod
     def is_suitable(shape):

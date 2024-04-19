@@ -1,5 +1,12 @@
 from menu.handlers.func import pause
 from menu.simpson.interface.plots import SimpsonPlots
+from Simpson_formula.Functions import s_f, define_n, define_m, func
+from Classes.Graphs import Graphs
+from Classes.Points import PointGraphs
+from hendllers.func import pause
+import common.commander
+from Classes.Input import UserSelect
+from common.calc.TrigonometryFunctions import derive
 
 class SimpsonInterface:
     def __init__(ab: tuple, precision: float):
@@ -9,8 +16,10 @@ class SimpsonInterface:
         self.graph = SimpsonPlots(ab)
         self.root = (0.0, 0.0)
 
-    def out_h(h: float):
+    def out_h(h: float, ends: Ends, f: callable):
         print(f"h = {h}")
+        self.graph.lines(ends, f)
+
 
     def output(n: int):
         if n <= 15 or View('Table', 'Simpson'):
@@ -23,13 +32,7 @@ class SimpsonInterface:
 
 
 
-from Simpson_formula.Functions import s_f, define_n, define_m, func
-from Classes.Graphs import Graphs
-from Classes.Points import PointGraphs
-from hendllers.func import pause
-import common.commander
-from Classes.Input import UserSelect
-from common.calc.TrigonometryFunctions import derive
+
 
 class SimpsonMethod:
     def __init__(ab: tuple):

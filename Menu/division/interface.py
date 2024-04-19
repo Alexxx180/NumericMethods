@@ -1,23 +1,34 @@
-from menu.division.solutions import DivideSegmentMethod
-from Classes.Table import Table
+import menu.division.solutions.division
+import menu.division.interface.segment
+from menu.division.interface.print import start, intervals, no_roots
+from menu.division.solutions.functions import middle
 
-form = { 'one': '{:.8f}', 'list', f'{0:.8f} - {1:.8f}' }
+def Show(name: str, roots: list):
+    Table(Division[name]).row(name).show().pause()
 
-def Fields():
-    return ['i', 'Диапазон']
+def DivideSegmentMethod(args: tuple):
+    division = SegmentDivision(args)
+    start(division.range)
 
-def RootIntervals(intervals: list):
-    name = 'Интервалы с корнями'
-    Table(Fields(), name).row(intervals).show().pause()
+    roots = division.study()
+    if len(roots) == 0:
+        division.show()
+        no_roots()
+        return
 
-def FoundedRoots(roots: list):
-    fields = Fields()
-    fields.append('Корень')
-    Table(fields, 'Найденные корни').row(roots).show().pause()
+    Show('Source', roots)
+    rows = []
 
-def DivideSegment(a, b, n, e):
-    tables = (RootIntervals, FoundedRoots)
-    DivideSegmentMethod(form, tables, a, b, (n, e))
+    division.space.plot.color = "green"
 
-if __name__ == '__main__':
-    print("Не реализована")
+    for index, x in enumerate(roots):
+        intervals(one, index + 1, x, division.e)
+        division.breakdown(x)
+
+        row = [e for e in x]
+        row.append(middle(x))
+        rows.append(row)
+
+    Show('Result', rows)
+    division.show()
+    pause(Root.format(rows[0][1]))

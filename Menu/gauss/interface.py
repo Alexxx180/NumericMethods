@@ -4,13 +4,9 @@ from menu.gauss.interface.defaults import code_defaults
 from menu.handlers.func import pause
 
 def GaussMethod(array):
-    array = code_defaults(array)
-
-    if GaussianChecks.is_suitable(array.shape):
+    if GaussChecks.is_suitable(array.shape):
         method = Gauss(array)
-        x = method.elimination()
-        if x is not None:
-            print("", x)
+        method.elimination()
     else:
         print("Нет решения")
 

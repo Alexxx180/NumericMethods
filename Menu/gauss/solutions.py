@@ -14,14 +14,12 @@ class Gauss:
         for _, num in enumerate(self.array):
             b.append(num[n - 1])
 
-        shape = a.shape
-        n = shape[1]
+        n = a.shape[1]
 
-        matrix = straight_course(n, b, a, shape)
-        no_solutions = GaussianChecks.are_undefined(matrix)
+        matrix = straight_course(n, b, a, a.shape)
+        no_solutions = GaussChecks.are_undefined(matrix)
 
         if no_solutions[0]:
-            return no_solutions[1]
+            print(no_solutions[1])
 
-        reverse_course(n, b, a, shape)
-        return None
+        reverse_course(n, b, a, a.shape)
