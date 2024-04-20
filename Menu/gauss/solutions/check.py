@@ -22,7 +22,6 @@ class GaussChecks:
         for row in array:
             if np.all(row[:-1] == 0) and row[-1] != 0:
                 return __null_string(row, 'none')
-
             if np.all(row == 0):
                 return __null_string(row, 'many')
 

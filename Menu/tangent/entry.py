@@ -3,8 +3,7 @@ from common.commander.input import *
 
 def Tangent(key):
     name = 'Tangent'
-    abe = Defaults[name][key] if are_defaults() else Input[name]
-    TangentMethod(key, abe)
+    TangentMethod(key, Defaults[name][key] if are_defaults() else Input[name]())
 
 if __name__ == '__main__':
     print("Не реализована")

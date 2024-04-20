@@ -1,3 +1,2 @@
-class Drawing:
-    Points = { 'red': 'ro' }
-    Chars = { 'Miss': '-', 'None': '' }
+Points = { 'red': 'ro' }
+Chars = { 'Miss': '-', 'None': '' }

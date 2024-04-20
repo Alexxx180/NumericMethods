@@ -11,7 +11,7 @@ class SegmentDivision:
         self.n = args[2]
         self.e = args[3]
         self.formula = Formula['Division']
-        self.stone = Milestone('График А', args)
+        self.stone = MilestoneA('График А', args)
         self.space = DefaultSpace(Graphs(1, 1), 'blue')
         self.segments = (Segment(0, 0), Segment(0, 0))
 
@@ -26,7 +26,7 @@ class SegmentDivision:
         return 'red'
 
     def study(self) -> list:
-        self.segments[0].update(a)
+        self.segments[0].update(self.range.start)
         step: float = self.range.size() / self.n
 
         for no in arange(1, self.n + 1, 1):

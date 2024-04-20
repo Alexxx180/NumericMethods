@@ -14,7 +14,7 @@ def Derivatives(sign: str = ""):
     derivatives = ["y", "y'", "y''"]
     for field in derivatives:
         field += f" {Approximation}"
-        return derivatives
+    return derivatives
 
 def TableFields(function: str):
     derivatives = Derivatives(equation)
@@ -28,13 +28,10 @@ def RungeTable(caption: str, formats: dict, fields, standard, big):
     data = formats['data']
 
     for v in standard:
-        columns.append(formatting(lists, v))
+        columns.append(v)
     for b in big:
-        columns.append(formatting(data, b))
+        columns.append(b)
 
     return Table(fields, caption).columns(0, columns)
 
 def ListTables(tables):
-    for table in tables:
-        pause()
-        table.out().show()

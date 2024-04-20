@@ -3,6 +3,10 @@ class Ends:
         self.start = start
         self.end = end
 
+    @staticmethod
+    def based(ends: Ends, f: callable):
+        return Ends(f(ends.start), f(ends.end))
+
     def size() -> float:
         return self.end - self.start
 

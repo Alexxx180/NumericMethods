@@ -4,7 +4,7 @@ from menu.division.interface.print import start, intervals, no_roots
 from menu.division.solutions.functions import middle
 
 def Show(name: str, roots: list):
-    Table(Division[name]).row(name).show().pause()
+    Table(Division[name]).row(roots).show().pause()
 
 def DivideSegmentMethod(args: tuple):
     division = SegmentDivision(args)

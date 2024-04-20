@@ -1,10 +1,9 @@
 from common.input.common import vinput
 from inquirer import Confirm
 
-message = 'Использовать значения по умолчанию?'
-
 def are_defaults():
     name = 'confirm'
+    message = 'Использовать значения по умолчанию?'
     query = (Confirm(name, message=message, default=True))
     return vinput(query)[name]
 
@@ -34,3 +33,9 @@ Defaults = { # Значения по умолчанию
         (0.72, 0.00, 1, 2, 0.00001)  # a, b, start, end, e
     ]
 }
+
+    """ # Switch ON/OFF with '#' at the start of the line
+
+    Пример переключателя
+
+    """ # Пример матрицы коэффициентов (матрица A) """

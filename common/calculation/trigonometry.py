@@ -8,9 +8,9 @@ class TrigonometryFunctions:
         d = X
         for i in range(len(derivative)):
             d = f.diff(d)
-        return lambdify(self.x, d)
+        return lambdify(X, d)
 
     @staticmethod
-    def derive(self, f, x: float, derivative: int):
+    def derive(self, f, x, derivative: int):
         formula = formulate(f, derivative)
         return formula(x)

@@ -7,7 +7,7 @@ from menu.gauss.interface import GaussMethod
 
 def GaussEntry():
     array = np.array(Defaults['Gauss'], dtype=float)
-    Table([""], "Исходная матрица").matrix(array).show()
+    Table(["Исходная матрица", ""]).matrix(array).show()
 
     if are_defaults():
         GaussMethod(array)

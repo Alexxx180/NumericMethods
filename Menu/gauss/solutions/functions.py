@@ -11,7 +11,7 @@ class GaussFunctions:
 
     def straight_course(n: int, b: list, a, shape):
         print("\nПрямой ход - обнуление элементов ниже главной диагонали\n")
-        table = Table([""], "")
+        table = Table(["", ""])
         result = None
         index = 0
 
@@ -21,12 +21,10 @@ class GaussFunctions:
                 text = format(i, k, Float, a)
                 print(f"\nШаг {index}\n{text}")
 
-                ratio = a[i, k] / a[k, k]
-                # k: до конца строки
+                ratio = a[i, k] / a[k, k] # k: до конца строки
                 a[i, k:] -= ratio * a[k, k:]
                 b[i] -= ratio * b[k]
-                # Добавление столбца
-                result = column_stack((a, b))
+                result = column_stack((a, b)) # Добавление столбца
                 table.matrix(result).show().clear()
 
         return result

@@ -1,66 +1,32 @@
-from menu.handlers.func import pause
-from menu.simpson.interface.plots import SimpsonPlots
-from Simpson_formula.Functions import s_f, define_n, define_m, func
-from Classes.Graphs import Graphs
-from Classes.Points import PointGraphs
-from hendllers.func import pause
-import common.commander
-from Classes.Input import UserSelect
-from common.calc.TrigonometryFunctions import derive
+from common.drawing import Points
+from common.calculation.objects import Ends
+from common.calculation.trigonometry import derive
+from menu.solutions.functions import determine, search_max
+from menu.solutions.solutions import SimpsonSolutions
+from menu.interface.view import space, variables, output, view
 
 class SimpsonInterface:
-    def __init__(ab: tuple, precision: float):
-        self.a = ab[0]
-        self.b = ab[1]
-        self.e = precision
-        self.graph = SimpsonPlots(ab)
-        self.root = (0.0, 0.0)
+    def __init__(self, args: tuple):
+        self.range = Ends(args)
+        self.ends = Ends((args[2], args[3]))
+        self.e = args[4]
+        self.solution = SimpsonSolutions(self.ends)
+        self.space = space(self.ends.margin(0.5))
+        self.derives = determine(self.range.end)
 
-    def out_h(h: float, ends: Ends, f: callable):
-        print(f"h = {h}")
-        self.graph.lines(ends, f)
+    def calculate():
+        d = { 0: self.derives[0], 4: self.derives[1] }
 
+        ends: tuple = self.ends.margin()
+        result = search_max(Points(ends, d[4]))
+        self.solutions.core.resize(self.e, result[1])
 
-    def output(n: int):
-        if n <= 15 or View('Table', 'Simpson'):
-            Table(Simpson['Result']).row(rows).show()
+        reorder(self.space, ends, result[0], d[0])
+        overlay(self.space, self.ends.margin(10), self.derives)
+        return self.solutions.perform(self)
 
-    def integration(ends: Ends, roots: tuple, result: float):
-        pause(f"a = {self.a}, b = {self.b}, e = {self.e:.15f}, M = {roots[0]}," +
-            f" n = {roots[1]}\nПределы интегрирования от {ends.start} " +
-            f"до {ends.end}\nЗначение интеграла = {result}")
-
-
-
-
-
-class SimpsonMethod:
-    def __init__(ab: tuple):
-        self.ab = ab
-        self.plot = Graphs(1,2)
-        self.root = (0.0, 0)
-        self.names = ("График f(x)", "График f''''(x)")
-
-        task = formula(ab).tasks[0 if ab[1] is None else 1]
-
-        self.derives = (lambda x: derive(task, x, 0),
-            lambda x: derive(task, x, 4))
-
-    def Calculate(ends: Ends, precision: float):
-        self.root[0]: float = search_max(ends, self.derives[1], plot.ax[1])
-        self.root[1]: int = quadratic(ends.size(), maximum, precision)
-
-        self.xy: tuple = ends.margin(10)
-
-        return perform(ends, root, derives[1], plot.ax[0])
-
-    def Simpson(ends: Ends, precision: float):
-        size = 10
-        offset = ends.margin(0.5)
-        self.points = (offset[0], offset[1], -size, size)
-
-        result = Calculate(ends, precision, task)
-
-        SegmentPrint.integration(ab, ends, precision, self.root, result)
-        if Commander.Plots['Simpson'] or UserSelect(""):
-            self.plot.show()
+    def start():
+        self.result = calculate(task)
+        variables(self)
+        output(self)
+        view(self)
