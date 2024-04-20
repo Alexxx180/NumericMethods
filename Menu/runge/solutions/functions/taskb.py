@@ -26,7 +26,8 @@ class TaskbFunctions:
             result.append(f(x[i]))
         return result
 
-    def derivative(self, fx: callable, row: list): # y'' = a * y' + b * y + f(x)
+    # y'' = a * y' + b * y + f(x)
+    def derivative(self, fx: callable, row: list): 
         funcs = (lambda yd: yd * at('a'), lambda y: y * at('b'), fx)
         for i in range(0, len(result)):
             row[i] = funcs[i](row[i])

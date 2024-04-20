@@ -37,5 +37,3 @@ class Taskb:
             rows[ii].append(result)
 
         return rows
-
-

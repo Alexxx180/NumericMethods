@@ -1,0 +1,30 @@
+from menu.runge.solutions.functions.formula import analyze, integrate
+
+def source(name, values):
+    Table(Runge[name]['Source']).row(values).show().out()
+
+def asolution(values: list, task: Taska):
+    name = 'A'
+    source(name)
+    formula = Formula['Runge'][name]
+
+    values = task.apply(formula)
+    values.append(analyze(x))
+    values.append(integrate(x).flatten().tolist())
+
+    Table(Runge[name]['Result']).columns(0, values).show().pause()
+
+def bsolution(values: list, i: int, function: str, task):
+    name = 'B'
+    source(name)
+    formula = Formula['Runge'][name][i]
+    values.extend(task.apply(formula))
+
+    result = (task.yfunction(values), task.xfunction(i), formula))
+    values.extend(result)
+    values.append(epsilon(result[0], result[1]))
+
+    fields = Runge[name]['Result']
+    fields[0] += str(i + 1)
+    fields[7] = function[i]
+    Table(fields).columns(0, values).show().pause()
