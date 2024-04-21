@@ -23,8 +23,6 @@ def Division_segment(a, b, n, e):
     message = "Найденные корни"
     table_root = Table(fields2, message)
 
-    base = PointGraphs(-100, 100, f)
-    overlay = PointGraphs(a, b, f)
 
     roots = study_function(a, b, n, plot.ax) ; ic(roots)  # noqa: F821
 
@@ -69,6 +67,8 @@ def Division_segment(a, b, n, e):
     xp = overlay.X
     yp = overlay.Y
 
+    base = PointGraphs(-100, 100, f)
+    overlay = PointGraphs(a, b, f)
     # Создаем график по пользователькому интервалу
     plot.settings_one("График А", min(xp), max(xp), min(yp), max(yp)) ; ic()  # noqa: F821
 

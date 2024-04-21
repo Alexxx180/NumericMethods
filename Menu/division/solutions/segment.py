@@ -6,12 +6,12 @@ class Segment:
     def __init__(self, x: float, sign: float):
         set_values(x, sign)
 
-    def set(self, clone: Segment):
-        set_values(clone.x, clone.sign)
+    def set(self, segment):
+        set_values(segment.x, segment.sign)
 
     def update(self, value: float):
         self.x = value
         self.sign = formula(self.x)
 
-    def differs(self, previous: Segment) -> bool:
+    def differs(self, previous) -> bool:
         return self.sign * previous.sign <= 0

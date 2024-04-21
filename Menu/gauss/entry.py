@@ -1,8 +1,8 @@
 import numpy as np
 from common.drawing import Table
 from common.commander.formula.text import *
-from common.commander.defaults import *
-from common.commander.input import *
+from common.commander.input.defaults import *
+from common.commander.input.user import *
 from menu.gauss.interface import GaussMethod
 
 def GaussEntry():

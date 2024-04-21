@@ -14,8 +14,6 @@ def Tangent_method_common(a, b, e, task, f_main, f1, f2):
 
     table = Table(fields, message) ; ic()  # noqa: F821
 
-    base = PointGraphs(-100, 100, f_main)
-    overlay = PointGraphs(a, b, f_main) ; ic()  # noqa: F821
 
     # Исследуем функцию B
     x, m = research(a, b, f_main, f1, f2) ; ic(x)  # noqa: F821
@@ -36,6 +34,9 @@ def Tangent_method_common(a, b, e, task, f_main, f1, f2):
 
     xp = overlay.X
     yp = overlay.Y
+
+    base = PointGraphs(-100, 100, f_main)
+    overlay = PointGraphs(a, b, f_main) ; ic()  # noqa: F821
 
     plot.settings_one(f"График {task}", min(xp), max(xp), min(yp), max(yp))
 

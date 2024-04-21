@@ -1,7 +1,7 @@
-from common.commander.defaults import *
-from common.commander.input import *
-from menu.division.interface import DivisionSegmentMethod
+from common.commander.input.defaults import *
+from common.commander.input.user import *
+from menu.division.interface.interface import SegmentDivisionMethod
 
 def DivisionEntry():
     name = 'Division'
-    DivideSegmentMethod(Defaults[name] if are_defaults() else Input[name]())
+    SegmentDivisionMethod(Defaults[name] if are_defaults() else Input[name]())

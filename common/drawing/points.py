@@ -1,11 +1,15 @@
-from numpy import arrange
+from numpy import arange
 
 class Points:
-    def __init__(self, ends: tuple):
+    def __init__(self, ends):
         self.func = function
         self.step = 0.0001
-        self.a = ends[0]
-        self.b = ends[1]
+        if isinstance(ends, tuple):
+            self.a = ends[0]
+            self.b = ends[1]
+        else:
+            self.a = -ends
+            self.b = ends
         self.__function()
 
     def __function(self):
@@ -13,6 +17,9 @@ class Points:
         self.Y = [self.function(x) for x in self.X]
 
 class Point:
-    def __init__(self, ends: Ends, margin: float, size: int):
-        self.X = ends.margin(margin)
+    def __init__(self, ends, size: int):
+        self.X = ends
         self.Y = (-size, size)
+
+    def margin():
+        return (self.X, self.Y)

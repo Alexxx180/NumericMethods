@@ -1,3 +1,5 @@
+from common.commander.texts.common import *
+
 class Research:
     def __init__(self, task)
         self.a = (0, 0, 0, 0)
@@ -11,13 +13,12 @@ class Research:
 
         if d2 != 0 or d3 != 0:
             self.roots = (direction[0], self.m)
-            self.message = f"{self.m}"
+            self.message = str(self.m)
         else:
-            self.message = f"f'({name}) = {d2}, f''({name}) = {d3}"
+            self.message = Texts['Derivatives'].format(name, d2, d3)
 
     def problem():
-        a = self.a[1] ; b = self.b[1]
-        self.message = f"f(a) * f(b) = {a} * {b} = {a * b} > 0"
+        self.message = Texts['Problem'].format(self.a[1], self.b[1])
 
     def descent():
         self.m = min(abs(self.a[2]), abs(self.b[2]))

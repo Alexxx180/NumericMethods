@@ -4,7 +4,7 @@ class Ends:
         self.end = end
 
     @staticmethod
-    def based(ends: Ends, f: callable):
+    def based(ends, f: callable):
         return Ends(f(ends.start), f(ends.end))
 
     def size() -> float:

@@ -1,5 +1,5 @@
-from common.commander.defaults import *
-from common.commander.input import *
+from common.commander.input.defaults import *
+from common.commander.input.user import *
 
 def Tangent(key):
     name = 'Tangent'

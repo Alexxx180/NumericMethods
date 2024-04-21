@@ -1,6 +1,6 @@
 from platforms.cross import clear
-from menu.handlers.interaction import ask, select
-import menu.handlers.choices as choice
+from common.handlers.interaction import ask, select
+import common.commander.input.choices as choice
 
 # TODO: For each formula except Gauss
 # TODO: For sympson append formula separately before any method execution
