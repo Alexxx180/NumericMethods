@@ -5,9 +5,9 @@ class Table:
     def __init__(self, fields: list = ["", ""], title: str = "", floats: str = ".8"):
         if title == "":
             title = fields.pop(0)
-        self.table.float_format = floats
         self.fields = fields
         self.table = PrettyTable()
+        self.table.float_format = floats
         self.table.title = title
 
     def __count_levels(self, lst):

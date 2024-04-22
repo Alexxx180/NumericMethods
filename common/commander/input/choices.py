@@ -25,11 +25,11 @@ options = {
 }
 
 methods = {
-    'Метод Деления отрезка': (DivisionEntry),
+    'Метод Деления отрезка': DivisionEntry,
     'Метод касательных': (TangentEntry, 'tangent',
         {'Формула A': 'A', 'Формула B': 'B'}
     ),
-    'Метод Гауса': (GaussEntry),
+    'Метод Гауса': GaussEntry,
     'Формула Симпсона': (SimpsonFormulaEntry, 'sympson',
         {'Формула 1': 'A', 'Формула 2': 'B'}
     ),

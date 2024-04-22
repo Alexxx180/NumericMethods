@@ -8,13 +8,12 @@ def menu():
     clear()
     answers = ask(choice.start)
     while answers[choice.Main] != 'Выход':
-        for key, value in choice.methods:
+        for key, value in choice.methods.items():
             if answers[choice.Main] == key:
-                invoke = value[0]
-                if len(value) == 1:
-                    invoke()
+                if isinstance(value, tuple):
+                    select(value[0], value[1], value[2])
                 else:
-                    select(invoke, values[1], values[2])
+                    value()
         clear()
         answers = ask(start_menu)
     print("Завершение работы.")
