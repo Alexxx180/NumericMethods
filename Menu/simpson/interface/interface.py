@@ -1,9 +1,9 @@
-from common.drawing import Points
-from common.calculation.objects import Ends
-from common.calculation.trigonometry import derive
-from menu.solutions.functions import determine, search_max
-from menu.solutions.solutions import SimpsonSolutions
-from menu.interface.view import space, variables, output, view
+from common.drawing.points import Points
+from common.calculus.objects.ends import Ends
+from common.calculus.trigonometry import derive
+from menu.simpson.solutions.functions import determine, search_max
+from menu.simpson.solutions.solutions import SimpsonSolutions
+from menu.simpson.interface.view import canvas, variables, output
 
 class SimpsonInterface:
     def __init__(self, args: tuple):

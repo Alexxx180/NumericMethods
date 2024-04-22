@@ -5,7 +5,7 @@ class CanvasBuilder:
         self.canvas = Canvas()
         self.task = None
 
-    def space(space)
+    def space(space):
         self.space = space
         self.space.name = self.name
         return self
@@ -33,7 +33,7 @@ class CanvasBuilder:
         self.canvas.planes.append((self.basis, i))
         return self
 
-    def apply(self, i: int = -1)
+    def apply(self, i: int = -1):
         for sets in self.canvas.settings:
             plot.based(sets[0], sets[1], sets[2])
 

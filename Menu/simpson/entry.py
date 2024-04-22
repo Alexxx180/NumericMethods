@@ -1,7 +1,7 @@
 from common.commander.formula.text import *
-from common.commander.defaults import *
-from common.commander.input import *
-from menu.simpson.interface import SimpsonMethod
+from common.commander.input.defaults import *
+from common.commander.input.user import *
+from menu.simpson.interface.interface import SimpsonInterface
 
 def SimpsonFormulaEntry(form: str):
     print(Descriptions['Simpson'][form])
@@ -11,4 +11,4 @@ def SimpsonFormulaEntry(form: str):
     else:
         args = Input['Simpson']('b' if form == 'B' else '')
 
-    SimpsonMethod(args)
+    SimpsonInterface(args).start()

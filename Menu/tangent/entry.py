@@ -1,7 +1,7 @@
 from common.commander.input.defaults import *
 from common.commander.input.user import *
 
-def Tangent(key):
+def TangentEntry(key):
     name = 'Tangent'
     TangentMethod(key, Defaults[name][key] if are_defaults() else Input[name]())
 

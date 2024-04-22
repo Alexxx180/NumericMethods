@@ -1,24 +1,22 @@
 from inquirer import List
 from menu.division.entry import DivisionEntry
 from menu.tangent.entry import TangentEntry
-from menu.gaus.entry import GaussEntry
+from menu.gauss.entry import GaussEntry
 from menu.simpson.entry import SimpsonFormulaEntry
 from menu.runge.entry import RungeKuttaEntry
 
 Main = 'option'
 
-start = (
-    List(Main, message="Выбрано",
-        choices=(
-            'Метод Деления отрезка',
-            'Метод касательных',
-            'Метод Гауса',
-            'Формула Симпсона',
-            'Метод Рунге – Кутта',
-            'Выход'
-        )
+start = [List(Main, message="Выбрано",
+    choices=(
+        'Метод Деления отрезка',
+        'Метод касательных',
+        'Метод Гауса',
+        'Формула Симпсона',
+        'Метод Рунге – Кутта',
+        'Выход'
     )
-)
+)]
 
 options = {
     'sympson': (List('sympson', message="Выбрано", choices=('Формула 1', 'Формула 2'))),

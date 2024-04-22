@@ -1,4 +1,4 @@
-from sympy import Symbol, sqrt, exp, sin, cos, tan, pow
+from sympy import Symbol, sqrt, exp, sin, cos, tan
 
 X = Symbol('x')
 Y = Symbol('y')
@@ -12,9 +12,9 @@ Formula = {
     'Simpson': {
         'A': lambda a, b: exp(a * X) * sin(b * X),
         'B': lambda a: 1 / sqrt(X ** 2 + a)
-    }
+    },
     'Runge': {
-        'A': lambda: Y / (1 + pow(X, 2))
+        'A': lambda: Y / (1 + X ** 2),
         'B': (
             lambda: sin(X),
             lambda: exp(X),

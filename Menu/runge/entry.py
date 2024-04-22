@@ -1,7 +1,7 @@
 from common.commander.formula.text import *
-from common.commander.defaults import *
-from common.commander.input import *
-from menu.runge.interface import RungeKuttaTasks
+from common.commander.input.defaults import *
+from common.commander.input.user import *
+from menu.runge.interface.interface import RungeKuttaTasks
 
 def RungeKuttaEntry(form):
     defaults = are_defaults()

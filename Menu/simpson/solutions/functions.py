@@ -1,6 +1,6 @@
 from common.commander.formula import *
-from common.drawing import Points
-from menu.simpson.solutions.ends import Ends
+from common.drawing.points import Points
+from common.calculus.objects.ends import Ends
 
 def determine(b: float = None):
     task = Formula['Simpson'][0 if b is None else 1]

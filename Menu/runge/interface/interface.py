@@ -1,10 +1,8 @@
-import menu.runge.solutions
-from menu.runge.interface.tasks.taskb.TaskbInterface import solution
-from Classes.Table import Table
+from menu.runge.interface.solutions import asolution, bsolution
+from common.commander.texts.fields import *
+from common.drawing.table import Table
 
 class RungeKuttaTasks:
-    Precision = 1e-9
-
     def __init__(self, arguments: list, extension: list = None):
         self.args = arguments
 
@@ -24,6 +22,6 @@ class RungeKuttaTasks:
 
     def B():
         task = Taskb(self.args)
-        funcs = ['sin(x)', 'e⁻ˣ', 'cos(x)']
+        funcs = Runge['Functions']
         for i in range(0, len(funcs)):
             bsolution(self.args, i, funcs[i], task)

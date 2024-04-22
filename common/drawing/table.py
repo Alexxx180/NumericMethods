@@ -1,8 +1,8 @@
 from prettytable import PrettyTable
-from menu.handlers.func import pause
+from common.handlers.interaction import pause
 
 class Table:
-    def __init__(self, fields: list, title: str = "", floats: str = ".8"):
+    def __init__(self, fields: list = ["", ""], title: str = "", floats: str = ".8"):
         if title == "":
             title = fields.pop(0)
         self.table.float_format = floats
@@ -19,6 +19,10 @@ class Table:
         for index, num in enumerate(x):
             add(self.table, index, num)
 
+    def __appendix(t, n, i):
+        n.insert(0, i)
+        t.add_row(n)
+
     def __single_level(x: list):
         if len(x) != 1:
             self.table.add_row(x)
@@ -29,7 +33,7 @@ class Table:
         if len(x[0]) == 2:
             __append(x, lambda t, i, n: t.add_row([i + 1, n[0], n[1]]))
         else:
-            __append(x, lambda t, i, n: n.insert(0, i) ; t.add_row(n))
+            __append(x, __appendix)
 
     def row(self, x: list):
         self.table.field_names = self.fields
@@ -46,7 +50,7 @@ class Table:
         self.table.add_column(self.field_names[i], x)
         return self
 
-    def columns(self, start: int, memory: iterable):
+    def columns(self, start: int, memory):
         end = len(memory)
         for i in range(start, end):
             column(i, memory[i])

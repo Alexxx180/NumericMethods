@@ -1,6 +1,7 @@
-from common.calculation.objects.ends import Ends
-from common.drawing.graphs.space import DefaultSpace
-from common.drawing.graphs.milestone import Milestone
+from common.calculus.objects.ends import Ends
+from common.drawing.graphs.spaces.scatter import ScatterSpace
+from common.drawing.graphs.builder import CanvasBuilder
+from common.drawing.graphs.graphs import Graphs
 from menu.division.solutions.segment import Segment
 from menu.division.solutions.functions import change_sequence
 

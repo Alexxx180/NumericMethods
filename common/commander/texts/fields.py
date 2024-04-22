@@ -1,14 +1,19 @@
-apx = chr(8776) # Approximation Symbol ≈
+a = chr(8776) # Approximation Symbol ≈
 
 Runge = {
     'A': {
         'Source': ['Условия', 'x₀', 'y₀', 'h', 'n'],
-        'Result': ['Задание А', 'ᵢ', 'x', f'y {apx}', 'yₐₙ =', 'yₚᵣ = ']
+        'Result': ['Задание А', 'ᵢ', 'x', f'y {a}', 'yₐₙ =', 'yₚᵣ = ']
     },
     'B': {
         'Source': ['Условия', 'x₀', 'y₀', "y'₀", 'a', 'b', 'h', 'n'],
-        'Result': ['Задание B', 'i', 'x', 'y {apx}', "y' {apx}", "y'' {apx}", "y'' - ay' - by", 'f(x)', 'погрешность']
+        'Result': ['Задание B', 'i', 'x', 'y {a}', "y' {a}", "y'' {a}", "y'' - ay' - by", 'f(x)', 'погрешность'],
+        'Functions': ['sin(x)', 'e⁻ˣ', 'cos(x)']
     }
+}
+
+Gauss = {
+    'Source': ["Исходная матрица", ""]
 }
 
 Tangent = {

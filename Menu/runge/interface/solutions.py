@@ -1,9 +1,11 @@
+from common.commander.texts.fields import *
+from common.commander.formula.formula import *
 from menu.runge.solutions.functions.formula import analyze, integrate
 
 def source(name, values):
     Table(Runge[name]['Source']).row(values).show().out()
 
-def asolution(values: list, task: Taska):
+def asolution(values: list, task):
     name = 'A'
     source(name)
     formula = Formula['Runge'][name]
@@ -20,7 +22,7 @@ def bsolution(values: list, i: int, function: str, task):
     formula = Formula['Runge'][name][i]
     values.extend(task.apply(formula))
 
-    result = (task.yfunction(values), task.xfunction(i), formula))
+    result = (task.yfunction(values), task.xfunction(i), formula)
     values.extend(result)
     values.append(epsilon(result[0], result[1]))
 

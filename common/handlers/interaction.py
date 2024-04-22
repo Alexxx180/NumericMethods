@@ -2,8 +2,8 @@ from inquirer import prompt
 from platforms.cross import clear
 
 def pause(text: str = ""):
-    print(text, "Нажмите Enter для продолжения...") # Перед остановкой консоли
-    input()  # Останавливаем консоль и ждем ввода от пользователя
+    print(text, "Нажмите Enter для продолжения...")
+    input() # Ждем ввода от пользователя
 
 def ask(query: tuple) -> dict:
     answers = prompt(query)
