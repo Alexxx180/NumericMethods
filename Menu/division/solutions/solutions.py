@@ -1,3 +1,4 @@
+from common.commander.formula.formula import *
 from common.calculus.objects.ends import Ends
 from common.drawing.graphs.spaces.scatter import ScatterSpace
 from common.drawing.graphs.builder import CanvasBuilder
@@ -8,7 +9,7 @@ from menu.division.solutions.functions import change_sequence
 class SegmentDivision:
     def __init__(self, args: tuple):
         self.roots = []
-        self.range = Ends(args)
+        self.range = Ends(args[0], args[1])
         self.n = args[2]
         self.e = args[3]
         name = 'Division'
