@@ -15,7 +15,7 @@ def menu():
                 else:
                     value()
         clear()
-        answers = ask(start_menu)
+        answers = ask(choice.start)
     print("Завершение работы.")
 
 

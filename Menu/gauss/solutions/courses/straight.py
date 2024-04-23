@@ -8,10 +8,11 @@ Python slice syntax
 https://stackoverflow.com/questions/509211/how-slicing-in-python-works
 """
 
+index: int = 0
 result = None
 
-def step(k: int, a, b: list, index: int):
-    global result
+def step(k: int, a, b: list):
+    global result, index
     text = Texts['Gauss']['Straight']['Step']
 
     start: int = k + 1
@@ -30,11 +31,11 @@ def step(k: int, a, b: list, index: int):
         Table().matrix(result).floats('.3').show()
 
 def straight(n: int, a, b: list):
-    global result
+    global result, index
     print(Texts['Gauss']['Straight']['Course'])
     index = 0
 
     for k in range(n):
-        step(k, a, b, index)
+        step(k, a, b)
 
     return result
