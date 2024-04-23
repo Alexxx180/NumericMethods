@@ -1,11 +1,10 @@
-from common.handlers.input.values.single import vinput
-from inquirer import Confirm
+from inquirer import Confirm, prompt
 
 def are_defaults():
     name = 'confirm'
     message = 'Использовать значения по умолчанию?'
-    query = (Confirm(name, message=message, default=True))
-    return vinput(query)[name]
+    query = [Confirm(name, message=message, default=True)]
+    return prompt(query)[name]
 
 Defaults = { # Значения по умолчанию
     'Division': ( # Метод деления отрезков

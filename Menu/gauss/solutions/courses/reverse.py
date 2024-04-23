@@ -8,11 +8,11 @@ def step(x: list, i: int, a: list, b: list):
     scalar = dot(a[i, start:], x[start:])
     x[i] = (b[i] - scalar) / a[i, i]
 
-    print(Texts['Reverse']['Step'].format(start, x[i]))
+    print(Texts['Gauss']['Reverse']['Step'].format(start, x[i]))
 
 
 def reverse(n: int, a, b: list):
-    print(Texts['Reverse']['Course'])
+    print(Texts['Gauss']['Reverse']['Course'])
     x = zeros(n)
 
     start: int = a.shape[0] - 1
