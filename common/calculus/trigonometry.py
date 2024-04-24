@@ -3,12 +3,13 @@ from sympy.utilities import lambdify
 
 X = Symbol('x')
 
-def formulate(f, count: int):
-    derivative = X
-    for i in range(count):
-        derivative = f.diff(derivative)
-    return lambdify(X, d)
+def formulate(derivative, count: int):
+    while count > 0:
+        derivative = derivative.diff(derivative)
+        count -= 1
 
-def derive(self, f, x, derivative: int):
-    formula = formulate(f, derivative)
+    return lambdify(X, derivative)
+
+def derive(text, x, derivative: int):
+    formula = formulate(text, derivative)
     return formula(x)

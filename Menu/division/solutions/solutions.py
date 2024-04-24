@@ -1,6 +1,8 @@
+from numpy import arange
 from common.commander.formula.formula import *
 from common.calculus.objects.ends import Ends
-from common.drawing.graphs.spaces.scatter import ScatterSpace
+from common.calculus.trigonometry import derive
+from common.drawing.graphs.spaces.plain import PlainSpace
 from common.drawing.graphs.builder import CanvasBuilder
 from common.drawing.graphs.graphs import Graphs
 from menu.division.solutions.segment import Segment
@@ -13,31 +15,35 @@ class SegmentDivision:
         self.n = args[2]
         self.e = args[3]
         name = 'Division'
-        self.formula = Formula[name]
+        self.formula = lambda x: derive(Formula[name], x, 0)
 
-        b = CanvasBuilder(name)
-        b.space(ScatterSpace()).graph(Graphs(1, 1)).formula(task)
-        b.mark(size).plane().mark(args).plane().label(f'Plot')
+        size = 100
+        b = CanvasBuilder().space(PlainSpace(name))
+        b.graph(Graphs(1, 1)).formula(self.formula)
+        for space in ((-size, size), args):
+            b.mark(space).plane()
+        b.label('Plot')
 
         self.canvas = b.canvas
         self.segments = (Segment(0, 0), Segment(0, 0))
 
     def resign(self, interval: list) -> str:
-        if self.current.differs(self.previous):
+        if self.segments[1].differs(self.segments[0]):
             self.roots.append(interval)
             return 'blue'
         return 'red'
 
     def study(self) -> list:
-        self.segments[0].update(self.range.start)
+        self.segments[0].update(self.range.start, self.formula)
         step: float = self.range.size() / self.n
 
         for no in arange(1, self.n + 1, 1):
             interval: list = [x for x in self.segments]
-            self.segments[1].update(self.range.start + step * no)
-            self.segments[0].set(self.current)
-            color: str = resign(interval)
-            self.canvas.orders.append((interval, self.formula, color))
+            initial: float = self.range.start + step * no 
+            self.segments[1].update(initial, self.formula)
+            self.segments[0].set(self.segments[1])
+            color: str = self.resign(interval)
+            self.canvas.orders.append((self.segments[0].x, self.formula, color))
 
         return self.roots
 

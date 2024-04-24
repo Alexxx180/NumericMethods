@@ -12,7 +12,7 @@ def TangentMethod(key: str, args: tuple):
 
     message: str = research.message
 
-    view = TangentPlots(name, 100, args, task)
+    view = TangentPlots(key, name, 100, args, task)
     print(Texts[name]['Message'].format(message))
 
     if research.roots is not None:

@@ -1,6 +1,6 @@
 from menu.runge.interface.solutions import asolution, bsolution
 from common.commander.texts.fields import *
-from common.drawing.table import Table
+from common.drawing.table.table import Table
 
 class RungeKuttaTasks:
     def __init__(self, arguments: list, extension: list = None):

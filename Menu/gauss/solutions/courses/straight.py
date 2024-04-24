@@ -1,5 +1,5 @@
 from numpy import column_stack, ndarray
-from common.drawing.table import Table
+from common.drawing.table.table import Table
 from common.commander.texts.common import *
 
 """

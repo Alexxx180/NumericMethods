@@ -5,13 +5,15 @@ from common.commander.Commander import View
 from menu.handlers.func import pause
 
 class TangentPlots:
-    def __init__(self, name: str, size: int, args: tuple, task):
+    def __init__(self, key: str, name: str, size: int, args: tuple, task):
         self.name = name
         self.length = size
 
-        b = CanvasBuilder(name)
-        b.space(ScatterSpace()).graph(Graphs(1, 1)).formula(task)
-        b.mark(size).plane().mark(args).plane().label(f'Plot {key}')
+        b = CanvasBuilder(name).space(ScatterSpace())
+        b.graph(Graphs(1, 1)).formula(task)
+        for space in (size, args):
+            b.mark(space).plane()
+        b.label(f'Plot {key}')
 
         self.canvas = b.canvas
 

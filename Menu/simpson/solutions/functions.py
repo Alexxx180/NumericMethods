@@ -1,5 +1,5 @@
 from common.commander.formula import *
-from common.drawing.points import Points
+from common.drawing.primitives.points import Points
 from common.calculus.objects.ends import Ends
 
 def determine(b: float = None):

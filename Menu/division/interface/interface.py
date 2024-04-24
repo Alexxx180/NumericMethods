@@ -6,13 +6,16 @@ def Show(name: str, roots: list):
     Table(Division[name]).row(roots).show().pause()
 
 def SegmentDivisionMethod(args: tuple):
+    name = 'Division'
     division = SegmentDivision(args)
-    print(Texts['Research'].format(division.range))
+
+    print(Texts[name]['Research'].format(
+        division.range.start, division.range.end))
 
     roots = division.study()
     if len(roots) == 0:
-        division.show()
-        print(Texts['No roots'])
+        print(Texts[name]['No roots'])
+        division.canvas.show()
         return
 
     Show('Source', roots)
@@ -21,7 +24,7 @@ def SegmentDivisionMethod(args: tuple):
     division.canvas.space.plot.color = "green"
 
     for index, x in enumerate(roots):
-        print(Texts['Interval'].format(one, index + 1, x, division.e))
+        print(Texts[name]['Interval'].format(one, index + 1, x, division.e))
         division.breakdown(x)
 
         row = [e for e in x]
@@ -30,4 +33,4 @@ def SegmentDivisionMethod(args: tuple):
 
     Show('Result', rows)
     division.canvas.show()
-    pause(Texts['Roots'].format(rows[0][1]))
+    pause(Texts[name]['Roots'].format(rows[0][1]))

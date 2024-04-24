@@ -19,9 +19,9 @@ start = [List(Main, message="Выбрано",
 )]
 
 options = {
-    'sympson': (List('sympson', message="Выбрано", choices=('Формула 1', 'Формула 2'))),
-    'tangent': (List('tangent', message="Выбрано", choices=('Формула A', 'Формула B'))),
-    'runge': (List('runge', message="Выбрано", choices=('Задание A', 'Задание B')))
+    'sympson': [List('sympson', message="Выбрано", choices=('Формула 1', 'Формула 2'))],
+    'tangent': [List('tangent', message="Выбрано", choices=('Формула A', 'Формула B'))],
+    'runge': [List('runge', message="Выбрано", choices=('Задание A', 'Задание B'))]
 }
 
 methods = {

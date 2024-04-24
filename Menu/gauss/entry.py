@@ -1,5 +1,5 @@
 import numpy as np
-from common.drawing.table import Table
+from common.drawing.table.table import Table
 from common.commander.formula.text import *
 from common.commander.input.defaults import *
 from common.commander.input.user import *

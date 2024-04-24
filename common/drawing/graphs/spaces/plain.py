@@ -1,16 +1,17 @@
 from common.drawing.drawing import *
 
 class PlainSpace:
-    def __init__():
+    def __init__(self, name: str, color = 'red'):
+        self.name = name
+        self.color = color
         self.fontsize = 12
-        self.color = 'red'
         self.line = 'dashed'
         self.align = {
             'horizontal': 'left',
             'vertical': 'bottom'
         }
 
-    def set_graph(graph, i: int = -1):
+    def set_graph(self, graph, i: int = -1):
         self.plot = graph
         self.ax = self.plot.ax if i == -1 else self.plot.ax[i]
 
@@ -32,7 +33,7 @@ class PlainSpace:
 
     def lines(self, values: tuple, f: callable):
         for x in values:
-            line(x, f(x))
+            self.line(x, f(x))
 
     def show(self):
         pass
@@ -42,6 +43,6 @@ class PlainSpace:
         if (len(order) == 3):
             self.color = order[2]
         if isinstance(basis, tuple):
-            lines(basis, drawing)
+            self.lines(basis, drawing)
         else:
-            line(basis, drawing)
+            self.line(basis, drawing)

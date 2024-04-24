@@ -3,13 +3,17 @@ from common.calculus.objects.ends import Ends
 from common.drawing.graphs.spaces.plain import PlainSpace
 
 def canvas(ends: tuple, derives: tuple):
-    x = ends.margin(0.5)
-    space = ends.margin(10)
+    x: tuple = ends.margin(0.5)
+    space: tuple = ends.margin(10)
+    count: int = len(derives)
 
-    b = CanvasBuilder(name).space(PlainSpace()).graph(Graphs(1, 2))
-    b.mark(x, 10).label('Plot 1', 0).label('Plot 2', 1)
-    for task in derives:
-        b.formula(task).mark(space).plane()
+    b = CanvasBuilder().space(PlainSpace(name))
+    b.graph(Graphs(1, 2)).mark(x, 10)
+    for i in range(count):
+        b.label(f'Plot {i + 1}', i)
+
+    for i in range(count):
+        b.formula(derives[i]).mark(space).plane(i)
 
     return b.canvas
 
