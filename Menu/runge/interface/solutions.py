@@ -8,7 +8,8 @@ def source(name, values):
 def asolution(values: list, task):
     name = 'A'
     source(name)
-    formula = Formula['Runge'][name]
+
+    formula = lambda x: derive(Formula['Runge'][name], x, 0)
 
     values = task.apply(formula)
     values.append(analyze(x))
@@ -19,7 +20,9 @@ def asolution(values: list, task):
 def bsolution(values: list, i: int, function: str, task):
     name = 'B'
     source(name)
-    formula = Formula['Runge'][name][i]
+    
+    formula = lambda x: derive(Formula['Runge'][name][i], x, 0)
+    
     values.extend(task.apply(formula))
 
     result = (task.yfunction(values), task.xfunction(i), formula)

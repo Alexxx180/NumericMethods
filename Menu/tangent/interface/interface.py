@@ -5,7 +5,8 @@ from menu.tangent.solutions.research import Research
 
 def TangentMethod(key: str, args: tuple):
     name = 'Tangent'
-    task = Formula[name][key]
+
+    task = lambda x: derive(Formula[name][key], x, 0)
 
     research = Research(task)
     research.start(args)

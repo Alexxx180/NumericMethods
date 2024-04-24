@@ -15,7 +15,9 @@ class SegmentDivision:
         self.n = args[2]
         self.e = args[3]
         name = 'Division'
-        self.formula = lambda x: derive(Formula[name], x, 0)
+
+        derive = formulate(Formula[name], 0)
+        self.formula = lambda x: derive(x)
 
         size = 100
         b = CanvasBuilder().space(PlainSpace(name))
