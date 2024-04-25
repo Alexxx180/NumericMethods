@@ -1,8 +1,10 @@
 from numpy import linspace
-from common.drawing import Points, Graphs, Table
+from common.drawing.primitives.points import Points
+from common.drawing.graphs.graphs import Graphs
+from common.drawing.table.table import Table
 from common.commander.texts.common import *
-from common.commander.Commander import View
-from menu.handlers.func import pause
+from common.commander.switch import View
+from common.handlers.interaction import pause
 
 class TangentPlots:
     def __init__(self, key: str, name: str, size: int, args: tuple, task):
@@ -13,14 +15,14 @@ class TangentPlots:
         b.graph(Graphs(1, 1)).formula(task)
         for space in (size, args):
             b.mark(space).plane()
-        b.label(f'Plot {key}')
+        b.label(f'Plot {key}').entitle('Full Name')
 
         self.canvas = b.canvas
 
     def draw(row: list):
-        for index, num in enumerate(row):
-            x = float(num[0])
-            y = float(num[1])
+        for index, value in enumerate(row):
+            x = float(value[0])
+            y = float(value[1])
 
             half = self.length / 2
             points = linspace(x - half, x + half, self.length)

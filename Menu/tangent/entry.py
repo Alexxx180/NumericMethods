@@ -1,5 +1,6 @@
 from common.commander.input.defaults import *
 from common.commander.input.user import *
+from menu.tangent.interface.interface import TangentMethod
 
 def TangentEntry(key):
     name = 'Tangent'

@@ -3,15 +3,15 @@ from platforms.cross import clear
 
 def pause(text: str = ""):
     print(text, "Нажмите Enter для продолжения...")
-    input() # Ждем ввода от пользователя
+    input()
 
-def ask(query: tuple) -> dict:
+def ask(query: list) -> dict:
     answers = prompt(query)
     clear()
     return answers
 
-def select(invoke: callable, query: str, choices: dict):
-    answers = ask(query)
-    for key, value in choices:
+def select(invoke: callable, query: str, choices: dict, options: dict):
+    answers = ask(options[query])
+    for key, value in choices.items():
         if answers[query] == key:
             invoke(value)

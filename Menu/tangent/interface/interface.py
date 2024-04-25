@@ -1,14 +1,11 @@
-from menu.tangent.interface.plots import TangentInterface
-from menu.tangent.solutions.functions.formula import TangentFormula
+from menu.tangent.interface.plots import TangentPlots
 from menu.tangent.solutions.functions import tangent
 from menu.tangent.solutions.research import Research
 
 def TangentMethod(key: str, args: tuple):
     name = 'Tangent'
 
-    task = lambda x: derive(Formula[name][key], x, 0)
-
-    research = Research(task)
+    research = Research(key, name)
     research.start(args)
 
     message: str = research.message

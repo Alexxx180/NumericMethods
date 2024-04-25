@@ -11,7 +11,7 @@ def menu():
         for key, value in choice.methods.items():
             if answers[choice.Main] == key:
                 if isinstance(value, tuple):
-                    select(value[0], value[1], value[2])
+                    select(value[0], value[1], value[2], choice.options)
                 else:
                     value()
         clear()

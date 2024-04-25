@@ -6,8 +6,11 @@ X = Symbol('x')
 def formulate(text, count: int):
     derivative = text if count == 0 else X
 
-    for i in range(count):
-        derivative = text.diff(derivative)
+    try:
+        for i in range(count):
+            derivative = text.diff(derivative)
+    except ValueError:
+        return lambda x: 0
 
     return lambdify(X, derivative)
 
