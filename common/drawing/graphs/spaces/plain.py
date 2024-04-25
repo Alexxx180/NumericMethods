@@ -5,7 +5,7 @@ class PlainSpace:
         self.name = name
         self.color = color
         self.fontsize = 12
-        self.line = 'dashed'
+        self.style = 'dashed'
         self.align = {
             'horizontal': 'left',
             'vertical': 'bottom'
@@ -23,13 +23,13 @@ class PlainSpace:
     def line(self, x: float, y: float):
         self.points = (y, 0)
         self.ax.vlines(x, self.points[1], self.points[0],
-            colors=self.color, linestyles=self.line)
+            colors=self.color, linestyles=self.style)
 
-        for p in points:
+        for p in self.points:
             self.ax.plot(x, p, Points[self.color])
 
         if abs(self.points[0]) > 0.01:
-            append_text(x, len(self.points))
+            self.append_text(x, len(self.points))
 
     def lines(self, values: tuple, f: callable):
         for x in values:

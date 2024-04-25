@@ -1,7 +1,7 @@
 from numpy import arange
 from common.commander.formula.formula import *
 from common.calculus.objects.ends import Ends
-from common.calculus.trigonometry import derive
+from common.calculus.trigonometry import formulate
 from common.drawing.graphs.spaces.plain import PlainSpace
 from common.drawing.graphs.builder import CanvasBuilder
 from common.drawing.graphs.graphs import Graphs
@@ -45,7 +45,10 @@ class SegmentDivision:
             self.segments[1].update(initial, self.formula)
             self.segments[0].set(self.segments[1])
             color: str = self.resign(interval)
-            self.canvas.orders.append((self.segments[0].x, self.formula, color))
+            x: float = self.segments[0].x
+            self.canvas.orders.append(
+                (x, self.formula(x), color)
+            )
 
         return self.roots
 

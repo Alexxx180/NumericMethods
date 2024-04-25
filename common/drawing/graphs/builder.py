@@ -27,7 +27,7 @@ class CanvasBuilder:
         return self
 
     def label(self, name: str, i: int = -1):
-        setting = (name, self.basis, i)
+        setting = (self.basis, name, i)
         self.canvas.settings.append(setting)
         return self
 

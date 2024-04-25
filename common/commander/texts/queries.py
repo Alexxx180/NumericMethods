@@ -22,4 +22,4 @@ texts = {
     'end': Text('end', message='Введите конец интегрирования', validate=__number)
 }
 
-ranges = (Confirm('range_error', message='Конец диапазона меньше его начала.\nПоменять значения местами?\n', default=True))
+ranges = [Confirm('range_error', message='Конец диапазона меньше его начала.\nПоменять значения местами?\n', default=True)]
