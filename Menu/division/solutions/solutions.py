@@ -24,7 +24,7 @@ class SegmentDivision:
         b.graph(Graphs(1, 1)).formula(self.formula)
         for space in ((-size, size), args):
             b.mark(space).plane()
-        b.label('Plot')
+        b.label('Plot').entitle('Full Name')
 
         self.canvas = b.canvas
         self.segments = (Segment(0, 0), Segment(0, 0))

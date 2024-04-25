@@ -8,7 +8,6 @@ class Canvas:
 
     def apply(self):
         for sets in self.settings:
-            print(f"SETS: {sets[2]}")
             self.space.plot.based(sets[0], sets[1], sets[2])
 
         for plane in self.planes:

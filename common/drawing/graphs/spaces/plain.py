@@ -4,7 +4,7 @@ class PlainSpace:
     def __init__(self, name: str, color = 'red'):
         self.name = name
         self.color = color
-        self.fontsize = 12
+        self.fontsize = 10
         self.style = 'dashed'
         self.align = {
             'horizontal': 'left',
