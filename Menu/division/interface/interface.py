@@ -1,36 +1,45 @@
-from common.commander.texts.common import *
+from common.handlers.printer import Printer
+from common.commander.formula.formula import *
+from common.calculus.trigonometry import formulate, invokation
 from menu.division.solutions.solutions import SegmentDivision
 from menu.division.solutions.functions import middle
+from menu.division.interface.canvas import canvas_from
 
 def Show(name: str, roots: list):
     Table(Division[name]).row(roots).show().pause()
 
 def SegmentDivisionMethod(args: tuple):
     name = 'Division'
-    division = SegmentDivision(args)
+    formula = formulate(Formula[name], 0)
+    derive = invokation(formula)
 
-    print(Texts[name]['Research'].format(
-        division.range.start, division.range.end))
+    division = SegmentDivision(args, derive)
 
-    roots = division.study()
-    if len(roots) == 0:
-        print(Texts[name]['No roots'])
-        division.canvas.show()
+    text = Printer(name)
+    canvas = canvas_from(name, derive, args)
+
+    text.add(print, 'Formula', formula)
+    text.add(print, 'Research', division.range)
+
+    division.study()
+    if len(division.roots) == 0:
+        text.add(print, 'No roots').print().clear()
+        canvas.show(division.orders)
         return
 
-    Show('Source', roots)
+    Show('Source', division.roots)
     rows = []
 
-    division.canvas.space.plot.color = "green"
+    for index, values in enumerate(division.roots):
+        e: float = division.presision.end
+        text.add(print, 'Interval', one, index + 1, values, e)
+        division.breakdown(values)
 
-    for index, x in enumerate(roots):
-        print(Texts[name]['Interval'].format(one, index + 1, x, division.e))
-        division.breakdown(x)
-
-        row = [e for e in x]
-        row.append(middle(x))
+        row = [v for v in values]
+        row.append(middle(values))
         rows.append(row)
 
     Show('Result', rows)
-    division.canvas.show()
-    pause(Texts[name]['Roots'].format(rows[0][1]))
+
+    canvas.show(division.orders)
+    text.add(pause, 'Roots', rows[0][1]).print().clear()

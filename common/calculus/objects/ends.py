@@ -1,11 +1,17 @@
 class Ends:
-    def __init__(self, start: float, end: float):
-        self.start = start
-        self.end = end
+    def __init__(self, start, end = None):
+        if (isinstance(start, tuple)):
+            self.start = start[0]
+            self.end = start[1]
+        elif end is None:
+            self.start = -start
+            self.end = start
+        else:
+            self.start = start
+            self.end = end
 
-    @staticmethod
-    def based(ends, f: callable):
-        return Ends(f(ends.start), f(ends.end))
+    def based(self, f: callable):
+        return Ends(f(self.start), f(self.end))
 
     def size(self) -> float:
         return self.end - self.start

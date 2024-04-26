@@ -15,17 +15,19 @@ class Research:
         self.message = ""
         self.roots = None
 
-    def side(self, name: str, direction: tuple):
-        d2 = direction[2] ; d3 = direction[3]
-
-        if d2 != 0 or d3 != 0:
-            self.roots = (direction[0], self.m)
+    def side(self, name: str, d: tuple):
+        if d[2] != 0 or d[3] != 0:
+            self.roots = (d[0], self.m)
             self.message = str(self.m)
         else:
-            self.message = Texts[self.name]['Derivatives'].format(name, d2, d3)
+            text: str = Texts[self.name]['Derivatives']
+            self.message = text.format(name, d[2], d[3])
 
     def problem(self):
-        self.message = Texts[self.name]['Problem'].format(self.a[1], self.b[1])
+        text: str = Texts[self.name]['Problem']
+        a = self.a[1]
+        b = self.b[1]
+        self.message = text.format(a, b, a * b)
 
     def descent(self):
         self.m = min(abs(self.a[2]), abs(self.b[2]))

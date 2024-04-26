@@ -1,3 +1,5 @@
+from common.commander.texts.common import *
+from common.handlers.interaction import *
 from menu.tangent.interface.plots import TangentPlots
 from menu.tangent.solutions.functions import tangent
 from menu.tangent.solutions.research import Research
@@ -10,7 +12,7 @@ def TangentMethod(key: str, args: tuple):
 
     message: str = research.message
 
-    view = TangentPlots(key, name, 100, args, task)
+    view = TangentPlots(key, name, 100, args, research.derives[0])
     print(Texts[name]['Message'].format(message))
 
     if research.roots is not None:

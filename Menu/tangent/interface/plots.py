@@ -1,5 +1,7 @@
 from numpy import linspace
 from common.drawing.primitives.points import Points
+from common.drawing.graphs.builder import CanvasBuilder
+from common.drawing.graphs.spaces.scatter import ScatterSpace
 from common.drawing.graphs.graphs import Graphs
 from common.drawing.table.table import Table
 from common.commander.texts.common import *
@@ -11,7 +13,7 @@ class TangentPlots:
         self.name = name
         self.length = size
 
-        b = CanvasBuilder(name).space(ScatterSpace())
+        b = CanvasBuilder().space(ScatterSpace(name))
         b.graph(Graphs(1, 1)).formula(task)
         for space in (size, args):
             b.mark(space).plane()

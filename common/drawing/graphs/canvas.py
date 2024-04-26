@@ -13,8 +13,10 @@ class Canvas:
         for plane in self.planes:
             self.space.plot.apply(plane[0], plane[1])
 
-    def show(self):
+    def show(self, orders: list = None):
         if View('Plots', self.space.name):
+            if orders is not None:
+                self.orders = orders
             self.render()
             self.space.show()
             self.apply()

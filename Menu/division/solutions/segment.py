@@ -13,5 +13,8 @@ class Segment:
         self.x = value
         self.sign = formula(self.x)
 
+    def copy(self):
+        return Segment(self.x, self.sign)
+
     def differs(self, previous) -> bool:
         return self.sign * previous.sign <= 0

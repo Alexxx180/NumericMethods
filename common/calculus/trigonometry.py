@@ -12,7 +12,9 @@ def formulate(text, count: int):
     except ValueError:
         return lambda x: 0
 
-    return lambdify(X, derivative)
+    return derivative
+
+def invokation(derive): return lambdify(X, derive)
 
 def derive(text, x, derivative: int):
     formula = formulate(text, derivative)
