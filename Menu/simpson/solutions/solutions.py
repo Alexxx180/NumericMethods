@@ -1,25 +1,27 @@
 from common.drawing.drawing import *
+from menu.simpson.solutions.core import SimpsonCore
 
 class SimpsonSolutions:
-    def __init__(ends):
-        self.core = SimpsonCore(ends)
+    def __init__(self, ends, f: callable):
+        self.core = SimpsonCore(ends, f)
         self.rows = []
 
+    @staticmethod
     def __empty_list():
         return [Chars['None'] * 2]
 
-    def blanks(row: list):
+    def blanks(self, row: list):
         row.extend(__empty__list())
         self.rows.append(row)
 
-    def values():
+    def values(self):
         row = __empty_list()
         row.insert(1, Chars['Miss'])
         row.insert(0, self.core.x)
         row[len(row) - self.core.i] = self.core.y
         self.rows.append(row)
 
-    def perform(view):
+    def perform(self, view):
         core = self.core
         view.origins(core)
         blanks([core.start, core.yends.start])

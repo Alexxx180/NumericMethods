@@ -27,10 +27,10 @@ Defaults = { # Значения по умолчанию
         ),
         'B': (-4.41, 1.53, 1) # a, b, y'₀
     },
-    'Simpson': [ # Формула Симпсона
-        (0.73, 1.46, 1, 2, 0.00001), # a, b, start, end, e
-        (0.72, 0.00, 1, 2, 0.00001)  # a, b, start, end, e
-    ]
+    'Simpson': { # Формула Симпсона
+        'A': (0.73, 1.46, 1, 2, 0.00001), # a, b, start, end, e
+        'B': (0.72, 0.00, 1, 2, 0.00001)  # a, b, start, end, e
+    }
 }
 
 """ # Switch ON/OFF with '#' at the start of the line

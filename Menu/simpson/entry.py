@@ -11,4 +11,4 @@ def SimpsonFormulaEntry(form: str):
     else:
         args = Input['Simpson']('b' if form == 'B' else '')
 
-    SimpsonInterface(args).start()
+    SimpsonInterface(args, form).start()

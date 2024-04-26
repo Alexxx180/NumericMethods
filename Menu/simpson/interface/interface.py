@@ -5,12 +5,12 @@ from menu.simpson.solutions.solutions import SimpsonSolutions
 from menu.simpson.interface.view import canvas, variables, output
 
 class SimpsonInterface:
-    def __init__(self, args: tuple):
+    def __init__(self, args: tuple, form: str):
         self.range = Ends(args)
         self.ends = Ends((args[2], args[3]))
         self.e = args[4]
-        self.solution = SimpsonSolutions(self.ends)
-        self.derives = determine(self.range.end)
+        self.derives = determine(self.ends, form)
+        self.solution = SimpsonSolutions(self.ends, self.derives[0])
         self.canvas = canvas(self.ends, self.derives)
 
     def calculate():

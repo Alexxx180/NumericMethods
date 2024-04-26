@@ -1,12 +1,16 @@
-from common.commander.formula import *
+from common.commander.formula.formula import *
 from common.drawing.primitives.points import Points
 from common.calculus.objects.ends import Ends
+from common.calculus.trigonometry import formulate, invokation
 
-def determine(b: float = None):
-    task = Formula['Simpson'][0 if b is None else 1]
+def determine(ab, form: str):
+    if ab.end is None:
+        task = Formula['Simpson'][form](ab.start)
+    else:
+        task = Formula['Simpson'][form](ab.start, ab.end)
     return (
-        lambda x: derive(task, x, 0),
-        lambda x: derive(task, x, 4)
+        invokation(formulate(task, 0)),
+        invokation(formulate(task, 4))
     )
 
 def search_max(points: Points) -> tuple:
