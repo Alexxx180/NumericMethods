@@ -10,12 +10,11 @@ def formulate(text, count: int):
         for i in range(count):
             derivative = text.diff(derivative)
     except ValueError:
-        return lambda x: 0
+        return '0'
 
     return derivative
 
-def invokation(derive): return lambdify(X, derive)
-
-def derive(text, x, derivative: int):
-    formula = formulate(text, derivative)
-    return formula(x)
+def invokation(derive):
+    if derive == '0':
+        return lambda x: 0
+    return lambdify(X, derive)

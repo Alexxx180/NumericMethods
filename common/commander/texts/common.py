@@ -1,6 +1,3 @@
-def formatting(string: str, iterable):
-    return [string.format(num) for num in iterable]
-
 Texts = {
     'Simpson': {
         'Full Name': 'Формула Симпсона',

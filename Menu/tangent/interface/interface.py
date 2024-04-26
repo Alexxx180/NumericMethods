@@ -1,23 +1,25 @@
 from common.commander.texts.common import *
-from common.handlers.interaction import *
-from menu.tangent.interface.plots import TangentPlots
-from menu.tangent.solutions.functions import tangent
+from common.commander.texts.fields import *
+from common.handlers.interaction import pause
+from common.handlers.printer import Printer
+from menu.tangent.interface.canvas import canvas_from
+from menu.tangent.solutions.functions import tangent, draw
 from menu.tangent.solutions.research import Research
 
-def TangentMethod(key: str, args: tuple):
-    name = 'Tangent'
-
+def TangentMethod(key: str, name: str, args: tuple):
     research = Research(key, name)
     research.start(args)
 
-    message: str = research.message
+    canvas = canvas_from(key, name, research.derives[0], args)
 
-    view = TangentPlots(key, name, 100, args, research.derives[0])
-    print(Texts[name]['Message'].format(message))
+    text = Printer(name)
+    text.add(print, 'Message', research.message)
 
     if research.roots is not None:
         row = tangent(args[2], research)
-        view.draw(row)
-        Table(Tangent[name]['Result'], message).row(row).show().pause()
+        orders = draw(row, name, 100)
+        canvas.show(orders)
+        grid((name, 'Result'), row, research.message)
+        text.print().clear()
     else:
-        pause(Texts[name]['No roots'].format(args[0], args[1]))
+        text.add(pause, 'No roots', args[0], args[1]).print().clear()

@@ -4,4 +4,4 @@ from menu.division.interface.interface import SegmentDivisionMethod
 
 def DivisionEntry():
     name = 'Division'
-    SegmentDivisionMethod(Defaults[name] if are_defaults() else Input[name]())
+    SegmentDivisionMethod(name, Defaults[name] if are_defaults() else Input[name]())

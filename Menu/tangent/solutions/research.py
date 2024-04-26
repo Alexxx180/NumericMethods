@@ -1,6 +1,6 @@
 from common.commander.texts.common import *
 from common.commander.formula.formula import *
-from common.calculus.trigonometry import formulate
+from common.calculus.trigonometry import formulate, invokation
 
 class Research:
     def __init__(self, key: str, name: str):
@@ -10,8 +10,10 @@ class Research:
         self.name = name
         for i in range(0, 3):
             formula = formulate(Formula[name][key], i)
-            derive = lambda x: formula(x)
-            self.derives.append(derive)
+            print(formula)
+            derive = invokation(formula)
+            d = lambda x: derive(x)
+            self.derives.append(d)
         self.message = ""
         self.roots = None
 
@@ -23,10 +25,8 @@ class Research:
             text: str = Texts[self.name]['Derivatives']
             self.message = text.format(name, d[2], d[3])
 
-    def problem(self):
+    def problem(self, a: float, b: float):
         text: str = Texts[self.name]['Problem']
-        a = self.a[1]
-        b = self.b[1]
         self.message = text.format(a, b, a * b)
 
     def descent(self):
@@ -45,6 +45,6 @@ class Research:
             self.b.append(derive(ab[1]))
 
         if ab[0] * ab[1] < 0:
-            descent()
+            self.descent()
         else:
-            self.message = self.problem()
+            self.problem(self.a[1], self.b[1])

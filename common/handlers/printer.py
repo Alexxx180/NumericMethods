@@ -6,7 +6,7 @@ class Printer:
         self.orders = []
 
     def add(self, text: callable, key: str, *args):
-        self.orders.append((text, key, *args))
+        self.orders.append((text, key, args))
         return self
 
     def print(self):
@@ -16,7 +16,7 @@ class Printer:
             args: int = 2
 
             if len(order) > args:
-                text(Texts[self.name][key].format(order[args]))
+                text(Texts[self.name][key].format(*order[args]))
             else:
                 text(Texts[self.name][key])
         return self
