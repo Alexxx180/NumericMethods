@@ -45,8 +45,7 @@ class TaskbFunctions:
 
         kl[0] = i + 1
 
-    def kl_fourth_order(self):
-        h = at('h'); return (1, (h, h) * 4)
+    def kl_fourth_order(self): h = return (1, (at('h'), at('h')) * 4)
 
     def calculate(self, k: tuple, i: int):
         return (k[1][i] + k[2][i] * 2 + k[3][i] * 2 + k[4][i]) / 6

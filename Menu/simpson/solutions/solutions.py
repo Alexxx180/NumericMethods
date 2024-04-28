@@ -1,36 +1,31 @@
-from common.drawing.drawing import *
 from menu.simpson.solutions.core import SimpsonCore
+from menu.simpson.solutions.functions import empty_list, placeholder
 
 class SimpsonSolutions:
     def __init__(self, ends, f: callable):
         self.core = SimpsonCore(ends, f)
         self.rows = []
 
-    @staticmethod
-    def __empty_list():
-        return [Chars['None'] * 2]
-
     def blanks(self, row: list):
-        row.extend(__empty__list())
+        row.extend(empty_list())
         self.rows.append(row)
 
     def values(self):
-        row = __empty_list()
-        row.insert(1, Chars['Miss'])
-        row.insert(0, self.core.x)
-        row[len(row) - self.core.i] = self.core.y
+        row = placeholder(self.core.x)
+        i: int = len(row) - self.core.i - 1
+        row[i] = self.core.y
         self.rows.append(row)
 
     def perform(self, view):
-        core = self.core
-        view.origins(core)
-        blanks([core.start, core.yends.start])
+        x = self.core.ends
+        y = self.core.yends
+        self.blanks([x.start, y.start])
 
-        for i in range(1, n):
+        for i in range(1, self.core.n):
             self.core.iteration(i)
-            values(core)
-            view.space.orders.append(core.coords())
+            coords = self.core.coords()
+            self.values()
+            view.orders.append(coords)
 
-        blanks([core.end, core.yends.end])
-        view.output(core.n)
-        return core.calculate()
+        self.blanks([x.end, y.end])
+        return self.core.calculate()

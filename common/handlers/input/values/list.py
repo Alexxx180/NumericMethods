@@ -1,8 +1,6 @@
-from common.handlers.input.values.single import vinput
-
 def input_list(query, variables):
     result = []
-    request = vinput(query)
+    request = prompt(query)
 
     for variable in variables:
         if len(variable) == 1:

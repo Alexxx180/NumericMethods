@@ -1,14 +1,15 @@
 from common.commander.formula.text import *
 from common.commander.input.defaults import *
 from common.commander.input.user import *
-from menu.simpson.interface.interface import SimpsonInterface
+from menu.simpson.interface import SimpsonInterface
 
 def SimpsonFormulaEntry(form: str):
-    print(Descriptions['Simpson'][form])
+    #print(Descriptions['Simpson'][form])
+    name = 'Simpson'
 
     if are_defaults():
-        args = Defaults['Simpson'][form]
+        args = Defaults[name][form]
     else:
-        args = Input['Simpson']('b' if form == 'B' else '')
+        args = Input[name]('b' if form == 'B' else '')
 
-    SimpsonInterface(args, form).start()
+    SimpsonInterface(args, name, form).start()

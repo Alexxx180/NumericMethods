@@ -1,11 +1,6 @@
+from common.drawing.table.table import Table
+
 a = chr(8776) # Approximation Symbol ≈
-
-def grid(keys: tuple, args, title: str = ""):
-    field = Fields
-    for key in keys:
-        field = field[key]
-
-    Table(field, title).row(args).show().pause()
 
 Fields = {
     'Runge': {

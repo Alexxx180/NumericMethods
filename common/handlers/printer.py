@@ -3,22 +3,44 @@ from common.commander.texts.common import *
 class Printer:
     def __init__(self, name: str):
         self.name = name
-        self.orders = []
+        self.orders: list = []
+        self.order: list = [print, None, None]
 
-    def add(self, text: callable, key: str, *args):
-        self.orders.append((text, key, args))
+    def edit(self, position: int, key: str):
+        self.order[1][position] = key
         return self
+
+    def act(self, function: callable):
+        self.order[0] = function
+        return self
+
+    def keys(self, *keys):
+        self.order[1] = keys
+        return self
+
+    def args(self, *values):
+        self.order[2] = values
+        return self
+
+    def add(self):
+        self.orders.append(self.order)
+        return self
+
+    def __get(self, keys: list):
+        field = Texts[self.name]
+        for key in keys:
+            field = field[key]
+        return field
+
+    def text(self):
+        return self.__get(self.order[1])
 
     def print(self):
         for order in self.orders:
             text: callable = order[0]
-            key: str = order[1]
-            args: int = 2
-
-            if len(order) > args:
-                text(Texts[self.name][key].format(*order[args]))
-            else:
-                text(Texts[self.name][key])
+            field = self.__get(order[1])
+            args: tuple = order[2]
+            text(field.format(*args) if len(args) == 0 else field)
         return self
 
     def clear(self):

@@ -16,13 +16,13 @@ class TableLevels:
             return 1 + max(self.count(level) for level in levels)
         return 0
 
-    def dimension(self, table, row: list):
-        if len(x) == 1:
-            __append(x, self.single)
+    def dimension(self, table, rows: list):
+        if len(rows) == 1:
+            self.__append(table, rows, self.single)
         else:
-            table.add_row(row)
+            table.add_row(rows)
 
-    def dimensions(self, row: list):
-        f = self.double if len(row[0]) != 2 else __appendix
-        __append(row, f)
+    def dimensions(self, table, row: list):
+        f = self.double if len(row[0]) != 2 else self.__appendix
+        self.__append(table, row, f)
         return self

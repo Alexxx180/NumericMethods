@@ -2,20 +2,19 @@ from numpy import zeros, dot
 from common.drawing.table.table import Table
 from common.commander.texts.common import *
 
-def step(x: list, i: int, a: list, b: list):
+def step(text, x: list, i: int, a: list, b: list):
     start: int = i + 1
 
     scalar = dot(a[i, start:], x[start:])
     x[i] = (b[i] - scalar) / a[i, i]
 
-    print(Texts['Gauss']['Reverse']['Step'].format(start, x[i]))
+    text.reverse_step(start, x[i])
 
-
-def reverse(n: int, a, b: list):
-    print(Texts['Gauss']['Reverse']['Course'])
+def reverse(text, n: int, a, b: list):
+    text.reverse_course()
     x = zeros(n)
 
     start: int = a.shape[0] - 1
 
     for i in range(start, -1, -1):
-        step(x, i, a, b)
+        step(text, x, i, a, b)

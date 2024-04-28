@@ -1,7 +1,9 @@
 Texts = {
     'Simpson': {
         'Full Name': 'Формула Симпсона',
-        'Variables': 'a = {0}, b = {1}, e = {2:.15f}, h = {3}, M = {4}, n = {5}\nПределы интегрирования {6}..{7}\nЗначение интеграла = {8}',
+        'Plot 1': 'График 1',
+        'Plot 2': 'График 2',
+        'Model': 'a = {0.range.start}, b = {0.range.end}, e = {0.e:.15f}, h = {0.solution.core.size}, M = {0.solution.core.m}, n = {0.solution.core.n}\nПределы интегрирования {0.ends.start}..{0.ends.end}\nЗначение интеграла = {0.result}',
     },
     'Division': {
         'Full Name': 'Метод деления отрезков',

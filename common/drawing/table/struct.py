@@ -7,9 +7,9 @@ class TableStruct:
     def row(self, table, values: list):
         levels = self.levels.count(values)
         if levels == 1:
-            self.levels.dimension(values)
+            self.levels.dimension(table, values)
         elif levels > 1:
-            self.levels.dimensions(values)
+            self.levels.dimensions(table, values)
         return self
 
     def column(self, table, i: int, values: list):

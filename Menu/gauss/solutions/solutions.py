@@ -4,8 +4,8 @@ from menu.gauss.solutions.courses.straight import straight
 from menu.gauss.solutions.courses.reverse import reverse
 
 class Gauss:
-    def __init__(self, num: list):
-        self.array = num
+    def __init__(self, numeric: list):
+        self.array = numeric
 
     def system_elimination(self):
         n = len(self.array[0])
@@ -16,10 +16,6 @@ class Gauss:
 
         n = a.shape[1]
 
-        matrix = straight(n, a, b)
-        unresolved = are_undefined(matrix)
-
-        if unresolved[0]:
-            print(unresolved[1])
-
-        reverse(n, a, b)
+        matrix = straight(text, n, a, b)
+        if not are_undefined(matrix, text):
+            reverse(text, n, a, b)

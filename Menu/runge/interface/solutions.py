@@ -1,35 +1,35 @@
-from common.commander.texts.fields import *
+from common.flow.texts.runge import Text
 from common.commander.formula.formula import *
 from menu.runge.solutions.functions.formula import analyze, integrate
 
-def source(name, values):
-    Table(Runge[name]['Source']).row(values).show().out()
-
 def asolution(values: list, task):
-    name = 'A'
-    source(name)
+    name = 'Runge'
+    key = 'A'
+    text = Text(name)
+    text.source(key, values)
 
-    formula = lambda x: derive(Formula['Runge'][name], x, 0)
+    formula = formulate(Formula['Runge', name], 0)
+    derive = invokation(formula)
 
-    values = task.apply(formula)
+    values = task.apply(derive)
     values.append(analyze(x))
     values.append(integrate(x).flatten().tolist())
 
-    Table(Runge[name]['Result']).columns(0, values).show().pause()
+    text.result(name, values)
 
-def bsolution(values: list, i: int, function: str, task):
-    name = 'B'
-    source(name)
-    
-    formula = lambda x: derive(Formula['Runge'][name][i], x, 0)
-    
-    values.extend(task.apply(formula))
+def bsolution(values: list, i: int, task):
+    name = 'Runge'
+    key = 'B'
+    text = Text(name)
+    text.source(key, values)
 
-    result = (task.yfunction(values), task.xfunction(i), formula)
+    formula = formulate(Formula['Runge', name, i], 0)
+    derive = invokation(formula)
+
+    values.extend(task.apply(derive))
+
+    result = (task.yfunction(values), task.xfunction(i), derive)
     values.extend(result)
     values.append(epsilon(result[0], result[1]))
 
-    fields = Runge[name]['Result']
-    fields[0] += str(i + 1)
-    fields[7] = function[i]
-    Table(fields).columns(0, values).show().pause()
+    text.result(name, values, function, i)

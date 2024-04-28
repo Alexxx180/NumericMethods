@@ -2,6 +2,17 @@ from common.commander.formula.formula import *
 from common.drawing.primitives.points import Points
 from common.calculus.objects.ends import Ends
 from common.calculus.trigonometry import formulate, invokation
+from common.drawing.drawing import *
+
+def placeholder(x: float):
+    add = { 1: Chars['Miss'], 0: x }
+    row = empty_list()
+    for key, value in add.items():
+        row.insert(key, value)
+    return row
+
+def empty_list():
+    return [Chars['None'] * 2]
 
 def determine(ab, form: str):
     if ab.end is None:

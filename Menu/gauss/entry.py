@@ -7,12 +7,16 @@ from common.commander.texts.fields import *
 from menu.gauss.interface.interface import GaussMethod
 
 def GaussEntry():
-    array = np.array(Defaults['Gauss'], dtype=float)
-    Table(Gauss['Source']).matrix(array).show()
+    name = 'Gauss'
+    array = np.array(Defaults[name], dtype=float)
+
+    text = Text(name)
+    text.source(array)
 
     if are_defaults():
-        GaussMethod(array)
+        GaussMethod(array, text)
     else:
-        validator = InputLoop()
+        validator = InputLoop(text)
         if validator.perform():
-            GaussMethod(validator.matrix)
+            GaussMethod(validator.matrix, validator.text)
+    text.pause()
