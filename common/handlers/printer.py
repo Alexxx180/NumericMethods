@@ -3,8 +3,13 @@ from common.commander.texts.common import *
 class Printer:
     def __init__(self, name: str):
         self.name = name
-        self.orders: list = []
         self.order: list = [print, None, None]
+
+    def __get(self, keys: list):
+        field = Texts[self.name]
+        for key in keys:
+            field = field[key]
+        return field
 
     def edit(self, position: int, key: str):
         self.order[1][position] = key
@@ -22,27 +27,15 @@ class Printer:
         self.order[2] = values
         return self
 
-    def add(self):
-        self.orders.append(self.order)
-        return self
-
-    def __get(self, keys: list):
-        field = Texts[self.name]
-        for key in keys:
-            field = field[key]
-        return field
-
     def text(self):
         return self.__get(self.order[1])
 
     def print(self):
-        for order in self.orders:
-            text: callable = order[0]
-            field = self.__get(order[1])
-            args: tuple = order[2]
-            text(field.format(*args) if len(args) == 0 else field)
-        return self
-
-    def clear(self):
-        self.orders.clear()
+        text: callable = self.order[0]
+        field = self.__get(self.order[1])
+        args: tuple = self.order[2]
+        if len(args) == 0:
+            text(field)
+        else:
+            text(field.format(*args))
         return self

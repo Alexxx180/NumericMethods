@@ -9,7 +9,7 @@ class Text:
         self.p = Printer(name).act(pause)
 
     def variables(self, model):
-        self.p.keys('Model').args(model).add().print()
+        self.p.keys('Model').args(model).print()
 
     def result(self, rows: list):
         fields = Fields[self.name, 'Result']

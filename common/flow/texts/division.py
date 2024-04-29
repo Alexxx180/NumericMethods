@@ -8,17 +8,17 @@ class Text:
         self.rows = []
 
     def research(self, formula, initial):
-        self.p.keys('Formula').args(formula).add()
-        self.p.keys('Research').args(initial).add()
+        self.p.keys('Formula').args(formula).print()
+        self.p.keys('Research').args(initial).print()
 
     def interval(self, *args):
-        self.p.keys('Interval').args(args).add()
+        self.p.keys('Interval').args(args).print()
 
     def no_roots(self):
-        self.p.keys('No roots').args().add().print().clear()
+        self.p.keys('No roots').args().print()
 
     def roots(self, result):
-        self.p.keys('Roots').args(result).add().print().clear()
+        self.p.keys('Roots').args(result).print()
 
     def source(self, roots):
         grid(self.name, 'Source').row(roots).show()

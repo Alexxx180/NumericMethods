@@ -1,4 +1,5 @@
 from common.commander.texts.common import *
+from common.flow.texts.tangent import Text
 from common.flow.canvas.tangent import canvas_from
 from menu.tangent.solutions.functions import tangent, draw
 from menu.tangent.solutions.research import Research

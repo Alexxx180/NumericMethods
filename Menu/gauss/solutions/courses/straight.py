@@ -25,8 +25,7 @@ def step(text, k: int, a, b: list):
         b[i] -= ratio * b[k]
 
         result = column_stack((a, b))
-
-        text
+        text.result(result)
 
 def straight(text, n: int, a, b: list):
     global result, index
@@ -34,6 +33,6 @@ def straight(text, n: int, a, b: list):
     index = 0
 
     for k in range(n):
-        step(k, a, b)
+        step(text, k, a, b)
 
     return result
