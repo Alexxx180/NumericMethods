@@ -21,4 +21,4 @@ class ScatterSpace:
 
     def render(self, order: tuple):
         self.draw(order[0], order[1], order[2])
-        self.scatters(order[4], order[5])
+        self.scatters(order[3], order[4])

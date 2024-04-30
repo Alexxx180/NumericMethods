@@ -9,12 +9,11 @@ def TangentMethod(key: str, name: str, args: tuple):
     research.start(args)
 
     derive = research.derives[0]
-    message = research.message
-
     canvas = canvas_from(key, name, derive, args)
 
     text = Text(name)
-    text.message(message)
+    text.formula(research.formula)
+    text.message(research.message)
 
     if research.roots is None:
         text.no_roots(args[0], args[1])
@@ -23,6 +22,6 @@ def TangentMethod(key: str, name: str, args: tuple):
     rows = tangent(args[2], research)
     orders = draw(rows, name, 100)
 
-    text.result(message, rows)
+    text.result(rows)
     canvas.show(orders)
     text.pause()

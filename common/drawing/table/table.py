@@ -6,17 +6,30 @@ class Table:
     def __init__(self, fields: list = [], title: str = ""):
         if title == "" and len(fields) != 0:
             title = fields.pop(0)
+        self.alignment = { 'Left': 'l', 'Center': 'c', 'Right': 'r' }
         self.fields = fields
-        self.table = TableDefaults(title)
+        self.table = TableDefaults(title, self.alignment)
         self.struct = TableStruct()
 
     def floats(self, symbols: str):
         self.table.float_format = symbols
         return self
 
+    def align(self, side: str, field: str = ''):
+        if field == '':
+            self.table.align = self.alignment[side]
+        else:
+            self.table.align[field] = self.alignment[side]
+        return self
+
     def row(self, x: list):
         self.table.field_names = self.fields
         self.struct.row(self.table, x)
+        return self
+
+    def rows(self, values:list):
+        self.table.field_names = self.fields
+        self.struct.rows(self.table, values)
         return self
 
     def columns(self, start: int, memory):

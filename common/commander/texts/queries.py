@@ -15,7 +15,7 @@ texts = {
     'e': Text('e', message='Введите точность e', validate=__number),
     'x': Text('x', message='Введите x₀', validate=__number),
     'y': Text('y', message='Введите y₀', validate=__number),
-    'yd': Text('yp', message="Введите y'₀", validate=__number),
+    'yd': Text('yp', message='Введите y’₀', validate=__number),
     'h': Text('h', message='Введите h', validate=__number),
     'n': Text('n', message='Введите n', validate=__number),
     'start': Text('start', message='Введите начало интегрирования', validate=__number),

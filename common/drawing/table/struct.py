@@ -12,6 +12,10 @@ class TableStruct:
             self.levels.dimensions(table, values)
         return self
 
+    def rows(self, table, rows: list):
+        for row in rows:
+            table.add_row(row)
+
     def column(self, table, i: int, values: list):
         table.add_column(table.field_names[i], values)
         return self

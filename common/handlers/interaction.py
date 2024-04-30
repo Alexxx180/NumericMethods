@@ -1,9 +1,20 @@
 from inquirer import prompt
 from platforms.cross import clear
 
+def upline():
+    print('\033[3A')
+
+def truncate(count: int):
+    for i in range(0, count):
+        print(' ', end='')
+
 def pause(text: str = ""):
-    print(text, "Нажмите Enter для продолжения...")
+    print(text)
+    message = "Нажмите Enter для продолжения..."
+    print(message)
     input()
+    upline()
+    truncate(len(message))
 
 def ask(query: list) -> dict:
     answers = prompt(query)

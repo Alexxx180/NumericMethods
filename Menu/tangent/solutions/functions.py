@@ -1,16 +1,15 @@
 from numpy import linspace
 from common.commander.texts.common import *
 
-def update(y: tuple, x: float, derives: list):
+def update(y: list, x: float, derives: list):
     for i in range(len(y)):
         y[i] = derives[i](x)
 
 def tangent(precision: float, research):
-    f = research.task
-    x = research.roots
+    x = list(research.roots)
 
-    y = (0.0, 0.0)
-    update(y, f, x[0], research.derives)
+    y = [0.0, 0.0]
+    update(y, x[0], research.derives)
 
     result = []
 
@@ -19,11 +18,11 @@ def tangent(precision: float, research):
     while (n := a(y[0], x[1])) > precision:
         result.append([x[0], y[0], y[1], n])
         x[0] -= y[0] / y[1]
-        update(y, f, x[0], research.derives)
+        update(y, x[0], research.derives)
 
-    update(y, f, x[0], research.derives)
+    update(y, x[0], research.derives)
 
-    row = (x[0], y[0], y[1], 0)
+    row = [x[0], y[0], y[1], 0]
     if y[0] != 0:
         row[3] = a(y[0], x[1])
 
@@ -42,9 +41,9 @@ def draw(row: list, name: str, length: int):
         points = linspace(x - half, x + half, length)
         tangent = z * (points - x) + y
 
-        name: str = Texts[name]['Name'].format(index)
-        order: tuple = (points, tangent, name, x, y)
+        caption: str = Texts[name]['Name'].format(index)
+        order: tuple = (points, tangent, caption, x, y)
 
         orders.append(order)
 
-    return order
+    return orders

@@ -14,6 +14,13 @@ class Text:
     def no_roots(self, a: float, b: float):
         self.p.act(pause).keys('No roots').args(a, b).print()
 
-    def result(self, caption: str, rows: list):
-        fields = Fields[self.name, 'Result']
-        Table(fields, caption).row(rows).show().pause()
+    def formula(self, rows: list):
+        fields = Fields[self.name]['Formula']
+        Table(fields).rows(rows).align('Left', 'Уравнение').show().pause()
+
+    def result(self, rows: list):
+        fields = Fields[self.name]['Result']
+        Table(fields).rows(rows).show().pause()
+
+    def pause(self):
+        pause()

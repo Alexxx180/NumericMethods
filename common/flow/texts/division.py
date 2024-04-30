@@ -1,3 +1,5 @@
+from common.drawing.table.table import Table
+from common.commander.texts.fields import *
 from common.handlers.printer import Printer
 from common.handlers.interaction import pause
 
@@ -11,9 +13,6 @@ class Text:
         self.p.keys('Formula').args(formula).print()
         self.p.keys('Research').args(initial).print()
 
-    def interval(self, *args):
-        self.p.keys('Interval').args(args).print()
-
     def no_roots(self):
         self.p.keys('No roots').args().print()
 
@@ -21,11 +20,12 @@ class Text:
         self.p.keys('Roots').args(result).print()
 
     def source(self, roots):
-        grid(self.name, 'Source').row(roots).show()
-
-    def result(self):
-        grid(self.name, 'Result').row(self.rows).show()
+        fields = Fields[self.name]['Source']
+        Table(fields).rows(roots).show()
         return self
+
+    def result(self, *args):
+        self.p.keys('Result').args(*args).print()
 
     def pause(self):
         pause()
