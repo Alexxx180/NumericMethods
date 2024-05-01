@@ -17,25 +17,28 @@ class RungeKuttaTasks:
     def __derive(self, formula: str, *symbols) -> callable:
         return invokation(formulate(formula, 0, *symbols), *symbols)
 
-    def __text(self):
-        return Text(self.name, self.key).source(self.args)
+    def __text(self, args):
+        return Text(self.name, self.key).source(args)
 
     def A(self):
-        print(self.formula)
         f: callable = self.__derive(self.formula, X, Y)
 
         columns: list = TaskA(self.args).apply(f)
+        columns[0], columns[1] = columns[1], columns[0]
+
         x: list = columns[0]
-        y0: float = self.args
+        y0: float = self.args[1]
+
         columns.append(analyze(x))
         columns.append(integrate(x, y0).flatten().tolist())
 
-        text = self.__text()
-        print(len(columns))
+        args = list(self.args)
+        args.append(self.formula)
+        text = self.__text(args)
         text.result(columns)
 
     def B(self):
-        text = self.__text()
+        text = self.__text(self.args)
         task = TaskB(self.args)
 
         for formula in self.formula:

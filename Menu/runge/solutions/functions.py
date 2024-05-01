@@ -28,7 +28,7 @@ def function1(y: list, a: float, b: float, n: int) -> list:
 def function2(f: callable, x: list, n: int) -> list:
     return [f(x[i]) for i in range(n + 1)]
 
-def analyze(x: float):
+def analyze(x: list):
     return np.exp(((x ** 3) / 3) + x) - 1
 
 def diff_equation(y, x):

@@ -6,7 +6,7 @@ class Text:
         self.fields = Fields[name]
         self.key = key
 
-    def source(self, values: list):
+    def source(self, values: tuple):
         Table(self.fields[self.key]['Source']).row(values).show()
         return self
 
@@ -15,4 +15,4 @@ class Text:
         if i != -1:
             fields[0] += str(i + 1)
             fields[7] = self.fields['Functions'][i]
-        Table(fields).columns(0, values).show().pause()
+        Table(fields).columns(0, values).floats('.8').show().pause()

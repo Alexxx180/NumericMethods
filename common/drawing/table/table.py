@@ -22,9 +22,10 @@ class Table:
             self.table.align[field] = self.alignment[side]
         return self
 
-    def row(self, x: list):
+    def row(self, values: list):
         self.table.field_names = self.fields
-        self.struct.row(self.table, x)
+        self.table.add_row(values)
+        #self.struct.row(self.table, x)
         return self
 
     def rows(self, values:list):
@@ -33,8 +34,7 @@ class Table:
         return self
 
     def columns(self, start: int, memory):
-        self.table.field_names = self.fields
-        self.struct.columns(self.table, start, memory)
+        self.struct.columns(self.fields, self.table, start, memory)
         return self
 
     def matrix(self, rows: list, head: str = 'x'):

@@ -5,8 +5,9 @@ from common.drawing.table.table import Table
 Fields = {
     'Runge': {
         'A': {
-            'Source': ['Условия', 'x₀', 'y₀', 'h', 'n'],
-            'Result': ['Задание А', 'ᵢ', 'x', f'y ≈', 'yₐₙ =', 'yₚᵣ = ']
+            'Source': ['Условия', 'x₀', 'y₀', 'h', 'n', 'Формула'],
+            'Result': ['Задание А', 'xᵢ', f'y ≈', 'yₐₙ =', 'yₚᵣ = ']
+            #'ᵢ', 'x', f'y ≈', 'yₐₙ =', 'yₚᵣ = ']
         },
         'B': {
             'Source': ['Условия', 'x₀', 'y₀', 'y’₀', 'a', 'b', 'h', 'n'],

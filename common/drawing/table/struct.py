@@ -16,23 +16,19 @@ class TableStruct:
         for row in rows:
             table.add_row(row)
 
-    def column(self, table, i: int, values: list):
-        table.add_column(table.field_names[i], values)
+    def column(self, field: str, table, values: list):
+        table.add_column(field, values)
         return self
 
-    def columns(self, table, start: int, memory):
-        end = len(memory)
+    def columns(self, fields: list, table, start: int, memory: list):
+        end: int = len(memory)
         for i in range(start, end):
-            print(len(memory[i]))
-            self.column(table, i, memory[i])
+            self.column(fields[i], table, memory[i])
         return self
 
     def matrix(self, table, rows: list, head: str = 'x'):
-        fields: list = []
-        for i in range(0, len(rows[0]) - 1):
-            fields.append(f"{head}{i + 1}")
-        fields.append(head.upper())
-
-        table.field_names = fields
+        count: int = len(rows[0]) - 1
+        table.field_names = [f"{head}{i + 1}" for i in range(count)]
+        table.field_names.append(head.upper())
         for row in rows:
             table.add_row(row)
