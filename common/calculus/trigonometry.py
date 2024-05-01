@@ -2,22 +2,23 @@ from sympy import Symbol
 from sympy.utilities import lambdify
 
 X = Symbol('x')
+Y = Symbol('y')
 
-def form(derivative: str) -> str:
-    return derivative.diff(X)
+def form(derivative: str, *symbols) -> str:
+    return derivative.diff(*symbols)
 
-def formulate(text, count: int) -> str:
+def formulate(text, count: int, *symbols) -> str:
     derivative = text
 
     try:
         for i in range(count):
-            derivative = form(derivative)
+            derivative = form(derivative, *symbols)
     except ValueError:
         return '0'
 
     return derivative
 
-def invokation(derive: str) -> callable:
+def invokation(derive: str, *symbols) -> callable:
     if derive == '0':
         return lambda x: 0
-    return lambdify(X, derive)
+    return lambdify(symbols, derive)

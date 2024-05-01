@@ -23,7 +23,8 @@ class TableStruct:
     def columns(self, table, start: int, memory):
         end = len(memory)
         for i in range(start, end):
-            column(table, i, memory[i])
+            print(len(memory[i]))
+            self.column(table, i, memory[i])
         return self
 
     def matrix(self, table, rows: list, head: str = 'x'):

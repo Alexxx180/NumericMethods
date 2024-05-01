@@ -1,7 +1,7 @@
-from common.commander.formula.formula import *
+from common.commander.formula import *
 from common.drawing.primitives.points import Points
 from common.calculus.objects.ends import Ends
-from common.calculus.trigonometry import formulate, invokation
+from common.calculus.trigonometry import formulate, invokation, X
 from common.drawing.drawing import *
 
 def placeholder(x: float):
@@ -15,13 +15,14 @@ def empty_list():
     return [Chars['None'] * 2]
 
 def determine(ab, form: str):
+    formula = Formula['Simpson'][form]
     if ab.end is None:
-        task = Formula['Simpson'][form](ab.start)
+        task = formula(ab.start)
     else:
-        task = Formula['Simpson'][form](ab.start, ab.end)
+        task = formula(ab.start, ab.end)
     return (
-        invokation(formulate(task, 0)),
-        invokation(formulate(task, 4))
+        invokation(formulate(task, 0, X), X),
+        invokation(formulate(task, 4, X), X)
     )
 
 def search_max(points: Points) -> tuple:

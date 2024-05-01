@@ -7,6 +7,7 @@ def upline():
 def truncate(count: int):
     for i in range(0, count):
         print(' ', end='')
+    print()
 
 def pause(text: str = ""):
     print(text)

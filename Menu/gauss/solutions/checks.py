@@ -4,17 +4,18 @@ from common.commander.texts.common import *
 def are_undefined(array, text):
     for row in array:
         if np.all(row[:-1] == 0) and row[-1] != 0:
-            return text.empty(row, 'None')
+            text.empty(row, 'None')
+            return True
         if np.all(row == 0):
-            return text.empty(row, 'Many')
+            text.empty(row, 'Many')
+            return False
 
     index: int = array.shape[0] - 1
     row = array[index]
 
-    if all(e == 0 for e in row[:-2]):
-        return text.zeros()
-
-    return False
+    no_zeros = not all(e == 0 for e in row[:-2])
+    if no_zeros: text.zeros()
+    return no_zeros
 
 def is_suitable(shape):
     return shape[0] <= shape[1] - 1

@@ -5,9 +5,8 @@ from common.handlers.interaction import pause
 
 class Text:
     def __init__(self, name: str):
-        self.name = name
+        self.fields = Fields[name]
         self.p = Printer(name).act(print)
-        self.rows = []
 
     def research(self, formula, initial):
         self.p.keys('Formula').args(formula).print()
@@ -20,7 +19,7 @@ class Text:
         self.p.keys('Roots').args(result).print()
 
     def source(self, roots):
-        fields = Fields[self.name]['Source']
+        fields = self.fields['Source']
         Table(fields).rows(roots).show()
         return self
 

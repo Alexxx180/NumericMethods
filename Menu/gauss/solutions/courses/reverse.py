@@ -8,7 +8,7 @@ def step(text, x: list, i: int, a: list, b: list):
     scalar = dot(a[i, start:], x[start:])
     x[i] = (b[i] - scalar) / a[i, i]
 
-    text.reverse_step(start, x[i])
+    text.reverse_step(i, x[i])
 
 def reverse(text, n: int, a, b: list):
     text.reverse_course()

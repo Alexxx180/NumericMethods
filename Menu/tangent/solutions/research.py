@@ -1,6 +1,6 @@
 from common.commander.texts.common import *
-from common.commander.formula.formula import *
-from common.calculus.trigonometry import form, invokation
+from common.commander.formula import *
+from common.calculus.trigonometry import form, invokation, X
 
 class Research:
     def __init__(self, key: str, name: str):
@@ -19,8 +19,8 @@ class Research:
 
     def derive(self, formula) -> str:
         self.formula.append((formula[0] + '(x)', formula[1]))
-        self.derives.append(invokation(formula[1]))
-        return (formula[0] + '’', form(formula[1]))
+        self.derives.append(invokation(formula[1], X))
+        return (formula[0] + '’', form(formula[1], X))
 
     def side(self, key: str, d: tuple):
         if d[2] == 0 or d[3] == 0:

@@ -70,6 +70,7 @@ class B:
 
         return X, Y, U, Up
 
+""" TASK A BELOW """
 
 def g1(x):
     return np.sin(x)

@@ -1,25 +1,38 @@
-import menu.runge.solutions.functions.taska
+from numpy import zeros
 
-class Taska:
-    @staticmethod
-    def formula(x, y):
-        return y / (1 + pow(x, 2))
+class TaskA:
+    def __init__(self, args: list):
+        self.x0: float = args[0]
+        self.y0: float = args[1]
+        self.h: float = args[2]
+        self.n: int = args[3]
+        self.matrix: list = [zeros(self.n), zeros(self.n)]
 
-    def __init__(self, arguments: list):
-        self.func = TaskaFunctions(arguments)
-        self.func.edit(0, arguments)
+    def apply(self, f: callable) -> list:
+        for j in range(0, self.n):
+            k: list = [1, 0, 0, 0, 0]
+            for relation in (0.0, 0.5, 0.5, 1.0):
+                self.kexpression(f, j, k, relation)
 
-    def apply(self, f: callable):
-        for ii in range(0, self.func.n):
-            k = (1, 0, 0, 0, 0)
-            r = (0.0, 0.5, 0.5, 1.0)
-            for relation in r:
-                self.func.kexpression(f, ii, k, relation)
+            args: list = [self.calculate(k), self.h]
+            for i in range (0, len(args)):
+                args[i] += self.matrix[i][j]
 
-            result = (self.func.calculate(k), h)
-            for i in range (0, len(result)):
-                result[i] += self.func.get(i, ii)
+            self.edit(j + 1, args)
+        return self.matrix
 
-            self.func.edit(ii + 1, result)
+    def edit(self, j: int, args: list):
+        if j < self.n:
+            for i in range(0, len(self.matrix)):
+                self.matrix[i][j] = args[i]
 
-        return self.func.matrix
+    def kexpression(self, f: callable, j: int, k: list, relation: float):
+        result: list = [self.h, k[k[0] - 1]]
+        for i in range(0, len(result)):
+            result[i] = result[i] * relation + self.matrix[i][j]
+
+        k[k[0]] = self.h * f(result[0], result[1])
+        k[0] += 1
+
+    def calculate(self, k: list):
+        return (k[1] + k[2] * 2 + k[3] * 2 + k[4]) / 6
