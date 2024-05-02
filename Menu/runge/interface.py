@@ -1,6 +1,6 @@
 from common.flow.texts.runge import Text
 from common.commander.formula import *
-from common.calculus.trigonometry import formulate, invokation, X, Y
+from common.calculus.trigonometry import formulate, invokation, integral, X, Y
 from menu.runge.solutions.functions import analyze, integrate
 from menu.runge.solutions.taska import TaskA
 from menu.runge.solutions.taskb import TaskB
@@ -12,7 +12,6 @@ class RungeKuttaTasks:
         self.args = args
         self.formula = Formula[self.name][self.key]
         self.method = getattr(self, key)
-        #columns.insert(0, [i for i in range(self.args[3] + 1)])
 
     def __derive(self, formula: str, *symbols) -> callable:
         return invokation(formulate(formula, 0, *symbols), *symbols)
@@ -29,8 +28,14 @@ class RungeKuttaTasks:
         x: list = columns[0]
         y0: float = self.args[1]
 
+        #integ = integral(self.formula, Y, X)
+        #print(integ)
+        #i: callable = invokation(integ, Y, X)
+
+        #columns.append([i(y0, x[j]) for j in range(len(x))])
         columns.append(analyze(x))
         columns.append(integrate(x, y0).flatten().tolist())
+        #columns.insert(0, [i for i in range(len(x))])
 
         args = list(self.args)
         args.append(self.formula)

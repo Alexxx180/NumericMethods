@@ -26,10 +26,10 @@ class TaskA:
             for i in range(0, len(self.matrix)):
                 self.matrix[i][j] = args[i]
 
-    def kexpression(self, f: callable, j: int, k: list, relation: float):
+    def kexpression(self, f: callable, j: int, k: list, relation: float): # TODO FIX 
         result: list = [self.h, k[k[0] - 1]]
         for i in range(0, len(result)):
-            result[i] = result[i] * relation + self.matrix[i][j]
+            result[i] = result[i] * relation + self.matrix[i][j] # INDEX OUT OF BOUNDS
 
         k[k[0]] = self.h * f(result[0], result[1])
         k[0] += 1

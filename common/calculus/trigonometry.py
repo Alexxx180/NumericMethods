@@ -1,4 +1,4 @@
-from sympy import Symbol
+from sympy import Symbol, integrate
 from sympy.utilities import lambdify
 
 X = Symbol('x')
@@ -6,6 +6,9 @@ Y = Symbol('y')
 
 def form(derivative: str, *symbols) -> str:
     return derivative.diff(*symbols)
+
+def integral(integral: str, *symbols) -> str:
+    return integrate(integral, *symbols)
 
 def formulate(text, count: int, *symbols) -> str:
     derivative = text
