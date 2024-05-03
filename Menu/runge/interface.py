@@ -47,12 +47,12 @@ class RungeKuttaTasks:
         task = TaskB(self.args)
 
         for formula in self.formula:
-            f: callable = self.__derive(formula)
+            f: callable = self.__derive(formula, X)
 
             columns: list = task.apply(f)
             x: list = columns[0]
-            columns.append(function1(y, task.a, task.b, task.n))
-            columns.append(function2(f, x, task.n))
-            columns.append(epsilon(result))
+            #columns.append(function1(y, task.a, task.b, task.n))
+            #columns.append(function2(f, x, task.n))
+            #columns.append(epsilon(result))
 
-            text.result(columns, f, i)
+            text.result(columns, formula)

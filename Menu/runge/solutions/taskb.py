@@ -1,4 +1,4 @@
-from menu.runge.solutions.functions import kl_order
+from menu.runge.solutions.functions import kl_order, derivative, calculate
 
 class TaskB:
     def __init__(self, args: list):
@@ -8,7 +8,7 @@ class TaskB:
         self.h: float = args[5]
         self.n: float = args[6]
 
-    def append(self, rows: list, kl: list, i: int, value: float):
+    def __append(self, rows: list, kl: list, i: int, value: float):
         self.y[i] += value
         rows[i].append(self.y[i])
 
@@ -22,11 +22,11 @@ class TaskB:
         for i in range(self.n):
             kl: list = kl_order(self.h)
             for relation in (0.0, 0.5, 0.5, 1.0):
-                klexpression(self, f, kl, relation)
+                self.klexpression(f, kl, relation)
 
             self.__append(rows, kl, 0, self.h)
             for j in range(1, 3):
-                self.__append(rows, kl, j, calculate(k, j))
+                self.__append(rows, kl, j, calculate(kl, j - 1))
 
             result += derivative(self.y, self.a, self.b, f)
             rows[3].append(result)
@@ -34,13 +34,15 @@ class TaskB:
         return rows
 
     def klexpression(self, f: callable, kl: list, relation: float):
-        r: list = kl[i].copy()
+        i: int = kl[0]
+
+        r: list = (kl[i] if i == 1 else kl[i - 1]).copy()
         r.insert(0, self.h)
 
-        for i in range(0, len(self.y)):
-            r[i] = r[i] * relation + self.y[i]
+        #print(r)
+        for j in range(0, len(self.y)):
+            r[j] = r[j] * relation + self.y[j]
 
-        result: tuple = (r[2], derivative(r, self.a, self.b, f))
-        for i in range(0, len(result)):
-            kl[kl[0]][i] *= result[i]
+        kl[i][0] *= r[2]
+        kl[i][1] *= derivative(r, self.a, self.b, f)
         kl[0] += 1

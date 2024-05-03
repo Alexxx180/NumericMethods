@@ -7,12 +7,13 @@ class Text:
         self.key = key
 
     def source(self, values: tuple):
+        print(len(values), values)
         Table(self.fields[self.key]['Source']).row(values).show()
         return self
 
-    def result(self, values: list, i: int = -1):
+    def result(self, values: list, formula: str = ''):
         fields = self.fields[self.key]['Result']
-        if i != -1:
-            fields[0] += str(i + 1)
-            fields[7] = self.fields['Functions'][i]
+        if formula != '':
+            fields[0] += f': {formula}'
+            fields[7] = formula
         Table(fields).columns(0, values).floats('.8').show().pause()

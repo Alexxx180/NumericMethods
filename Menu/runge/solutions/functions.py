@@ -6,14 +6,16 @@ from operator import sub
 Precision = 1e-9
 
 def kl_order(h: float) -> list:
-    return [1, [[h, h] for i in range(4)]]
+    kl: list = [1]
+    for i in range(4):
+        kl.append([h, h])
+    return kl
 
 def calculate(k: tuple, l: int) -> float:
     return (k[1][l] + k[2][l] * 2 + k[3][l] * 2 + k[4][l]) / 6
 
-def derivative(self, y: list, a: float, b: float, fx: callable) -> float:
-    f = (fx, lambda d: b * d, lambda d1: a * d1) # y'' = a * y' + b * y + f(x)
-    return sum([f[i](y[i]) for i in range(0, len(f))])
+def derivative(y: list, a: float, b: float, f: callable) -> float:
+    return a * y[2] + b * y[1] + f(y[0]) # y'' = a * y' + b * y + f(x)
 
 def function1(y: list, a: float, b: float, n: int) -> list:
     result: list = []
