@@ -36,7 +36,6 @@ def diff_equation(y, x):
 
 def integrate(x: list, y0: float):
     return odeint(diff_equation, y0, x, rtol=Precision, atol=Precision)
-# diff_equation
 
 def epsilon(r: list):
     n = len(r[0])

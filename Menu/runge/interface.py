@@ -23,7 +23,7 @@ class RungeKuttaTasks:
         f: callable = self.__derive(self.formula, X, Y)
 
         columns: list = TaskA(self.args).apply(f)
-        columns[0], columns[1] = columns[1], columns[0]
+        #columns[0], columns[1] = columns[1], columns[0]
 
         x: list = columns[0]
         y0: float = self.args[1]
