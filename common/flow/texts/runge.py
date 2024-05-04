@@ -12,8 +12,8 @@ class Text:
         return self
 
     def result(self, values: list, formula: str = ''):
-        fields = self.fields[self.key]['Result']
+        fields = self.fields[self.key]['Result'].copy()
         if formula != '':
             fields[0] += f': {formula}'
-            fields[7] = formula
+            fields[6] = formula
         Table(fields).columns(0, values).floats('.8').show().pause()

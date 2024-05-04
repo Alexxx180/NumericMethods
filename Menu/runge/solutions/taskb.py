@@ -35,11 +35,8 @@ class TaskB:
 
     def klexpression(self, f: callable, kl: list, relation: float):
         i: int = kl[0]
-
         r: list = (kl[i] if i == 1 else kl[i - 1]).copy()
         r.insert(0, self.h)
-
-        #print(r)
         for j in range(0, len(self.y)):
             r[j] = r[j] * relation + self.y[j]
 
