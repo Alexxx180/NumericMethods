@@ -17,7 +17,3 @@ def menu():
         clear()
         answers = ask(choice.start)
     print("Завершение работы.")
-
-
-if __name__ == '__main__':
-    menu()
