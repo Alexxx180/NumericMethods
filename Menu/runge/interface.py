@@ -49,5 +49,4 @@ class RungeKuttaTasks:
             columns.append(function2(f, x, length))
             columns.append(epsilon(columns, length))
 
-            print()
             text.result(columns, str(formula))

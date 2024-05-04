@@ -18,13 +18,13 @@ def derivative(y: list, a: float, b: float, f: callable) -> float:
     return a * y[2] + b * y[1] + f(y[0]) # y'' = a * y' + b * y + f(x)
 
 def function1(y: list, a: float, b: float, n: int) -> list:
-    return [y[2][i] * a - y[1][i] * b - y[0][i] for i in range(n)]
+    return [y[3][i] - y[2][i] * a - y[1][i] * b for i in range(n)]
 
 def function2(f: callable, x: list, n: int) -> list:
     return [f(x[i]) for i in range(n)]
 
 def epsilon(r: list, n: int) -> list:
-    return [abs(float(r[1][i]) - float(r[0][i])) for i in range(n)]
+    return [abs(float(r[-1][i]) - float(r[-2][i])) for i in range(n)]
 
 def analyze(x: list) -> list:
     return np.exp(((x ** 3) / 3) + x) - 1

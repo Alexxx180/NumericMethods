@@ -7,8 +7,8 @@ class Text:
         self.key = key
 
     def source(self, values: tuple):
-        print(len(values), values)
-        Table(self.fields[self.key]['Source']).row(values).show()
+        fields = self.fields[self.key]['Source'].copy()
+        Table(fields).row(values).show()
         return self
 
     def result(self, values: list, formula: str = ''):
