@@ -1,12 +1,12 @@
 from common.drawing.table.table import Table
-from common.commander.texts.fields import *
 from common.handlers.interaction import pause
 from common.handlers.printer import Printer
+from common.commander.resources import Resources
 
 class Text:
     def __init__(self, name: str):
+        self.fields: dict = Resources.Fields[name]
         self.p = Printer(name)
-        self.fields = Fields[name]
 
     def empty(self, name: str, row: list):
         self.p.act(print).keys('Solutions', 'Common').args(row).print()
@@ -42,7 +42,7 @@ class Text:
         self.p.act(print).keys('Straight', 'Course').args().print()
 
     def source(self, array):
-        Table(self.fields['Source']).matrix(array).show()
+        Table(self.fields['Source'].copy()).matrix(array).show()
 
     def result(self, result):
         Table().matrix(result).floats('.3').show()

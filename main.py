@@ -6,7 +6,7 @@ def resource(method: str, no: int, maximum: int):
 
 def main(no: int):
     Resources.Enabled = Resources.at('resources/switch/enabled.json')
-    Resources.Queries = Resources.at('resources/switch/queries.json')
+    Resources.Hints = Resources.at('resources/switch/hints.json')
     Resources.Fields = Resources.at('resources/text/fields.json')
     Resources.Texts = Resources.at('resources/text/labels.json')
     Resources.Defaults = {
@@ -39,5 +39,6 @@ def main(no: int):
 if __name__ == '__main__':
     with open('variant.txt') as no:
         main(int(no.readline()))
+    setup_queries(Resources.at('resources/texts/queries.json'))
     setup_menu()
     menu()

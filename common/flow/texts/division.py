@@ -1,11 +1,11 @@
 from common.drawing.table.table import Table
-from common.commander.texts.fields import *
 from common.handlers.printer import Printer
 from common.handlers.interaction import pause
+from common.commander.resources import Resources
 
 class Text:
     def __init__(self, name: str):
-        self.fields = Fields[name]
+        self.fields: dict = Fields[name]
         self.p = Printer(name).act(print)
 
     def research(self, formula, initial):

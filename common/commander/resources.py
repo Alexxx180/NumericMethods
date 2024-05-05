@@ -8,12 +8,16 @@ class Resources:
 
     # Tables / Plots switch
     Enabled: dict
+    Hints: dict
+
+    # Table fields / text labels
+    Fields: dict
+    Texts: dict
+
+    # User input / defaults
+    Defaults: dict 
+    Input: dict
     Queries: dict
-
-    Fields: dict # All table fields
-    Texts: dict # All text labels
-
-    Defaults: dict # All input defaults
 
     # Menu choices
     Main: dict

@@ -1,4 +1,4 @@
-from common.commander.texts.common import *
+from common.commander.resources import Resources
 
 class Printer:
     def __init__(self, name: str):
@@ -6,7 +6,7 @@ class Printer:
         self.order: list = [print, None, None]
 
     def __get(self, keys: list):
-        field = Texts[self.name]
+        field = Resources.Texts[self.name]
         for key in keys:
             field = field[key]
         return field

@@ -1,9 +1,9 @@
 from common.drawing.table.table import Table
-from common.commander.texts.fields import *
+from common.commander.resources import Resources
 
 class Text:
     def __init__(self, name: str, key: str):
-        self.fields = Fields[name]
+        self.fields = Resources.Fields[name]
         self.key = key
 
     def source(self, values: tuple):

@@ -1,8 +1,7 @@
 from inquirer import prompt
 from platforms.cross import clear
 
-def upline():
-    print('\033[3A')
+line = { 'up': '\033[3A' }
 
 def truncate(count: int):
     for i in range(0, count):
@@ -10,14 +9,10 @@ def truncate(count: int):
     print()
 
 def pause(text: str = ""):
-    print(text)
-    message = "Нажмите Enter для продолжения..."
-    print(message)
-    input()
-    upline()
-    truncate(len(message))
+    message = Resources.Texts['Common']['Forward']
+    print(text, message) ; input()
+    print(line['up']) ; truncate(len(message))
 
 def ask(query: list) -> dict:
-    answers = prompt(query)
-    clear()
+    answers = prompt(query) ; clear()
     return answers
