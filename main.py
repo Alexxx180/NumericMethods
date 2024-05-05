@@ -5,22 +5,27 @@ def resource(method: str, no: int, maximum: int):
     return Resources.at(f'resources/{method}/{no % maximum + 1}.json')
 
 def main(no: int):
-    Resources.Enabled = Resources.at(f'resources/switch/enabled.json')
-    Resources.Queries = Resources.at(f'resources/switch/queries.json')
-    Resources.Fields = Resources.at(f'resources/text/fields.json')
-    Resources.Texts = Resources.at(f'resources/text/labels.json')
-
+    Resources.Enabled = Resources.at('resources/switch/enabled.json')
+    Resources.Queries = Resources.at('resources/switch/queries.json')
+    Resources.Fields = Resources.at('resources/text/fields.json')
+    Resources.Texts = Resources.at('resources/text/labels.json')
     Resources.Defaults = {
-        'Division': Resources.at(f'resources/defaults/division.json'),
-        'Tangent': Resources.at(f'resources/defaults/tangent.json'),
-        'Gauss': Resources.at(f'resources/defaults/gauss.json'),
+        # Метод деления отрезка: a, b, e
+        'Division': Resources.at('resources/defaults/division.json'),
+        # Метод касательных: a, b, e
+        'Tangent': Resources.at('resources/defaults/tangent.json'),
+        # Метод Гаусса: дополненная 4-х мерная матрица
+        'Gauss': Resources.at('resources/defaults/gauss.json'),
+        # Формула Симпсона: a, b, integral(start, end), e
         'Simpson': resource('defaults/simpson', no, 8),
+        # Метод Рунге-Кутта
         'Runge': {
+            # Коши: x₀, y₀, h шаг, n кол-во
             'A': resource('defaults/runge/a', no, 15),
+            # Коши: a, b, x₀, y₀, y’₀, h шаг, n кол-во
             'B': resource('defaults/runge/b', no, 5),
         }
     }
-
     Resources.Formula = {
         'Division': resource('formula/division', no, 15),
         'Tangent': resource('formula/tangent', no, 15),
@@ -31,8 +36,8 @@ def main(no: int):
         }
     }
 
-
 if __name__ == '__main__':
     with open('variant.txt') as no:
         main(int(no.readline()))
+    setup_menu()
     menu()

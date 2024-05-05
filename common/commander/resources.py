@@ -14,3 +14,8 @@ class Resources:
     Texts: dict # All text labels
 
     Defaults: dict # All input defaults
+
+    # Menu choices
+    Main: dict
+    Methods: dict
+    Options: dict
