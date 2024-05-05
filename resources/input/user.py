@@ -2,28 +2,30 @@ from common.commander.texts.queries import *
 from common.handlers.input.values.list import input_list
 
 Requests = {
-    'division': (texts['a'], texts['b'], texts['n'], texts['e']),
-    'tangent': (texts['a'], texts['b'], texts['e']),
+    'division': (q['a'], q['b'], q['n'], q['e']),
+    'tangent': (q['a'], q['b'], q['e']),
     'runge': {
-        'A': (texts['x'], texts['y'], texts['h'], texts['n']),
-        'B': (texts['yd'], texts['a'], texts['b'])
+        'A': (q['x'], q['y'], q['h'], q['n']),
+        'B': (q['a'], q['b'], q['x'], q['y'], q['yd'], q['h'])
     },
-    'simpson': (texts['a'], texts['b'], texts['start'], texts['end'], texts['e'])
+    'simpson': (q['a'], q['b'], q['start'], q['end'], q['e'])
 }
 
 Input = {
     'Division': (lambda: input_list(Requests['division'], 
-        (float, 'a'), (float, 'b'), (validate_e), (lambda: request_n(0, 100)))
+        (float, 'a'), (float, 'b'), validate_e, lambda: request_n(0, 100))
     ),
     'Tangent': (lambda: input_list(Requests['tangent'],
-        (float, 'a'), (float, 'b'), (validate_e))
+        (float, 'a'), (float, 'b'), validate_e)
     ),
     'Runge': {
         'A': (lambda: input_list(Requests['runge']['A'],
             (float, 'x'), (float, 'y'), (float, 'h'), (int, 'n'))
         ),
         'B': (lambda: input_list(Request['runge']['B'],
-            (float, 'yp'), (float, 'a'), (float, 'b'))
+            (float, 'a'), (float, 'b'), (float, 'x'), (float, '')
+            (float, 'yp'), ()
+            )
         )
     },
     'Simpson': (lambda b: input_list(Requests['Simpson'],
