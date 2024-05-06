@@ -1,44 +1,39 @@
-from menu import menu
+#from menu import menu
 from common.commander.resources import Resources
 
-def resource(method: str, no: int, maximum: int):
-    return Resources.at(f'resources/{method}/{no % maximum + 1}.json')
+variant: int
 
-def main(no: int):
-    Resources.Enabled = Resources.at('resources/switch/enabled.json')
-    Resources.Hints = Resources.at('resources/switch/hints.json')
-    Resources.Fields = Resources.at('resources/text/fields.json')
-    Resources.Texts = Resources.at('resources/text/labels.json')
-    Resources.Defaults = {
-        # Метод деления отрезка: a, b, e
-        'Division': Resources.at('resources/defaults/division.json'),
-        # Метод касательных: a, b, e
-        'Tangent': Resources.at('resources/defaults/tangent.json'),
-        # Метод Гаусса: дополненная 4-х мерная матрица
-        'Gauss': Resources.at('resources/defaults/gauss.json'),
-        # Формула Симпсона: a, b, integral(start, end), e
-        'Simpson': resource('defaults/simpson', no, 8),
-        # Метод Рунге-Кутта
-        'Runge': {
-            # Коши: x₀, y₀, h шаг, n кол-во
-            'A': resource('defaults/runge/a', no, 15),
-            # Коши: a, b, x₀, y₀, y’₀, h шаг, n кол-во
-            'B': resource('defaults/runge/b', no, 5),
-        }
-    }
-    Resources.Formula = {
-        'Division': resource('formula/division', no, 15),
-        'Tangent': resource('formula/tangent', no, 15),
-        'Simpson': Resources.at('resources/formula/simpson.json'),
-        'Runge': {
-            'A': resource('formula/runge/a', no, 15),
-            'B': Resources.at('resources/formula/runge/b.json')
-        }
-    }
+def resource(file):
+    if isinstance(file, dict):
+        resources: dict = {}
+        for key, value in file.items():
+            resources[key] = resource(value)
+        return resources
+    elif isinstance(file, list):
+        no: int = variant % file[1] + 1
+        #return f'resources/{file[0]}/{no}.json'
+        return Resources.at(f'resources/{file[0]}/{no}.json')
+    else:
+        #return f'resources/{file}.json'
+        return Resources.at(f'resources/{file}.json')
+
+
+def main():
+    manifest: dict = Resources.at('resources/manifest.json')
+
+    Resources.Texts = resource(manifest['Texts'])
+    Resources.Fields = resource(manifest['Fields'])
+    Resources.Hints = resource(manifest['Hints'])
+    Resources.Enabled = resource(manifest['Enabled'])
+    Resources.Defaults = resource(manifest['Defaults'])
+    Resources.Formula = resource(manifest['Formula'])
+
+    print(Resources.Formula)
 
 if __name__ == '__main__':
     with open('variant.txt') as no:
-        main(int(no.readline()))
-    setup_queries(Resources.at('resources/texts/queries.json'))
-    setup_menu()
-    menu()
+        variant = int(no.readline())
+    main()
+    #setup_queries(Resources.at('resources/texts/queries.json'))
+    #setup_menu()
+    #menu()

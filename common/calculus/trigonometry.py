@@ -1,17 +1,12 @@
 from sympy import Symbol, integrate
 from sympy.utilities import lambdify
+from sympy.parsing.sympy_parser import parse_expr
 
-X = Symbol('x')
-Y = Symbol('y')
-
-def form(derivative: str, *symbols) -> str:
+def form(derivative, *symbols) -> str:
     return derivative.diff(*symbols)
 
-def integral(integral: str, *symbols) -> str:
-    return integrate(integral, *symbols)
-
 def formulate(text, count: int, *symbols) -> str:
-    derivative = text
+    derivative = parse_expr(text)
 
     try:
         for i in range(count):
@@ -21,7 +16,7 @@ def formulate(text, count: int, *symbols) -> str:
 
     return derivative
 
-def invokation(derive: str, *symbols) -> callable:
+def invokation(derive, *symbols) -> callable:
     if derive == '0':
         return lambda x: 0
     return lambdify(symbols, derive)

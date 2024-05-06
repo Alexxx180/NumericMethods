@@ -1,10 +1,10 @@
 {
     "Tables": {
-        "Simpson" : True
+        "Simpson" : true
     },
     "Plots": {
-        "Division": True,
-        "Simpson" : True,
-        "Tangent" : False
+        "Division": true,
+        "Simpson" : true,
+        "Tangent" : false
     }
 }
