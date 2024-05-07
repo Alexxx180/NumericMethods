@@ -6,41 +6,36 @@ class PlainSpace:
         self.color = color
         self.fontsize = 10
         self.style = 'dashed'
-        self.align = {
-            'horizontal': 'left',
-            'vertical': 'bottom'
-        }
+        self.align = { 'horizontal': 'left', 'vertical': 'bottom' }
 
     def set_graph(self, graph, i: int = -1):
         self.plot = graph
-        self.ax = self.plot.ax if i == -1 else self.plot.ax[i]
-
-    def append_text(self, x: float, count: int):
-        relation = (self.points[0], x)
-        for i in range(0, count):
-            self.ax.text(x, self.points[i], f"{relation[i]:.2f}", fontsize=self.fontsize, ha=self.align['horizontal'], va=self.align['vertical'])
+        self.plot.select(i)
 
     def line(self, x: float, y: float):
         self.points = (y, 0)
-        self.ax.vlines(x, self.points[1], self.points[0],
-            colors=self.color, linestyles=self.style)
+        self.plot.vlines(self.points, x, self.style, self.color)
 
-        for p in self.points:
-            self.ax.plot(x, p, Points[self.color])
+        for point in self.points:
+            self.plot.make(x, point, Points[self.color])
 
         if abs(self.points[0]) > 0.01:
-            self.append_text(x, len(self.points))
+            self.plot.text(self.points, x, self.align, self.fontsize)
 
     def lines(self, values: tuple, f: callable):
-        for x in values:
-            self.line(x, f(x))
+        for x in values: self.line(x, f(x))
 
-    def show(self):
-        pass
+    def show(self): pass
 
     def render(self, order):
-        basis = order[0] ; drawing = order[1]
-        if (len(order) == 3):
+        if isinstance(order, int):
+            self.plot.select(order)
+            return
+
+        basis = order[0]
+        drawing = order[1]
+
+        if len(order) == 3:
             self.color = order[2]
         if isinstance(basis, tuple):
             self.lines(basis, drawing)

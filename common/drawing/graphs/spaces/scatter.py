@@ -7,7 +7,6 @@ class ScatterSpace:
 
     def set_graph(self, graph, i: int = -1):
         self.plot = graph
-        self.ax = self.plot.ax if i == -1 else self.plot.ax[i]
 
     def draw(self, basis: list, line: float, label: str):
         self.plot.ax.plot(basis, line, label=label, linestyle='--')

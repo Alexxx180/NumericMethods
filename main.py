@@ -11,7 +11,7 @@ def resource(file):
             resources[key] = resource(value)
         return resources
     elif isinstance(file, list):
-        no: int = variant % file[1] + 1
+        no: int = variant % (file[1] + 1)
         return Resources.at(f'resources/{file[0]}/{no}.json')
     else:
         return Resources.at(f'resources/{file}.json')

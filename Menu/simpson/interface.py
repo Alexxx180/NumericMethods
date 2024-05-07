@@ -1,3 +1,4 @@
+from common.commander.switch import View
 from common.drawing.primitives.points import Points
 from common.calculus.objects.ends import Ends
 from menu.simpson.solutions.functions import determine, search_max
@@ -14,20 +15,23 @@ class SimpsonInterface:
         self.ends = Ends((args[2], args[3]))
         self.e: float = args[4]
 
-        self.derives = determine(self.ends, form)
-        self.solution = SimpsonSolutions(self.ends, self.derives[0])
+        self.derives = determine(args[0], args[1], form)
+        self.solution = SimpsonSolutions(self.ends, self.derives[1])
 
         self.canvas = canvas_from(name, self.ends, self.derives)
         self.orders: list = []
 
     def calculate(self):
         ends: tuple = self.ends.margin()
-        result = search_max(Points(ends, self.derives[1]))
-        self.solution.core.resize(self.e, result[1])
+        print(ends)
+        result = search_max(Points(ends, self.derives[4]))
+        self.solution.core.resize(self.e, result['m'])
 
-        x: float = result[0]
-        self.orders.append((x, self.derives[0](x)))
-        self.orders.append((ends, self.derives[0]))
+        x: float = result['x']
+        f: callable = self.derives[1]
+        self.orders.append(0)
+        #self.orders.append((x, f(x)))
+        #self.orders.append((ends, f))
 
         return self.solution.perform(self)
 
@@ -38,5 +42,5 @@ class SimpsonInterface:
         if self.solution.core.n <= 15 or View('Table', self.name):
             self.text.result(self.solution.rows)
 
-        self.canvas.show()
+        self.canvas.show(self.orders)
         self.text.pause()

@@ -13,6 +13,8 @@ def formulate(text, count: int, *symbols) -> str:
 
     try:
         for i in range(count):
+            print('DIFF: ', i, '/', count)
+            print(derivative)
             derivative = form(derivative, *symbols)
     except ValueError:
         return '0'
@@ -22,4 +24,5 @@ def formulate(text, count: int, *symbols) -> str:
 def invokation(derive, *symbols) -> callable:
     if derive == '0':
         return lambda x: 0
+    #print(derive)
     return lambdify(symbols, derive)

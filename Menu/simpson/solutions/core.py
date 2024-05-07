@@ -9,10 +9,10 @@ class SimpsonCore:
         self.middle: float = self.yends.sub() / 2 # S в методичке
         self.result: float = self.yends.sum()
 
-    def resize(self, e: float, m: float):
+    def resize(self, e: float, maxed: float):
         size: float = self.ends.size()
-        self.m: float = m
-        self.n: int = quadratic(size, m, e)
+        self.m: float = maxed
+        self.n: int = quadratic(size, self.m, e)
         self.size: float = size / self.n # H в методичке
 
     def coords(self) -> tuple:

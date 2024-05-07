@@ -7,6 +7,30 @@ class Graphs:
         self.color = 'black'
         self.width = 0.25
         self.basis = 0
+        self.i = -1
+
+    def select(self, i: int):
+        self.i = i
+
+    def text(self, points, x: float, align: dict, size):
+        relation = (points[0], x)
+        for i in range(0, len(points)):
+            (self.ax if self.i == -1 else self.ax[self.i]).text(x,
+                points[i], f"{relation[i]:.2f}", fontsize=size,
+                ha=align['horizontal'], va=align['vertical'])
+
+    def vlines(self, points, x: float, style, color):
+        if self.i == -1:
+            print('IIII', self.i)
+            self.ax.vlines(x, points[1], points[0], colors=color, linestyles=style)
+        else:
+            self.ax[self.i].vlines(x, points[1], points[0], colors=color, linestyles=style)
+
+    def make(self, x: float, point, color):
+        if self.i == -1:
+            self.ax.plot(x, point, color)
+        else:
+            self.ax[self.i].plot(x, point, color)
 
     def __set(self, ax, x, y, title: str = ""):
         if title != "":

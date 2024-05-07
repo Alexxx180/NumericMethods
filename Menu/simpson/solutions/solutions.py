@@ -21,11 +21,13 @@ class SimpsonSolutions:
         y = self.core.yends
         self.blanks([x.start, y.start])
 
+        view.orders.append(0)
+
         for i in range(1, self.core.n):
             self.core.iteration(i)
             coords = self.core.coords()
             self.values()
-            view.orders.append(coords)
+            #view.orders.append(coords)
 
         self.blanks([x.end, y.end])
         return self.core.calculate()

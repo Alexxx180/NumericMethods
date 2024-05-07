@@ -3,7 +3,7 @@ from numpy import arange
 class Points:
     def __init__(self, ends, function: callable):
         self.task = function
-        self.step = 0.0001
+        self.step = 0.01 #0.0001
         if isinstance(ends, list) or isinstance(ends, tuple):
             self.__range(ends[0], ends[1])
         else:

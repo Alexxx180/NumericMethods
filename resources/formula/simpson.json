@@ -1,4 +1,4 @@
 {
-    "A": "exp(a * x) * sin(b * x)",
-    "B": "1 / sqrt(x ** 2 + a)"
+    "A": "exp({a:.2f} * x) * sin({b:.2f} * x)",
+    "B": "1 / sqrt(x ** 2 + {a:.2f})"
 }
