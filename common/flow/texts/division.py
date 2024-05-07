@@ -5,7 +5,7 @@ from common.commander.resources import Resources
 
 class Text:
     def __init__(self, name: str):
-        self.fields: dict = Fields[name]
+        self.fields: dict = Resources.Fields[name]
         self.p = Printer(name).act(print)
 
     def research(self, formula, initial):
@@ -19,7 +19,7 @@ class Text:
         self.p.keys('Roots').args(result).print()
 
     def source(self, roots):
-        fields = self.fields['Source']
+        fields = self.fields['Source'].copy()
         Table(fields).rows(roots).show()
         return self
 

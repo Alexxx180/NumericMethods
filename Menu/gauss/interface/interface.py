@@ -1,7 +1,6 @@
 from menu.gauss.solutions.solutions import Gauss
 from menu.gauss.solutions.checks import is_suitable
 from common.handlers.interaction import pause
-from common.commander.texts.common import *
 
 def GaussMethod(array, text):
     if is_suitable(array.shape):

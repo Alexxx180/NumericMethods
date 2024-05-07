@@ -1,6 +1,6 @@
 import numpy as np
 from common.commander.switch import are_defaults
-from common.commander.Resources import Resources
+from common.commander.resources import Resources
 from common.flow.texts.gauss import Text
 from menu.gauss.interface.interface import GaussMethod
 

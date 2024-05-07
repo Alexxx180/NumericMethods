@@ -41,7 +41,18 @@ class Table:
         self.struct.matrix(self.table, rows, head)
         return self
 
-    def show(self): print(self.table) ; return self
-    def clear(self): self.table.clear_rows() ; return self
-    def print(self, text: str = ""): print(text) ; return self
-    def pause(self, text: str = ""): pause(text) ; return self
+    def show(self):
+        print(self.table)
+        return self
+
+    def clear(self):
+        self.table.clear_rows()
+        return self
+
+    def print(self, text: str = ""):
+        print(text)
+        return self
+
+    def pause(self, text: str = ""):
+        pause(text)
+        return self

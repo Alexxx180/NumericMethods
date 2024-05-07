@@ -1,6 +1,5 @@
 from common.drawing.primitives.points import Points
 from common.calculus.objects.ends import Ends
-from common.commander.texts.common import *
 from menu.simpson.solutions.functions import determine, search_max
 from menu.simpson.solutions.solutions import SimpsonSolutions
 from common.flow.texts.simpson import Text

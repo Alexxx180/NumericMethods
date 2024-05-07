@@ -16,7 +16,8 @@ class Text:
 
     def formula(self, rows: list):
         fields = self.fields['Formula'].copy()
-        Table(fields).rows(rows).align('Left', 'Уравнение').show().pause()
+        column: str = fields[2]
+        Table(fields).rows(rows).align('Left', column).show().pause()
 
     def result(self, rows: list):
         fields = self.fields['Result'].copy()

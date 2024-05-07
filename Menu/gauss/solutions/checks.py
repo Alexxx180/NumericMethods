@@ -1,5 +1,4 @@
 import numpy as np
-from common.commander.texts.common import *
 
 def are_undefined(array, text):
     for row in array:

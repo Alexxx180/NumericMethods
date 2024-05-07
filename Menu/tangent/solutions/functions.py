@@ -1,5 +1,5 @@
 from numpy import linspace
-from common.commander.texts.common import *
+from common.commander.resources import Resources
 
 def update(y: list, x: float, derives: list):
     for i in range(len(y)):
@@ -41,7 +41,7 @@ def draw(row: list, name: str, length: int):
         points = linspace(x - half, x + half, length)
         tangent = z * (points - x) + y
 
-        caption: str = Texts[name]['Name'].format(index)
+        caption: str = Resources.Texts[name]['Name'].format(index)
         order: tuple = (points, tangent, caption, x, y)
 
         orders.append(order)

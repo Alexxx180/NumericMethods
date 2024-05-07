@@ -1,12 +1,13 @@
-from common.commander.formula import *
-from common.calculus.trigonometry import formulate, invokation, X
+from sympy.abc import x
+from common.commander.resources import Resources
+from common.calculus.trigonometry import formulate, invokation
 from menu.division.solutions import SegmentDivision
 from common.flow.canvas.division import canvas_from
 from common.flow.texts.division import Text
 
 def SegmentDivisionMethod(name: str, args: tuple):
-    formula = formulate(Formula[name], 0, X)
-    derive = invokation(formula, X)
+    formula = formulate(Resources.Formula[name], 0, x)
+    derive = invokation(formula, x)
 
     canvas = canvas_from(name, derive, args)
 

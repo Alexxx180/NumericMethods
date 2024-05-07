@@ -4,7 +4,7 @@ class Points:
     def __init__(self, ends, function: callable):
         self.task = function
         self.step = 0.0001
-        if isinstance(ends, tuple):
+        if isinstance(ends, list) or isinstance(ends, tuple):
             self.__range(ends[0], ends[1])
         else:
             self.__range(-ends, ends)

@@ -1,4 +1,4 @@
-from common.commander.texts.common import *
+from common.commander.resources import Resources
 
 class ScatterSpace:
     def __init__(self, name: str, color: str = 'red'):
@@ -14,7 +14,7 @@ class ScatterSpace:
 
     def scatters(self, x, y):
         self.plot.ax.scatter(x, y, color=self.color,
-            label=Texts[self.name]['Point'])
+            label=Resources.Texts[self.name]['Point'])
 
     def show(self):
         self.plot.ax.legend()

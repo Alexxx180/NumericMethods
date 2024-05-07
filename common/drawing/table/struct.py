@@ -28,7 +28,8 @@ class TableStruct:
 
     def matrix(self, table, rows: list, head: str = 'x'):
         count: int = len(rows[0]) - 1
-        table.field_names = [f"{head}{i + 1}" for i in range(count)]
-        table.field_names.append(head.upper())
+        fields: list = [f"{head}{i + 1}" for i in range(count)]
+        fields.append(head.upper())
+        table.field_names = fields
         for row in rows:
             table.add_row(row)

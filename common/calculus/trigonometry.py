@@ -2,11 +2,14 @@ from sympy import Symbol, integrate
 from sympy.utilities import lambdify
 from sympy.parsing.sympy_parser import parse_expr
 
+def express(formula: str):
+    return parse_expr(formula)
+
 def form(derivative, *symbols) -> str:
     return derivative.diff(*symbols)
 
 def formulate(text, count: int, *symbols) -> str:
-    derivative = parse_expr(text)
+    derivative = express(text)
 
     try:
         for i in range(count):

@@ -1,5 +1,6 @@
 from inquirer import prompt
 from platforms.cross import clear
+from common.commander.resources import Resources
 
 line = { 'up': '\033[3A' }
 

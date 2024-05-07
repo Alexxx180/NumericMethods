@@ -1,6 +1,6 @@
 class Ends:
     def __init__(self, start, end = None):
-        if (isinstance(start, tuple)):
+        if isinstance(start, tuple) or isinstance(start, list):
             self.start = start[0]
             self.end = start[1]
         elif end is None:

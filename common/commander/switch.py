@@ -11,5 +11,5 @@ def swap_instead_repeat() -> bool:
     return __confirm('confirm', Resources.Texts['Common']['Range'])
 
 def View(control: str, method: str) -> bool:
-    return Resources.Enabled[control][method] or
-        __confirm('confirm', Resources.Texts[control][method])
+    return Resources.Enabled[control][method] or __confirm(
+        'confirm', Resources.Texts[control][method])

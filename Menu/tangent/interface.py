@@ -1,4 +1,3 @@
-from common.commander.texts.common import *
 from common.flow.texts.tangent import Text
 from common.flow.canvas.tangent import canvas_from
 from menu.tangent.solutions.functions import tangent, draw
@@ -15,7 +14,7 @@ def TangentMethod(key: str, name: str, args: tuple):
     text.formula(research.formula)
     text.message(research.message)
 
-    if research.roots is None:
+    if len(research.roots) == 0:
         text.no_roots(args[0], args[1])
         return
 

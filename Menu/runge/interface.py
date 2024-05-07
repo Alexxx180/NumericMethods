@@ -1,6 +1,7 @@
+from sympy.abc import x, y
 from common.flow.texts.runge import Text
-from common.commander.formula import *
-from common.calculus.trigonometry import formulate, invokation, integral, X, Y
+from common.commander.resources import Resources
+from common.calculus.trigonometry import formulate, invokation, express
 from menu.runge.solutions.functions import analyze, integrate, function1, function2, epsilon
 from menu.runge.solutions.taska import TaskA
 from menu.runge.solutions.taskb import TaskB
@@ -10,25 +11,25 @@ class RungeKuttaTasks:
         self.name = name
         self.key = key
         self.args = args
-        self.formula = Formula[self.name][self.key]
+        self.formula = Resources.Formula[self.name][self.key]
         self.method = getattr(self, key)
 
     def __derive(self, formula: str, *symbols) -> callable:
-        return invokation(formulate(formula, 0, *symbols), *symbols)
+        return invokation(express(formula), *symbols)
 
     def __text(self, args):
         return Text(self.name, self.key).source(args)
 
     def A(self):
-        f: callable = self.__derive(self.formula, X, Y)
+        f: callable = self.__derive(self.formula, x, y)
 
         columns: list = TaskA(self.args).apply(f)
 
-        x: list = columns[0]
+        X: list = columns[0]
         y0: float = self.args[1]
 
-        columns.append(analyze(x))
-        columns.append(integrate(x, y0).flatten().tolist())
+        columns.append(analyze(X))
+        columns.append(integrate(X, y0).flatten().tolist())
 
         args = list(self.args)
         args.append(self.formula)
@@ -40,13 +41,13 @@ class RungeKuttaTasks:
         task = TaskB(self.args)
 
         for formula in self.formula:
-            f: callable = self.__derive(formula, X)
+            f: callable = self.__derive(formula, x)
             length: int = task.n + 1
             columns: list = task.apply(f)
-            x: list = columns[0]
+            X: list = columns[0]
 
             columns.append(function1(columns, task.a, task.b, length))
-            columns.append(function2(f, x, length))
+            columns.append(function2(f, X, length))
             columns.append(epsilon(columns, length))
 
             text.result(columns, str(formula))

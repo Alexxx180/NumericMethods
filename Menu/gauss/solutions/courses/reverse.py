@@ -1,6 +1,5 @@
 from numpy import zeros, dot
 from common.drawing.table.table import Table
-from common.commander.texts.common import *
 
 def step(text, x: list, i: int, a: list, b: list):
     start: int = i + 1

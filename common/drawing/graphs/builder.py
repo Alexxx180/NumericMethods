@@ -1,4 +1,4 @@
-from common.commander.texts.common import *
+from common.commander.resources import Resources
 from common.drawing.graphs.canvas import Canvas
 from common.drawing.primitives.points import Points
 from common.drawing.primitives.point import Point
@@ -27,8 +27,11 @@ class CanvasBuilder:
             self.basis = Points(args, self.task)
         return self
 
+    def __text(self, name: str):
+        return Resources.Texts[self.canvas.space.name][name]
+
     def label(self, name: str, i: int = -1):
-        setting = (self.basis, Texts[self.canvas.space.name][name], i)
+        setting = (self.basis, self.__text(name), i)
         self.canvas.settings.append(setting)
         return self
 
@@ -37,4 +40,4 @@ class CanvasBuilder:
         return self
 
     def entitle(self, name: str):
-        self.canvas.space.plot.window(Texts[self.canvas.space.name][name])
+        self.canvas.space.plot.window(self.__text(name))

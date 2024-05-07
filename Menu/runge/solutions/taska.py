@@ -15,6 +15,7 @@ class TaskA:
                 self.kexpression(f, j, k, relation)
 
             args: list = [self.h, self.calculate(k)]
+
             for i in range (0, len(args)):
                 args[i] += self.matrix[i][j]
 

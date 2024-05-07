@@ -42,10 +42,10 @@ class Text:
         self.p.act(print).keys('Straight', 'Course').args().print()
 
     def source(self, array):
-        Table(self.fields['Source'].copy()).matrix(array).show()
+        Table(self.fields['Source'].copy()).align('Right').matrix(array).show()
 
     def result(self, result):
-        Table().matrix(result).floats('.3').show()
+        Table().matrix(result).floats('.3').align('Right').show()
 
     def pause(self, text: str = ''):
         pause(text)
