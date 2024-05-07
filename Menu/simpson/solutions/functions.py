@@ -25,8 +25,10 @@ def search_max(points) -> tuple:
     pts = enumerate(points.Y)
 
     indices = [i for i, value in pts if abs(value) == maxed]
+    print('MAXED', maxed)
+    print('Y', points.Y)
     index = int(indices[0])
-    print('XXXX', points.X)
+    #print('XXXX', points.X)
     return { 'm': maxed, 'x': points.X[index] }
 
 def quadratic(size: float, m: float, e: float) -> int:
