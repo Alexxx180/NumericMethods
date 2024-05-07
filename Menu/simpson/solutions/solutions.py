@@ -27,7 +27,7 @@ class SimpsonSolutions:
             self.core.iteration(i)
             coords = self.core.coords()
             self.values()
-            #view.orders.append(coords)
+            view.orders.append(coords)
 
         self.blanks([x.end, y.end])
         return self.core.calculate()

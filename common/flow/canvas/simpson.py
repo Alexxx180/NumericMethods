@@ -13,14 +13,17 @@ def canvas_from(name: str, ends, derives: list):
 
     builder = CanvasBuilder()
     builder.space(space)
+    builder.graph(graph)
+    builder.select(0)
     builder.mark(x, 10)
 
     for i in range(0, count):
-        builder.graph(graph, i)
         builder.label(f'Plot {i + 1}', i)
 
-    for _, derive in derives.items():
-        builder.formula(derive).mark(base).plane(i)
+    grades = (1, 4)
+    for i in range(0, len(grades)):
+        grade: int = grades[i]
+        builder.formula(derives[grade]).mark(base).plane(i)
 
     builder.entitle('Full Name')
     return builder.canvas

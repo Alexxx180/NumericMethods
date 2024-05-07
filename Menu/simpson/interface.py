@@ -23,15 +23,15 @@ class SimpsonInterface:
 
     def calculate(self):
         ends: tuple = self.ends.margin()
-        print(ends)
-        result = search_max(Points(ends, self.derives[4]))
+        f: callable = self.derives[4]
+        result = search_max(Points(ends, f))
         self.solution.core.resize(self.e, result['m'])
 
         x: float = result['x']
-        f: callable = self.derives[1]
+        self.orders.append(1)
+        self.orders.append((x, f(x)))
         self.orders.append(0)
-        #self.orders.append((x, f(x)))
-        #self.orders.append((ends, f))
+        self.orders.append((ends, self.derives[1]))
 
         return self.solution.perform(self)
 

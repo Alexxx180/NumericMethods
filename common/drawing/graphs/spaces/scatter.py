@@ -5,8 +5,11 @@ class ScatterSpace:
         self.name = name
         self.color = color
 
-    def set_graph(self, graph, i: int = -1):
+    def set_graph(self, graph):
         self.plot = graph
+
+    def select(self, i: int):
+        self.plot.select(i)
 
     def draw(self, basis: list, line: float, label: str):
         self.plot.ax.plot(basis, line, label=label, linestyle='--')

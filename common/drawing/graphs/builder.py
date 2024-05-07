@@ -12,8 +12,12 @@ class CanvasBuilder:
         self.canvas.space = space
         return self
 
-    def graph(self, plot, i: int = -1):
-        self.canvas.space.set_graph(plot, i)
+    def graph(self, plot):
+        self.canvas.space.set_graph(plot)
+        return self
+
+    def select(self, i: int):
+        self.canvas.space.select(i)
         return self
 
     def formula(self, task: callable):

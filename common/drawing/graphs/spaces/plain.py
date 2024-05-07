@@ -8,8 +8,10 @@ class PlainSpace:
         self.style = 'dashed'
         self.align = { 'horizontal': 'left', 'vertical': 'bottom' }
 
-    def set_graph(self, graph, i: int = -1):
+    def set_graph(self, graph):
         self.plot = graph
+
+    def select(self, i: int):
         self.plot.select(i)
 
     def line(self, x: float, y: float):
