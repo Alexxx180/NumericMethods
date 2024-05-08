@@ -8,7 +8,7 @@ def verify(request: callable, default) -> bool:
     except ValueError:
         return (False, default)
 
-def validate(request: callable, default) -> bool:
+def validate(request: callable) -> bool:
     try:
         request()
         return True
@@ -18,7 +18,7 @@ def validate(request: callable, default) -> bool:
 def specify(check: callable, arg: tuple, error: str, *conditions):
     query: callable = lambda: float(prompt(Resources.Queries[arg[0]])[arg[0]])
     parameter: tuple = verify(query, arg[1])
-    while check(argument):
+    while not parameter[0] or check(parameter[1]):
         errors.keys(error).args(conditions).print()
         parameter = verify(query, arg[1])
     return parameter[1]
@@ -29,7 +29,9 @@ def number(_, response) -> bool:
     return valid
 
 def list_argument(parameters: list, convert: callable, arg: str) -> bool:
-    if arg == '': parameters.append(convert(0))
+    if arg == '':
+        parameters.append(convert(0))
+        return True
 
     query = Resources.Queries[arg]
     request: callable = lambda: parameters.append(convert(prompt(query)[arg]))

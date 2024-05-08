@@ -21,7 +21,6 @@ class Graphs:
 
     def vlines(self, points, x: float, style, color):
         if self.i == -1:
-            print('IIII', self.i)
             self.ax.vlines(x, points[1], points[0], colors=color, linestyles=style)
         else:
             self.ax[self.i].vlines(x, points[1], points[0], colors=color, linestyles=style)
