@@ -5,11 +5,11 @@ from common.calculus.objects.ends import Ends
 from common.calculus.trigonometry import formulate, invokation, express
 from common.drawing.drawing import *
 
-def empty_list() -> list: return [Chars['None'] * 2]
+def empty_list() -> list: return [Chars['Miss'], Chars['Miss']]
 
 def placeholder(x0: float) -> list:
     row = empty_list()
-    row.insert(1, Chars['Miss'])
+    row.insert(1, Chars['None'])
     row.insert(0, x0)
     return row
 
