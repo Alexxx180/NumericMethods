@@ -31,6 +31,8 @@ def tangent(precision: float, research):
 
 def draw(row: list, name: str, length: int):
     orders = []
+    colors: tuple = ('green', 'blue', 'red')
+    i: int = 0
 
     for index, value in enumerate(row):
         x = float(value[0])
@@ -41,8 +43,10 @@ def draw(row: list, name: str, length: int):
         points = linspace(x - half, x + half, length)
         tangent = z * (points - x) + y
 
+        i = (i + 1) % len(colors)
+
         caption: str = Resources.Texts[name]['Name'].format(index)
-        order: tuple = (points, tangent, caption, x, y)
+        order: tuple = (points, tangent, caption, x, y, colors[i])
 
         orders.append(order)
 

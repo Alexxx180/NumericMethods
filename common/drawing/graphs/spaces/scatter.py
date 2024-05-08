@@ -14,8 +14,10 @@ class ScatterSpace:
     def draw(self, basis: list, line: float, label: str):
         self.plot.ax.plot(basis, line, label=label, linestyle='--')
 
-    def scatters(self, x, y):
-        self.plot.ax.scatter(x, y, color=self.color,
+    def scatters(self, x, y, color = ''):
+        if color == '': color = self.color
+
+        self.plot.ax.scatter(x, y, color=color,
             label=Resources.Texts[self.name]['Point'])
 
     def show(self):
@@ -23,4 +25,4 @@ class ScatterSpace:
 
     def render(self, order: tuple):
         self.draw(order[0], order[1], order[2])
-        self.scatters(order[3], order[4])
+        self.scatters(order[3], order[4], order[5])

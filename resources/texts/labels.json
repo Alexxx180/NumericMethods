@@ -13,7 +13,8 @@
         "Full Name": "Формула Симпсона",
         "Plot 1": "График f(x)",
         "Plot 2": "График f’’’’(x)",
-        "Model": "a = {0.range.start}, b = {0.range.end}, e = {0.e:.5f}, h = {0.solution.core.size}, M = {0.solution.core.m}, n = {0.solution.core.n}\nПределы интегрирования {0.ends.start}..{0.ends.end}\nЗначение интеграла = {0.result}"
+        "Formula": "Формулы:\nf(x) = {0}\nf’’’’(x) = {1}",
+        "Model": "Значения:\na = {0.range.start}, b = {0.range.end}, e = {0.e:.5f}, h = {0.solution.core.size}, M = {0.solution.core.m}, n = {0.solution.core.n}\nПределы интегрирования {0.ends.start}..{0.ends.end}\nЗначение интеграла = {0.result}"
     },
     "Division": {
         "Full Name": "Метод деления отрезков",

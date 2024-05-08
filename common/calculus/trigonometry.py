@@ -13,8 +13,6 @@ def formulate(text, count: int, *symbols) -> str:
 
     try:
         for i in range(count):
-            print('DIFF: ', i, '/', count)
-            print(derivative)
             derivative = form(derivative, *symbols)
     except ValueError:
         return '0'

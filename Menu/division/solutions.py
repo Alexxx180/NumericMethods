@@ -19,25 +19,29 @@ class SegmentDivision:
     def __not_found(self) -> bool:
         return self.b - self.a > self.e
 
+    def __calculate(self) -> float:
+        self.c = (self.a + self.b) / 2
+
+        x: float = self.formula(self.a)
+        y: float = self.formula(self.c)
+
+        if x * y > 0:
+            self.a = self.c
+        else:
+            self.b = self.c
+
+        return y
+
     def study(self):
         self.e *= 2
         self.c: float
-        i: int = 0
+        i: int = 1
 
         while self.__not_found():
-            i += 1
-            self.c = (self.a + self.b) / 2
-
-            x: float = self.formula(self.a)
-            y: float = self.formula(self.c)
-
-            if x * y > 0:
-                self.a = self.c
-            else:
-                self.b = self.c
-
+            y = self.__calculate()
             color: str = 'blue' if y < 0 else 'red'
             self.__root(i, y, color)
+            i += 1
 
-        self.c = (self.a + self.b) / 2
+        y = self.__calculate()
         self.__root(i, y, 'green')

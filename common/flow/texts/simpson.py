@@ -6,10 +6,14 @@ from common.commander.resources import Resources
 class Text:
     def __init__(self, name: str):
         self.fields: dict = Resources.Fields[name]
-        self.p = Printer(name).act(pause)
+        self.p = Printer(name).act(print)
 
     def variables(self, model):
         self.p.keys('Model').args(model).print()
+        self.pause()
+
+    def formula(self, *args):
+        self.p.keys('Formula').args(*args).print()
 
     def result(self, rows: list):
         fields = self.fields['Result'].copy()

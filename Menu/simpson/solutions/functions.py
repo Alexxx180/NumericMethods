@@ -13,11 +13,16 @@ def placeholder(x0: float) -> list:
     row.insert(0, x0)
     return row
 
-def determine(a: float, b: float, form: str) -> dict:
-    task = Resources.Formula['Simpson'][form].format(a=a, b=b)
+def __form(text: str, *args) -> tuple:
+    return (text, formulate(text, 4, *args))
+
+def determine(text, a: float, b: float, form: str) -> dict:
+    task = Resources.Formula['Simpson'][form]
+    real = __form(task.format(a=a, b=b), x)
+    text.formula(real[0], str(real[1]))
     return {
-        1: invokation(express(task), x),
-        4: invokation(formulate(task, 4, x), x)
+        1: invokation(express(real[0]), x),
+        4: invokation(real[1], x)
     }
 
 def search_max(points) -> tuple:

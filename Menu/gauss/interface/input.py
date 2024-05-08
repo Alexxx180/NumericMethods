@@ -23,7 +23,6 @@ class InputLoop:
         query = [Text(name, message=self.text.description())]
 
         while not self.errors.at[self.empty]:
-            print('k')
             row: str = prompt(query)[name]
             self.errors.compute((
                 lambda: len(row) == 0,
@@ -32,16 +31,12 @@ class InputLoop:
             ))
             if not self.errors.total:
                 self.columns.append(self.row)
-                print(self.columns)
 
     def perform(self):
         self.columns: list = []
-        print('j')
         self.__validation()
-        print('NOPE')
 
         if self.errors.at[self.vary] or len(self.columns) == 0:
-            print('VERY BAD')
             return False
 
         self.matrix = np.array(self.columns)

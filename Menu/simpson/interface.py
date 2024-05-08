@@ -15,7 +15,7 @@ class SimpsonInterface:
         self.ends = Ends((args[2], args[3]))
         self.e: float = args[4]
 
-        self.derives = determine(args[0], args[1], form)
+        self.derives = determine(self.text, args[0], args[1], form)
         self.solution = SimpsonSolutions(self.ends, self.derives[1])
 
         self.canvas = canvas_from(name, self.ends, self.derives)

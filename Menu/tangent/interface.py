@@ -9,7 +9,6 @@ def TangentMethod(key: str, name: str, args: tuple):
     research.start(args)
 
     derive = research.derives[0]
-    canvas = canvas_from(key, name, derive, args)
 
     text = Text(name)
     text.formula(research.formula)
@@ -22,10 +21,9 @@ def TangentMethod(key: str, name: str, args: tuple):
     rows = tangent(args[2], research)
     orders = draw(rows, name, 100)
 
-    if View('Table', name):
-        text.result(rows)
-
+    if View('Table', name): text.result(rows)
     if View('Plots', name):
+        canvas = canvas_from(key, name, derive, args)
         canvas.show(orders)
 
     text.pause()
