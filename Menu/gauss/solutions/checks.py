@@ -19,15 +19,11 @@ def are_undefined(array, text):
 def is_suitable(shape):
     return shape[0] <= shape[1] - 1
 
-def is_varying(self, text):
-    values: list = self.values
-    matrix: list = self.matrix
-    
-    if errors := len(set(map(len, matrix + [values]))) > 1:
-        text.varying()
+def is_varying(self, text) -> bool:
+    errors: bool = len(self.row) != 5
+    if errors: text.varying()
     return errors
 
-def is_single(count: int, text):
-    if errors := count == 1:
-        text.single()
+def is_single(count: int, text) -> bool:
+    if errors := count == 1: text.single()
     return errors

@@ -19,10 +19,10 @@ class Text:
         self.p.act(pause).keys('Input', 'Data').args().print()
 
     def single(self):
-        self.p.act(pause).keys('Input', 'Count').args().print()
+        self.p.act(pause).keys('Input', 'Single').args().print()
 
     def varying(self):
-        self.p.act(pause).keys('Input', 'Single').args().print()
+        self.p.act(pause).keys('Input', 'Count').args().print()
 
     def no_solutions(self):
         self.p.act(print).keys('Solutions', 'Not found').args().print()

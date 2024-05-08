@@ -20,7 +20,7 @@ class Printer:
         return self
 
     def keys(self, *keys):
-        self.order[1] = keys
+        self.order[1] = list(keys)
         return self
 
     def args(self, *values):
