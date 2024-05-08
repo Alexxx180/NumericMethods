@@ -13,8 +13,6 @@ class InputLoop:
     def __process(self, row) -> bool:
         try:
             self.row = [float(cell) for cell in row.split()]
-            self.columns.append(self.row)
-            print(self.columns)
             return False
         except ValueError:
             self.text.process()
@@ -32,6 +30,9 @@ class InputLoop:
                 lambda: self.__process(row),
                 lambda: is_varying(self, self.text)
             ))
+            if not self.errors.total:
+                self.columns.append(self.row)
+                print(self.columns)
 
     def perform(self):
         self.columns: list = []

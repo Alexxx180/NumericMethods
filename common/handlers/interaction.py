@@ -9,10 +9,13 @@ def truncate(count: int):
         print(' ', end='')
     print()
 
-def pause(text: str = ""):
-    message = Resources.Texts['Common']['Forward']
-    print(text, message) ; input()
-    print(line['up']) ; truncate(len(message))
+def pause(text: str = ''):
+    if text == '':
+        text = Resources.Texts['Common']['Forward']
+
+    print(text) ; input() ; print(line['up'])
+
+    truncate(len(text))
 
 def ask(query: list) -> dict:
     answers = prompt(query) ; clear()
