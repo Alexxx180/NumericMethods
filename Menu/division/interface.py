@@ -1,4 +1,5 @@
 from sympy.abc import x
+from common.commander.switch import View
 from common.commander.resources import Resources
 from common.calculus.trigonometry import formulate, invokation
 from menu.division.solutions import SegmentDivision
@@ -21,7 +22,10 @@ def SegmentDivisionMethod(name: str, args: tuple):
     if len(division.roots) == 0:
         text.no_roots()
     else:
-        text.source(division.roots).result(division)
+        if View('Table', name):
+            text.source(division.roots)
+        text.result(division)
 
-    canvas.show(division.orders)
+    if View('Plots', name):
+        canvas.show(division.orders)
     text.pause()

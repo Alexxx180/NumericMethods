@@ -1,6 +1,9 @@
 {
     "Table": {
-        "Simpson" : true
+        "Division": true,
+        "Simpson" : true,
+        "Tangent" : true,
+        "Gauss" : true
     },
     "Plots": {
         "Division": true,

@@ -15,8 +15,8 @@ def validate(request: callable) -> bool:
     except ValueError:
         return False
 
-def specify(check: callable, arg: tuple, error: str, *conditions):
-    query: callable = lambda: float(prompt(Resources.Queries[arg[0]])[arg[0]])
+def specify(convert: callable, check: callable, arg: tuple, error: str, *conditions):
+    query: callable = lambda: convert(prompt(Resources.Queries[arg[0]])[arg[0]])
     parameter: tuple = verify(query, arg[1])
     while not parameter[0] or check(parameter[1]):
         errors.keys(error).args(conditions).print()

@@ -42,5 +42,6 @@ class SimpsonInterface:
         if self.solution.core.n <= 15 or View('Table', self.name):
             self.text.result(self.solution.rows)
 
-        self.canvas.show(self.orders)
+        if View('Plots', self.name):
+            self.canvas.show(self.orders)
         self.text.pause()

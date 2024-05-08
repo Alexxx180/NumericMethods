@@ -11,6 +11,13 @@ def __pass_argument(parameters: list, convert: callable, args):
         while not list_argument(parameters, convert, name):
             pause(f"{Resources.Texts['Common']['Invalid']}\n")
 
+def __specific_argument(parameters: list, validator: callable):
+    args = validator()
+    if isinstance(args, tuple):
+        parameters.extend(args)
+    else:
+        parameters.append(args)
+
 def listing(*args):
     parameters: list = []
 
@@ -18,6 +25,6 @@ def listing(*args):
         if isinstance(arg, tuple) and len(arg) == 2:
             __pass_argument(parameters, arg[0], arg[1])
         else:
-            parameters.append(arg())
+            __specific_argument(parameters, arg)
 
     return parameters

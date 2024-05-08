@@ -1,6 +1,6 @@
+import numpy as np
 from inquirer import prompt, Text
-from common.commander.texts.common import *
-from menu.gauss.solutions.check import is_single_string, is_varying
+from menu.gauss.solutions.checks import is_single, is_varying
 
 class InputLoop:
     def __init__(self, text):
@@ -8,7 +8,7 @@ class InputLoop:
         self.text = text
         self.errors = False
 
-    def __process(row):
+    def __process(self, row):
         self.errors = True
         try:
             self.values = [float(value) for value in row.split()]
@@ -18,17 +18,21 @@ class InputLoop:
             self.text.process()
         return self.errors
 
-    def __validation(description: str):
+    def __check(self, row, text) -> bool:
+        not_valid = not row or self.__process(row)
+        if not_valid: self.errors = is_varying(self, text)
+        return not_valid or self.errors
+
+    def __validation(self):
         name = 'row'
         query = [Text(name, message=self.text.description())]
 
         not_valid = True
         while not_valid:
             row = prompt(query)[name]
-            not_valid = not row or self.__process(row) or
-                self.errors := is_varying(self, self.text)
+            not_valid = self.__check(row, self.text)
 
-    def perform():
+    def perform(self):
         self.__validation()
 
         if self.errors:

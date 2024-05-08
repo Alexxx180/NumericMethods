@@ -8,6 +8,6 @@ def SimpsonFormulaEntry(form: str):
     if are_defaults():
         args = Resources.Defaults[name][form]
     else:
-        args = Resources.Input[name]('b' if form == 'B' else '')
+        args = Resources.Input[name]('' if form == 'B' else 'b')
 
     SimpsonInterface(args, name, form).start()

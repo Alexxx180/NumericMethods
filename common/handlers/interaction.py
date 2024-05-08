@@ -5,7 +5,7 @@ from common.commander.resources import Resources
 line = { 'up': '\033[3A' }
 
 def truncate(count: int):
-    for i in range(0, count):
+    for i in range(0, count + 1):
         print(' ', end='')
     print()
 

@@ -3,6 +3,7 @@ from common.commander.switch import are_defaults
 from common.commander.resources import Resources
 from common.flow.texts.gauss import Text
 from menu.gauss.interface.interface import GaussMethod
+from menu.gauss.interface.input import InputLoop
 
 def GaussEntry():
     name = 'Gauss'

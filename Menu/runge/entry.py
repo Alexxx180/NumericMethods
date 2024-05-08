@@ -8,7 +8,7 @@ def RungeKuttaEntry(form: str):
     if are_defaults():
         args = Resources.Defaults[name][form]
     else:
-        args = Resources.Input[name][form]
+        args = Resources.Input[name][form]()
 
     implementation = RungeKuttaTasks(name, form, args)
     implementation.method()

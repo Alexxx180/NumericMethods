@@ -1,5 +1,6 @@
 from numpy import column_stack, ndarray
 from common.drawing.table.table import Table
+from common.commander.switch import View
 
 """
 Python slice syntax
@@ -10,7 +11,7 @@ https://stackoverflow.com/questions/509211/how-slicing-in-python-works
 index: int = 0
 result = None
 
-def step(text, k: int, a, b: list):
+def step(text, show: bool, k: int, a, b: list):
     global result, index
     start: int = k + 1
     end: int = a.shape[0]
@@ -24,14 +25,15 @@ def step(text, k: int, a, b: list):
         b[i] -= ratio * b[k]
 
         result = column_stack((a, b))
-        text.result(result)
+        if show: text.result(result)
 
 def straight(text, n: int, a, b: list):
     global result, index
+    show: bool = View('Table', 'Gauss')
     text.straight_course()
     index = 0
 
     for k in range(n):
-        step(text, k, a, b)
+        step(text, show, k, a, b)
 
     return result

@@ -9,11 +9,11 @@ errors = Printer('Common').act(print)
 
 def validate_e() -> float:
     precision: callable = lambda e: abs(e) >= 1 or e < 1e-15 or e == 0.0
-    return specify(precision, ('e', 0.0), 'Wrong e')
+    return specify(float, precision, ('e', 0.0), 'Wrong e')
 
-def request_n(start: int, end: int) -> float:
+def request_n(start: int, end: int) -> int:
     count: callable = lambda n: n < start or n > end
-    return specify(count, ('n', 0), 'Wrong n', start, end)
+    return specify(int, count, ('n', 0), 'Wrong n', start, end)
 
 def pair(convert: callable, start: str, end: str):
     query: callable = lambda name: convert(prompt(Resources.Queries[name])[name])

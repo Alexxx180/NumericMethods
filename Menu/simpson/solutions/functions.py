@@ -25,14 +25,10 @@ def search_max(points) -> tuple:
     pts = enumerate(points.Y)
 
     indices = [i for i, value in pts if abs(value) == maxed]
-    print('MAXED', maxed)
-    print('Y', points.Y)
     index = int(indices[0])
-    #print('XXXX', points.X)
     return { 'm': maxed, 'x': points.X[index] }
 
 def quadratic(size: float, m: float, e: float) -> int:
-    print('STATS', m, size, e)
     n = (m * (size ** 5) / (180 * e)) ** 0.25
 
     if not isinstance(n, int): n = int(n + 1)

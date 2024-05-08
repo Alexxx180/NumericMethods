@@ -1,4 +1,5 @@
 from common.flow.texts.tangent import Text
+from common.commander.switch import View
 from common.flow.canvas.tangent import canvas_from
 from menu.tangent.solutions.functions import tangent, draw
 from menu.tangent.solutions.research import Research
@@ -21,6 +22,10 @@ def TangentMethod(key: str, name: str, args: tuple):
     rows = tangent(args[2], research)
     orders = draw(rows, name, 100)
 
-    text.result(rows)
-    canvas.show(orders)
+    if View('Table', name):
+        text.result(rows)
+
+    if View('Plots', name):
+        canvas.show(orders)
+
     text.pause()
