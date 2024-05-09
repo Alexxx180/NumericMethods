@@ -1,22 +1,22 @@
-import inquirer
 import numpy as np
-from Classes.Table import Table
-from menu.gauss.interface import GaussMethod
-from menu.gauss.interface.defaults import real_defaults
+from common.commander.switch import are_defaults
+from common.commander.resources import Resources
+from common.flow.texts.gauss import Text
+from menu.gauss.interface.interface import GaussMethod
+from menu.gauss.interface.input import InputLoop
 
 def GaussEntry():
-    array = np.array(real_defaults(), dtype=float)
-    Table([""], "Исходная матрица").matrix(array).show()
+    name = 'Gauss'
+    array = np.array(Resources.Defaults[name], dtype=float)
 
-    name = 'question'
-    defaults = 'Использовать матрицу?'
-    question = [inquirer.Confirm(name, message=defaults, default=True)] 
-    question = inquirer.prompt(question)
+    text = Text(name)
+    text.source(array)
 
-    if question[name]:
-        GaussMethod(array)
-        return
+    if are_defaults():
+        GaussMethod(array, text)
+    else:
+        validator = InputLoop(text)
+        if validator.perform():
+            GaussMethod(validator.matrix, validator.text)
 
-    validator = InputLoop()
-    if validator.perform():
-        GaussMethod(validator.matrix)
+    text.pause()

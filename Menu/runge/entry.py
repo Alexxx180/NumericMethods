@@ -1,19 +1,14 @@
-import menu.runge.interface
-from menu.runge.interface.defaults import defaultsA, defaultsB, are_defaults, inputA, inputB
-from Class.Input import has_form
+from common.commander.switch import are_defaults
+from common.commander.resources import Resources
+from menu.runge.interface import RungeKuttaTasks
 
-def RungeKutta(form):
-    if not has_form(1, 2, form):
-        return
+def RungeKuttaEntry(form: str):
+    name = 'Runge'
 
-    defaults = are_defaults()
-    args1 = defaultsA(form) if defaults else inputA()
-
-    # Применение методов A или B
-    if form == 1:
-        implementation = RungeKuttaTasks(args1)
+    if are_defaults():
+        args = Resources.Defaults[name][form]
     else:
-        args2 = defaultsB() if defaults else inputB()
-        implementation = RungeKuttaTasks(args1, args2)
+        args = Resources.Input[name][form]()
 
+    implementation = RungeKuttaTasks(name, form, args)
     implementation.method()

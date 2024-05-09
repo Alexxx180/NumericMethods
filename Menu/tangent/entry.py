@@ -1,23 +1,13 @@
-from menu.tangent.interface import TangentInterface
-from menu.tangent.solutions.functions.formula import TangentFormula
-from menu.tangent.solutions.functions import tangent
-from menu.tangent.solutions.research import Research
+from common.commander.switch import are_defaults
+from common.commander.resources import Resources
+from menu.tangent.interface import TangentMethod
 
-def TangentMethod(name: str, abe: tuple):
-    formula = TangentFormula(name)
-    research = Research(formula.task)
-    research.start(abe)
+def TangentEntry(key):
+    name = 'Tangent'
 
-    view = TangentInterface(name, 100)
-    view.memorize(name, research.message)
-
-    if research.roots is not None:
-        row = tangent(abe[2], research)
-        DrawTangent(row, view)
+    if are_defaults():
+        args = Resources.Defaults[name][key]
     else:
-        view.no_roots(abe[0], abe[1])
+        args = Resources.Input[name]()
 
-    view.show_graph()
-
-if __name__ == '__main__':
-    print("Не реализована")
+    TangentMethod(key, name, args)

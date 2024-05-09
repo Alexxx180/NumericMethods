@@ -1,28 +1,47 @@
-from Classes.Graphs import Graphs
-import menu.division.solutions.division
-import menu.division.interface.segment
-import menu.division.interface.print
+from common.calculus.objects.ends import Ends
 
-def DivideSegmentMethod(form: dict, tables: tuple, a: float, b: float, n: tuple):
-    plot = Graphs(1, 1)
+class SegmentDivision:
+    def __init__(self, args: tuple, derive: callable):
+        self.roots: list = []
+        self.orders: list = []
+        self.a: float = args[0]
+        self.b: float = args[1]
+        self.e: float = args[2]
+        self.formula: callable = derive
 
-    graph = DivisionSegmentPlot(a, b, plot)
-    division = SegmentDivision(plot.ax)
+    def __root(self, i: int, y: float, color: str):
+        root: tuple = (i, self.a, self.b)
+        self.roots.append(root)
 
-    roots = division.study(a, b, n[0])
-    if len(roots) == 0:
-        graph.show().print(SegmentPrint.NoRoots)
-        return
+        order: tuple = (self.c, y, color)
+        self.orders.append(order)
 
-    tables[0](roots)
+    def __not_found(self) -> bool:
+        return self.b - self.a > self.e
 
-    rows = []
-    for index, x in enumerate(roots):
-        one = form['one']
-        intervals(one, index + 1, x, n[1])
-        division.breakdown(x, n[1])
-        row = (form['list'].format(x), one.format(middle(x)))
-        rows.append(row)
+    def __calculate(self) -> float:
+        self.c = (self.a + self.b) / 2
 
-    tables[1](rows)
-    graph.show().pause(SegmentPrint.Root.format(rows[0][1]))
+        x: float = self.formula(self.a)
+        y: float = self.formula(self.c)
+
+        if x * y > 0:
+            self.a = self.c
+        else:
+            self.b = self.c
+
+        return y
+
+    def study(self):
+        self.e *= 2
+        self.c: float
+        i: int = 1
+
+        while self.__not_found():
+            y = self.__calculate()
+            color: str = 'blue' if y < 0 else 'red'
+            self.__root(i, y, color)
+            i += 1
+
+        y = self.__calculate()
+        self.__root(i, y, 'green')

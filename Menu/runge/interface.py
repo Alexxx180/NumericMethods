@@ -1,47 +1,53 @@
-import menu.runge.solutions
-import menu.runge.solutions.functions.formula.FormulaA as FA
-from menu.runge.interface.tasks.taskb.TaskbInterface import solution
-from Classes.Table import Table
+from sympy.abc import x, y
+from common.flow.texts.runge import Text
+from common.commander.resources import Resources
+from common.calculus.trigonometry import formulate, invokation, express
+from menu.runge.solutions.functions import analyze, integrate, function1, function2, epsilon
+from menu.runge.solutions.taska import TaskA
+from menu.runge.solutions.taskb import TaskB
 
-class RungeKuttaTasks: # Parameters = { 'i': 0, 'x0': 1, 'y0': 2, 'h': 3, 'n': 4 }
-    Precision = 1e-9
+class RungeKuttaTasks:
+    def __init__(self, name: str, key: str, args: tuple):
+        self.name = name
+        self.key = key
+        self.args = args
+        self.formula = Resources.Formula[self.name][self.key]
+        self.method = getattr(self, key)
 
-    def __init__(self, arguments: list, extension: list = None):
-        self.args = arguments
+    def __derive(self, formula: str, *symbols) -> callable:
+        return invokation(express(formula), *symbols)
 
-        if extension is not None:
-            for i in range(0, len(extension)):
-                self.args.insert(i + 2, extension[i])
-            self.method = B
-        else:
-            self.method = A
+    def __text(self, args):
+        return Text(self.name, self.key).source(args)
 
-        numbers = [i for i in range(self.args[3] + 1)]
-        self.args.insert(0, numbers) # Parameters['i']
+    def A(self):
+        f: callable = self.__derive(self.formula, x, y)
 
-    def A():
-        fields = Runge['A']
-        Table(fields['Source']).row(self.args).show().out()
-        task = Taska(self.args)
+        columns: list = TaskA(self.args).apply(f)
 
-        values = task.apply(FA.formula)
-        values.append(FA.analyze(x))
-        values.append(FA.integrate(x).flatten().tolist()) 
-        # Вывод таблицы
-        RungeTable(fields['Result'], values, []).show().pause()
+        X: list = columns[0]
+        y0: float = self.args[1]
 
-    def B(): 
-        fields = Runge['B']
-        Table(fields['Source']).row(self.args).show().out()
-        # a = 2.41, b = 2.18, y' = 1
-        task = Taskb(self.args)
-        tables = []
-        # Решения для функций
-        funcs = ['sin(x)', 'e⁻ˣ', 'cos(x)']
-        for i in range(0, len(funcs)):
-            tables.append(solution(self.args, i, funcs, task))
-        # Последовательный вывод всех таблиц
-        ListTables(tables)
+        columns.append(analyze(X))
+        columns.append(integrate(X, y0).flatten().tolist())
 
-if __name__ == '__main__':
-    print("Не реализована")
+        args = list(self.args)
+        args.append(self.formula)
+        text = self.__text(args)
+        text.result(columns)
+
+    def B(self):
+        text = self.__text(self.args)
+        task = TaskB(self.args)
+
+        for formula in self.formula:
+            f: callable = self.__derive(formula, x)
+            length: int = task.n + 1
+            columns: list = task.apply(f)
+            X: list = columns[0]
+
+            columns.append(function1(columns, task.a, task.b, length))
+            columns.append(function2(f, X, length))
+            columns.append(epsilon(columns, length))
+
+            text.result(columns, str(formula))

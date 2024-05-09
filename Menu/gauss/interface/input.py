@@ -1,47 +1,45 @@
-import inquirer
-from menu.gauss.solutions.check import is_single_string, is_varying
+import numpy as np
+from inquirer import prompt, Text
+from menu.gauss.solutions.checks import is_single, is_varying
+from menu.gauss.interface.errors import Errors
 
 class InputLoop:
-    Name = 'row'
+    def __init__(self, text):
+        self.text = text
+        self.empty = 'empty'
+        self.vary = 'vary'
+        self.errors = Errors((self.empty, 'invalid', self.vary))
 
-    def __init__(self):
-        self.values = None
-        self.matrix = []
-
-    def process_input_string(row):
-        self.errors = True
+    def __process(self, row) -> bool:
         try:
-            self.values = [float(value) for value in row.split()]
-            self.errors = False
+            self.row = [float(cell) for cell in row.split()]
+            return False
         except ValueError:
-            pause("Неверный ввод")
-        return self.errors
+            self.text.process()
+            return True
 
-    def loop(description: str):
-        row_input = inquirer.prompt([inquirer.Text(Name, message=description)])
-        row = row_input[Name]
+    def __validation(self):
+        name = 'row'
+        query = [Text(name, message=self.text.description())]
 
-        if not row:
+        while not self.errors.at[self.empty]:
+            row: str = prompt(query)[name]
+            self.errors.compute((
+                lambda: len(row) == 0,
+                lambda: self.__process(row),
+                lambda: is_varying(self, self.text)
+            ))
+            if not self.errors.total:
+                self.columns.append(self.row)
+
+    def perform(self):
+        self.columns: list = []
+        self.__validation()
+
+        if self.errors.at[self.vary] or len(self.columns) == 0:
             return False
 
-        if process_input_string(row):
-            return False
+        self.matrix = np.array(self.columns)
+        shape = self.matrix.shape[0]
 
-        self.matrix.append(self.values)
-
-        if self.errors = is_varying(self.values, self.matrix):
-            return False
-
-        return True
-
-    def perform():
-        description = 'Введите строку матрицы / пустую строку для завершения'
-        self.errors = False
-        while validating = loop(description):
-            pass
-
-        if self.errors:
-            return False
-
-        self.matrix = np.array(self.matrix)
-        return not is_single_string(self.matrix.shape[0]):
+        return not is_single(shape, self.text)

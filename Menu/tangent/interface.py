@@ -1,33 +1,29 @@
-from Classes.Points import Points
-from Classes.Graphs import Graphs
-from Classes.Table import Table
-from common.commander import Commander
-from menu.handlers.func import pause
+from common.flow.texts.tangent import Text
+from common.commander.switch import View
+from common.flow.canvas.tangent import canvas_from
+from menu.tangent.solutions.functions import tangent, draw
+from menu.tangent.solutions.research import Research
 
-class TangentInterface:
-    def __init__(self, name: str, size: int):
-        self.name = name
-        self.plot = Graphs(1, 1)
-        self.base = Points((-size, size), task)
-        self.overlay = Points(abe, task)
+def TangentMethod(key: str, name: str, args: tuple):
+    research = Research(key, name)
+    research.start(args)
 
-    def no_roots(a: float, b: float):
-        pause(f"Похоже на интервале {[a, b]} корней для функции B нет")
+    derive = research.derives[0]
 
-    def memorize(message: str):
-        self.message = message
-        print(f"\nЗначение m = {message}")
+    text = Text(name)
+    text.formula(research.formula)
+    text.message(research.message)
 
-    def output(row: list):
-        plot.ax.legend()
-        Table(Tangent['Result'], self.message).row(row).show().pause()
+    if len(research.roots) == 0:
+        text.no_roots(args[0], args[1])
+        return
 
-    def draw_graph(basis: float, line: float, x: float, y: float, index: int):
-        self.plot.ax.plot(basis, line, label=f'Касательная {index}', linestyle='--')
-        self.plot.ax.scatter(x, y, color='red', label='её точка')
+    rows = tangent(args[2], research)
+    orders = draw(rows, name, 100)
 
-    def show_graph():
-        self.plot.based(self.overlay, f"График {self.name}")
-        self.plot.apply(self.base).apply(self.overlay)
-        if Commander.View('Plot', 'Tangent'):
-            self.plot.show()
+    if View('Table', name): text.result(rows)
+    if View('Plots', name):
+        canvas = canvas_from(key, name, derive, args)
+        canvas.show(orders)
+
+    text.pause()

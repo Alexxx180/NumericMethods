@@ -1,41 +1,43 @@
-import menu.runge.solutions.functions.taskb
+from menu.runge.solutions.functions import kl_order, derivative, calculate
 
-class Taskb:
-    def __init__(self, arguments: list):
-        self.func = TaskbFunctions(arguments)
-        self.args = []
-        for i in range(4, len(arguments)):
-            self.args.append(arguments[i])
+class TaskB:
+    def __init__(self, args: list):
+        self.a: float = args[0]
+        self.b: float = args[1]
+        self.y0: list = [args[i] for i in range(2, 5)]
+        self.h: float = args[5]
+        self.n: float = args[6]
 
-    def at(name: str)
-        return self.args[name]
+    def __append(self, rows: list, kl: list, i: int, value: float):
+        self.y[i] += value
+        rows[i].append(self.y[i])
 
-    def apply(self, g: callable):
-        rows = []
-        for i in range(0, len(self.args)):
-            rows.append([self.args[i]])
+    def apply(self, f: callable):
+        self.y: list = self.y0.copy()
 
-        result = self.func.derivative(g, self.args.copy())
-        rows.append([result])
+        rows: list = [[y] for y in self.y]
+        rows.append([derivative(self.y, self.a, self.b, f)])
 
-        for i in range(n):
-            ii = 0
-            kl = self.func.kl_fourth_order()
-            rl = (0.0, 0.5, 0.5, 1.0)
-            for relation in rl:
-                self.func.klexpression(g, self.args, kl, relation)
+        for i in range(self.n):
+            kl: list = kl_order(self.h)
+            for relation in (0.0, 0.5, 0.5, 1.0):
+                self.klexpression(f, kl, relation)
 
-            values = (self.func.at('h'), 0, 0)
-            for ii in range(len(values) - 1):
-                values[ii + 1] = calculate(k, ii)
+            self.__append(rows, kl, 0, self.h)
+            for j in range(1, 3):
+                self.__append(rows, kl, j, calculate(kl, j - 1))
 
-            for ii in range(0, len(values)):
-                self.args[ii] += values[ii]
-                rows[i].append(self.args[ii])
-
-            result += self.func.derivative(g, self.args.copy())
-            rows[ii].append(result)
+            rows[3].append(derivative(self.y, self.a, self.b, f))
 
         return rows
 
+    def klexpression(self, f: callable, kl: list, relation: float):
+        i: int = kl[0]
+        r: list = (kl[i] if i == 1 else kl[i - 1]).copy()
+        r.insert(0, self.h)
+        for j in range(0, len(self.y)):
+            r[j] = r[j] * relation + self.y[j]
 
+        kl[i][0] *= r[2]
+        kl[i][1] *= derivative(r, self.a, self.b, f)
+        kl[0] += 1

@@ -1,27 +1,43 @@
-from Classes.Points import Points
-from menu.simpson.solutions.ends import Ends
+from sympy.abc import x, a, b
+from common.commander.resources import Resources
+from common.drawing.primitives.points import Points
+from common.calculus.objects.ends import Ends
+from common.calculus.trigonometry import formulate, invokation, express
+from common.drawing.drawing import *
 
-class SimpsonFunctions:
-    @staticmethod
-    def search_max(ends: Ends, f: callable, ax):
-        points = Points(ends.margin(), f)
+def empty_list() -> list: return [Chars['Miss'], Chars['Miss']]
 
-        maxed = max(map(abs, points.Y))
-        pts = enumerate(points.Y)
+def placeholder(x0: float) -> list:
+    row = empty_list()
+    row.insert(1, Chars['None'])
+    row.insert(0, x0)
+    return row
 
-        indices = [i for i, value in pts if abs(value) == maxed]
-        index = int(indices[0])
-        line(points.X[index], f, ax)
-        return maxed
+def __form(text: str, *args) -> tuple:
+    return (text, formulate(text, 4, *args))
 
-    @staticmethod
-    def quadratic(size: float, m: float, e: float) -> int:
-        n = (m * size ** 5 / (180 * e)) ** 0.25
+def determine(text, a: float, b: float, form: str) -> dict:
+    task = Resources.Formula['Simpson'][form]
+    real = __form(task.format(a=a, b=b), x)
+    text.formula(real[0], str(real[1]))
+    return {
+        1: invokation(express(real[0]), x),
+        4: invokation(real[1], x)
+    }
 
-        if not isinstance(n, int):
-            n = int(n + 1)
+def search_max(points) -> tuple:
+    maxed = max(map(abs, points.Y))
+    pts = enumerate(points.Y)
 
-        while n % 2 != 0:
-            n += 1
+    indices = [i for i, value in pts if abs(value) == maxed]
+    index = int(indices[0])
+    return { 'm': maxed, 'x': points.X[index] }
 
-        return n
+def quadratic(size: float, m: float, e: float) -> int:
+    n = (m * (size ** 5) / (180 * e)) ** 0.25
+
+    if not isinstance(n, int): n = int(n + 1)
+
+    while n % 2 != 0: n += 1
+
+    return n

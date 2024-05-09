@@ -1,0 +1,13 @@
+{
+    "Table": {
+        "Division": true,
+        "Simpson" : true,
+        "Tangent" : true,
+        "Gauss" : true
+    },
+    "Plots": {
+        "Division": true,
+        "Simpson" : true,
+        "Tangent" : false
+    }
+}

@@ -1,8 +1,13 @@
-from Division_segment.main import Division_segment 
-from Classes.Input import vinput, validate_e
-from Menu.common import request_a_b, request_n
-import Classes.Texts.Queries as q
+from common.commander.switch import are_defaults
+from common.commander.resources import Resources
+from menu.division.interface import SegmentDivisionMethod
 
 def DivisionEntry():
-    args = Defaults['Division'] if are_defaults else Input['Division']()
-    DivisionMethod(args)
+    name = 'Division'
+
+    if are_defaults():
+        args = Resources.Defaults[name]
+    else:
+        args = Resources.Input[name]()
+
+    SegmentDivisionMethod(name, args)

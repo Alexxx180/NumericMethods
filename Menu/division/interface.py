@@ -1,23 +1,31 @@
-from menu.division.solutions import DivideSegmentMethod
-from Classes.Table import Table
+from sympy.abc import x
+from common.commander.switch import View
+from common.commander.resources import Resources
+from common.calculus.trigonometry import formulate, invokation
+from menu.division.solutions import SegmentDivision
+from common.flow.canvas.division import canvas_from
+from common.flow.texts.division import Text
 
-form = { 'one': '{:.8f}', 'list', f'{0:.8f} - {1:.8f}' }
+def SegmentDivisionMethod(name: str, args: tuple):
+    formula = formulate(Resources.Formula[name], 0, x)
+    derive = invokation(formula, x)
 
-def Fields():
-    return ['i', 'Диапазон']
+    canvas = canvas_from(name, derive, args)
 
-def RootIntervals(intervals: list):
-    name = 'Интервалы с корнями'
-    Table(Fields(), name).row(intervals).show().pause()
+    division = SegmentDivision(args, derive)
 
-def FoundedRoots(roots: list):
-    fields = Fields()
-    fields.append('Корень')
-    Table(fields, 'Найденные корни').row(roots).show().pause()
+    text = Text(name)
+    text.research(formula, division)
 
-def DivideSegment(a, b, n, e):
-    tables = (RootIntervals, FoundedRoots)
-    DivideSegmentMethod(form, tables, a, b, (n, e))
+    division.study()
 
-if __name__ == '__main__':
-    print("Не реализована")
+    if len(division.roots) == 0:
+        text.no_roots()
+    else:
+        if View('Table', name):
+            text.source(division.roots)
+        text.result(division)
+
+    if View('Plots', name):
+        canvas.show(division.orders)
+    text.pause()
