@@ -1,6 +1,7 @@
-from start import dropdown, setup_menu
+import matplotlib
 from common.handlers.input.specific import setup_input
 from common.commander.resources import Resources
+from start import dropdown, setup_menu
 
 variant: int
 
@@ -24,6 +25,7 @@ def main():
         setattr(Resources, name, resource(manifest[name]))
 
 if __name__ == '__main__':
+    matplotlib.use('TkAgg')
     with open('variant.txt') as no:
         variant = int(no.readline())
     main()
