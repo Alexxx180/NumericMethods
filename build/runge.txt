@@ -1,0 +1,3 @@
+Метод Рунге-Кутты
+
+http://www.mathprofi.ru/metody_eilera_i_runge_kutty.html
