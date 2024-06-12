@@ -1,6 +1,4 @@
 from sympy.abc import x, y
-from sympy import integrate
-from scipy.integrate import solve_ivp
 from common.flow.texts.runge import Text
 from common.commander.resources import Resources
 from common.calculus.trigonometry import formulate, invokation, express
@@ -23,30 +21,14 @@ class RungeKuttaTasks:
         return Text(self.name, self.key).source(args)
 
     def A(self):
-        integ = integrate(self.formula, x, y)
         f: callable = self.__derive(self.formula, x, y)
-        #f: callable = invokation(integ, x, y)
-        i: callable = invokation(integ, x, y)
-
         columns: list = TaskA(self.args).apply(f)
 
         X: list = columns[0]
         y0: float = self.args[1]
+        h: float = self.args[2]
 
-        print(integ)
-        """
-        an = [y0]
-        for a in range(0, len(X) - 1):
-            an.append(i(x=X[a], y=an[a]))
-        """
-
-        #columns.append(an)
-
-        #columns.append(analyze(X, y0, f).flatten().tolist())
-        integral = solve_ivp(f, (X[0], X[len(X) - 1]), [y0], first_step=0.2, max_step=0.2)
-        print(integral["y"][0])
-        columns.append(integral["y"][0])
-        #columns.append(analyze(X, y0, i).flatten().tolist())
+        columns.append(analyze(h, X, y0, f))
 
         args = list(self.args)
         args.append(self.formula)

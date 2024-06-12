@@ -1,5 +1,5 @@
 import numpy as np
-from scipy.integrate import odeint
+from scipy.integrate import solve_ivp
 from functools import reduce
 from operator import sub
 
@@ -26,5 +26,7 @@ def function2(f: callable, x: list, n: int) -> list:
 def epsilon(r: list, n: int) -> list:
     return [abs(float(r[-1][i]) - float(r[-2][i])) for i in range(n)]
 
-def analyze(x: list, y0: float, f: callable):
-    return odeint(f, y0, x, rtol=Precision, atol=Precision)
+def analyze(h: float, x: list, y0: float, f: callable) -> list:
+    solved_integral = solve_ivp(f, (x[0], x[len(x) - 1]),
+        [y0], first_step=h, max_step=h)
+    return solved_integral["y"][0]

@@ -18,8 +18,6 @@ class TaskA:
 
             for i in range (0, len(args)):
                 args[i] += self.matrix[i][j]
-            print(args[1])
-#            print(args[1], args[1] + self.matrix[1][j])
 
             self.edit(j + 1, args)
         return self.matrix
@@ -29,11 +27,8 @@ class TaskA:
             self.matrix[i][j] = args[i]
 
     def kexpression(self, f: callable, j: int, k: list, relation: float):
-        #result: list = [self.h, self.h * k[k[0] - 1]]
-        xy = ('x', 'y')
         result: list = [self.h, k[k[0] - 1]]
         for i in range(0, len(result)):
-            # print("{2} ({3}) + {0} * {1}".format(result[i], relation, xy[i], self.matrix[i][j]))
             result[i] = result[i] * relation + self.matrix[i][j]
 
         k[k[0]] = self.h * f(result[0], result[1])
