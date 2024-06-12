@@ -26,11 +26,5 @@ def function2(f: callable, x: list, n: int) -> list:
 def epsilon(r: list, n: int) -> list:
     return [abs(float(r[-1][i]) - float(r[-2][i])) for i in range(n)]
 
-def analyze(x: list) -> list:
-    return np.exp(((x ** 3) / 3) + x) - 1
-
-def diff_equation(y, x):
-    return (1 + x ** 2) * (1 + y)
-
-def integrate(x: list, y0: float):
-    return odeint(diff_equation, y0, x, rtol=Precision, atol=Precision)
+def analyze(x: list, y0: float, f: callable):
+    return odeint(f, y0, x, rtol=Precision, atol=Precision)
