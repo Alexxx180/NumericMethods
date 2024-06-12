@@ -19,8 +19,8 @@ def are_undefined(array, text):
 def is_suitable(shape):
     return shape[0] <= shape[1] - 1
 
-def is_varying(self, text) -> bool:
-    errors: bool = len(self.row) != 5
+def is_varying(self, text, count: int) -> bool:
+    errors: bool = len(self.row) != count
     if errors: text.varying()
     return errors
 

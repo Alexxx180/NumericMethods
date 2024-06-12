@@ -2,7 +2,7 @@ from sympy.abc import x, y
 from common.flow.texts.runge import Text
 from common.commander.resources import Resources
 from common.calculus.trigonometry import formulate, invokation, express
-from menu.runge.solutions.functions import analyze, integrate, function1, function2, epsilon
+from menu.runge.solutions.functions import analyze, function1, function2, epsilon
 from menu.runge.solutions.taska import TaskA
 from menu.runge.solutions.taskb import TaskB
 
@@ -22,14 +22,13 @@ class RungeKuttaTasks:
 
     def A(self):
         f: callable = self.__derive(self.formula, x, y)
-
         columns: list = TaskA(self.args).apply(f)
 
         X: list = columns[0]
         y0: float = self.args[1]
+        h: float = self.args[2]
 
-        columns.append(analyze(X))
-        columns.append(integrate(X, y0).flatten().tolist())
+        columns.append(analyze(h, X, y0, f))
 
         args = list(self.args)
         args.append(self.formula)

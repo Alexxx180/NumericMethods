@@ -18,21 +18,35 @@ class InputLoop:
             self.text.process()
             return True
 
-    def __validation(self):
+    def __prompt(self, count: int):
+        if count == 0:
+            not_vary = lambda: False
+        else:
+            not_vary = lambda: is_varying(self, self.text, count)
+
         name = 'row'
         query = [Text(name, message=self.text.description())]
+        row: str = prompt(query)[name]
+        self.errors.compute((
+            lambda: len(row) == 0,
+            lambda: self.__process(row),
+            not_vary
+        ))
+
+    def __validation(self):
+        count: int = 0
+
+        while not count == 0:
+            self.__prompt(count)
+            count = len(self.row)
 
         while not self.errors.at[self.empty]:
-            row: str = prompt(query)[name]
-            self.errors.compute((
-                lambda: len(row) == 0,
-                lambda: self.__process(row),
-                lambda: is_varying(self, self.text)
-            ))
+            self.__prompt(count)
             if not self.errors.total:
                 self.columns.append(self.row)
 
     def perform(self):
+        self.row: list = []
         self.columns: list = []
         self.__validation()
 

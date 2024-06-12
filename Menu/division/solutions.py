@@ -19,8 +19,11 @@ class SegmentDivision:
     def __not_found(self) -> bool:
         return self.b - self.a > self.e
 
+    def __middle(self) -> float:
+        return (self.a + self.b) / 2
+
     def __calculate(self) -> float:
-        self.c = (self.a + self.b) / 2
+        self.c = self.__middle()
 
         x: float = self.formula(self.a)
         y: float = self.formula(self.c)
@@ -45,3 +48,4 @@ class SegmentDivision:
 
         y = self.__calculate()
         self.__root(i, y, 'green')
+        self.c = self.__middle()
